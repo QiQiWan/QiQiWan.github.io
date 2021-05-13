@@ -1,0 +1,706 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favcion.png">
+  <link rel="icon" type="image/png" href="/img/favcion.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#3a311c">
+  <meta name="description" content="这里是一个工科男苦逼的小空间.记录一些我喜欢的东西比如平面设计，程序设计等等，还会有我不喜欢的东西，各种力学、结构学等等.我的专业是建筑工程，但是我喜欢鼓捣计算机专业相关方面的东西，如果看了我的博客对你有启发的话，记得留言收藏推荐三连击哦^O^">
+  <meta name="author" content="吃白饭-EatRice">
+  <meta name="keywords" content="随笔,分享,经历,吃白饭,休伯利安号,小万,开学啦,科比读后感,星际争霸,守望先锋,雷诺,休伯利安">
+  <meta name="theme-color" content="#3a311c">
+  <link rel="manifest" href="/manifest.json" />
+  
+  <title>数学——模型评估方法 ~ 吃白饭的休伯利安号</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/tomorrow-night.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1746382_qrhzb41budd.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"eatrice.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="吃白饭的休伯利安号" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>吃白饭的休伯利安号</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Home/">
+                <i class="iconfont icon-addrcard"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/experience/">
+                <i class="iconfont icon-experiment"></i>
+                历程
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/RSS/">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数学——模型评估方法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      吃白饭-EatRice
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-02-16 17:09" pubdate>
+        2020年2月16日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数学——模型评估方法</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：1 年前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最近在学习机器学习的一些相关的算法，在学习过程中新接触到了大量的概念和原理。为了更好地提高学习的效果，于是就把在学习的过程中接触到的新概念和遇到的问题通通写进我的博客，作为学习笔记，以提供给自己和其他朋友进行查阅和参考。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这篇内容主要是讲述数学模型的模型评估方法，将会对新的概念进行逐一解读。有条件的还会对相关的内容进行拓展资料的整理，其主要内容如下：</p>
+<h2 id="新的概念"><a href="#新的概念" class="headerlink" title="新的概念"></a>新的概念</h2><h3 id="评估思路"><a href="#评估思路" class="headerlink" title="评估思路"></a>评估思路</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经过实验测试，对模型的泛化误差进行评估，选出泛化误差最小的模型。待测数据集未知，使用测试集进行泛化测试，测试误差（<code>Testing Error</code>）即为泛化误差的近似。</p>
+<p><img src="1.png" srcset="/img/loading.gif" alt="一直数据集和待测数据集" title="一直数据集和待测数据集"></p>
+<p>::: warning<br>需要注意:</p>
+<ol>
+<li><p>测试集和训练集要保持互斥：即测试集和训练集不能相同，就像数学题中的例题和测试题一样，用的方法和原理要相同，但是做法不一致。</p>
+</li>
+<li><p>测试集和训练集要服从独立同分布：即测试集和训练集所取得数据要保证同源，即要保证他们有相同的期望和方差，且相互独立。<br>:::</p>
+</li>
+</ol>
+<h3 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a>评估方法</h3><h4 id="留出法（Hold-out）"><a href="#留出法（Hold-out）" class="headerlink" title="留出法（Hold-out）"></a>留出法（Hold-out）</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>概念：</strong>讲已知数据集分成两个互斥的部分，其中一部分用来训练模型，另一部分用来测试模型，评估其误差，作为泛化误差的估计。</p>
+<p>::: warning<br>需要注意：</p>
+<ol>
+<li><p>两个数据集的划分要尽可能保持数据分布一致性，避免因数据划分过程引入认为的偏差：即划分之后的数据要尽可能使他们独立同分布。</p>
+</li>
+<li><p>数据分割存在多种形式会导致不同的训练集，测试集划分，单次留出法结果往往存在偶然性，其稳定性较差，通常会进行若干次随即划分、重复实验评估取平均值作为评估结果。</p>
+</li>
+<li><p>数据集拆分成两部分，每部分的规模设置会影响评估结果，测试训练的比例通常为7:3、8:2等<br>:::</p>
+</li>
+</ol>
+<p><img src="2.png" srcset="/img/loading.gif" alt="分层采样(Stratified Sampleing)" title="分层采样"></p>
+<h4 id="交叉验证法-Cross-Validation"><a href="#交叉验证法-Cross-Validation" class="headerlink" title="交叉验证法(Cross Validation)"></a>交叉验证法(Cross Validation)</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>概念：</strong>将数据集划分成<code>k</code>个大小相似的互斥的数据自己，自己数据尽可能保证数据分布的一致性（分层采样），每次从中取一个数据作为测试集，其余用作训练及，可以进行<code>k</code>次训练和测试，得到评估均值。该验证方法也称作<code>k</code>折交叉验证(<code>k-fold Cross Validation</code>)。使用不同的划分，重复<code>p</code>次，称为<code>p</code>次<code>k</code>折交叉验证。</p>
+<p><img src="3.png" srcset="/img/loading.gif" alt="交叉验证图示" title="交叉验证法图示"></p>
+<h4 id="留一法（Leave-One-Out-LOO）"><a href="#留一法（Leave-One-Out-LOO）" class="headerlink" title="留一法（Leave-One-Out LOO）"></a>留一法（Leave-One-Out LOO）</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>概念：</strong>是<code>k</code>折交叉验证的特殊形式，将数据集分成两个，其中一个数据集记录条数为1，作为测试集使用，其余记录作为训练集训练模型。训练出的模型和使用全部数据集训练得到的模型接近，其评估结果比较准确。确定是当数据集较大时，训练的次数和计算规模较大。</p>
+<p><img src="4.png" srcset="/img/loading.gif" alt="留一法图示" title="留一法图示"></p>
+<h4 id="自助法（Bootstrapping）"><a href="#自助法（Bootstrapping）" class="headerlink" title="自助法（Bootstrapping）"></a>自助法（Bootstrapping）</h4><blockquote>
+<p>拽着自己的鞋带把自己从湖里提起来.<br>—巴龙伯爵历险记</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>概念：</strong>是一种产生样本的抽样方法，其实质是有放回的随机抽样，即从一直数据集中随机抽取一条记录，然后将该记录放入测试集同时放回原数据集，继续下一次抽样，直到测试集中的数据条数满足要求。</p>
+<p>::: tips</p>
+<p>要点:</p>
+<ul>
+<li>假设已知数据集 D 含有 n 条数据，采用自助法得到一个记录条数为 n 的测试集 T 。D 中的一些数据会在 T 中出现多次，还有一些数据不会出现。</li>
+<li>估算一下经过 n 次有放回采样后，大概多少记录未被选中：<ul>
+<li>某一次具体的采样，一条数据被选中的概率为 1/n，未被选中的概率为：1- 1/n</li>
+<li>连续 n 次采样均未被选中的概率为：<img src="e1.png" srcset="/img/loading.gif" alt="公式1" title="公式1">，取极限：<img src="e2.png" srcset="/img/loading.gif" alt="公式2" title="公式2"></li>
+</ul>
+</li>
+<li>通过有放回的抽样获得的训练集去训练模型，不在训练集中的数据（总数量的 1/3）去用于测试，这样的测试结果被称为<strong>包外估计（Out-of-Bag Estimate, OOB）</strong></li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><h4 id="留出法"><a href="#留出法" class="headerlink" title="留出法"></a><strong>留出法</strong></h4><ol>
+<li><p>实现简单、方便，在一定程度上能评估泛化误差</p>
+</li>
+<li><p>测试机和训练及分开，缓解了过拟合</p>
+</li>
+</ol>
+<ul>
+<li>一次划分，评估结果的偶然性大</li>
+<li>数据被拆分后，用于训练、测试的数据更少了</li>
+</ul>
+<h4 id="交叉验证法（留一法）"><a href="#交叉验证法（留一法）" class="headerlink" title="交叉验证法（留一法）"></a><strong>交叉验证法（留一法）</strong></h4><ol>
+<li><p>k 可以根据实际情况设置，充分利用了所有样本</p>
+</li>
+<li><p>多次划分，评估结果相对稳定</p>
+</li>
+</ol>
+<ul>
+<li>计算比较繁琐，需要进行 k 次训练和评估</li>
+</ul>
+<h4 id="自助法"><a href="#自助法" class="headerlink" title="自助法"></a><strong>自助法</strong></h4><ol>
+<li><p>样本较小时可以通过自助法产生多个自助样本集，且有约36.8%的测试样本</p>
+</li>
+<li><p>对于总体的理论分布没有要求</p>
+</li>
+</ol>
+<ul>
+<li>无放回抽样引入了额外的偏差</li>
+</ul>
+<h3 id="几种方法的选择"><a href="#几种方法的选择" class="headerlink" title="几种方法的选择"></a>几种方法的选择</h3><ul>
+<li>已知数据集数量充足时，通常采用留出法或者 k 折交叉验证法</li>
+<li>对于已知数据集较小且难以有效划分训练集/测试集的时候，采用自助法</li>
+<li>对于已知数据集较小且可以有效划分训练集/测试集的时候，采用留一法。</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+    Author：<a href='https://eatrice.top'> 吃白饭-EatRice</a><br />
+    Source：<a href="https://eatrice.top/post/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E6%96%B9%E6%B3%95/">
+        https://eatrice.top/post/模型评估方法/</a><br />
+    
+    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+    
+</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/SQL%E5%AD%97%E5%85%B8%E5%BC%8F%E6%95%99%E7%A8%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SQL字典式教程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/%E9%A9%AC%E4%B8%8A%E5%B0%B1%E8%A6%81%E5%BC%80%E5%AD%A6%E4%BA%86/">
+                        <span class="hidden-mobile">马上就要开学了</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz",
+          app_key: "dzKTc4w4K1maxEg8E5243rrH",
+          placeholder: "休伯利安号在等待接收你的信号哟^0^\n(支持MarkDown语法)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+<br> <p><a id="rainbow"></a></p> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?71be728981300868000249d1707c92b7";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-160834801-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/HidenMath.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

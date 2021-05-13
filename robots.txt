@@ -1,0 +1,29 @@
+User-agent: *
+
+Allow: /
+
+Allow: /post/
+
+Allow: /archives/
+
+Allow: /tags/
+
+Allow: /categories/
+
+Allow: /about/
+
+Allow: /js/
+
+Allow: /lib/
+
+Allow: /css/
+
+Allow: /img/
+
+Allow: /thumbnail/
+
+Allow: /live2d-widget-master/
+
+Allow: /dplayer/
+
+Sitemap: https://eatrice.top/sitemap.xml

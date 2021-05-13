@@ -1,0 +1,768 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favcion.png">
+  <link rel="icon" type="image/png" href="/img/favcion.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#3a311c">
+  <meta name="description" content="这里是一个工科男苦逼的小空间.记录一些我喜欢的东西比如平面设计，程序设计等等，还会有我不喜欢的东西，各种力学、结构学等等.我的专业是建筑工程，但是我喜欢鼓捣计算机专业相关方面的东西，如果看了我的博客对你有启发的话，记得留言收藏推荐三连击哦^O^">
+  <meta name="author" content="吃白饭-EatRice">
+  <meta name="keywords" content="随笔,分享,经历,吃白饭,休伯利安号,小万,开学啦,科比读后感,星际争霸,守望先锋,雷诺,休伯利安">
+  <meta name="theme-color" content="#3a311c">
+  <link rel="manifest" href="/manifest.json" />
+  
+  <title>结构力学-力法 ~ 吃白饭的休伯利安号</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/tomorrow-night.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1746382_qrhzb41budd.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"eatrice.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="吃白饭的休伯利安号" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>吃白饭的休伯利安号</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Home/">
+                <i class="iconfont icon-addrcard"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/experience/">
+                <i class="iconfont icon-experiment"></i>
+                历程
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/RSS/">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="结构力学-力法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      吃白饭-EatRice
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-10 21:02" pubdate>
+        2020年5月10日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      30
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">结构力学-力法</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：1 年前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>力学是结构力学中基于虚功原理，用于解算超静定结构的结构内力的一种计算方法。其基本原理为：通过将结构的多余支座假定为一系列的支座反力$\{ {X_1},{X_2},…,{X_n}\} $，将超静定问题转化为静定问题，然后使用<strong>图乘法</strong>求出当假设的支座反力为1时，引起的该力的方向上的位移，即得到结构在该方向上的柔度$\delta $，然后通过建立<strong>位移典型方程</strong>：各个力在假设的支座反力上引起的<strong>位移的总和为0</strong>，即$[X][\delta ] + [\Delta P] = 0$。求解该多元线性方程组即能得到假设的支座反力。根据支座反力和已知荷载可以求得结构内力。</p>
+<p>该多元线性方程组也称为<strong>力法典型方程</strong>。</p>
+<p>关于力法的典型方程，其中：</p>
+<ul>
+<li>$[X]$为假设的支座反力列向量，其等于${[{X_1},{X_2},...,{X_n}]^T}$；</li>
+<li>$[\delta ]$为各假设的支座反力当其大小等于单位力时，在对应的支座反力方向上引起的位移。其等于:</li>
+</ul>
+
+$$
+\left[ {\begin{array}{*{20}{c}}
+{\int {\frac{{{{\overline M }_{X1}}{{\overline M }_{X1}}}}{{EI}}} }&{\int {\frac{{{{\overline M }_{X1}}{{\overline M }_{X2}}}}{{EI}}} }&{...}&{\int {\frac{{{{\overline M }_{X1}}{{\overline M }_{Xn}}}}{{EI}}} }\\
+{\int {\frac{{{{\overline M }_{X2}}{{\overline M }_{X1}}}}{{EI}}} }&{\int {\frac{{{{\overline M }_{X2}}{{\overline M }_{X2}}}}{{EI}}} }&{...}&{\int {\frac{{{{\overline M }_{X2}}{{\overline M }_{Xn}}}}{{EI}}} }\\
+ \vdots & \vdots & \ddots & \vdots \\
+{\int {\frac{{{{\overline M }_{Xn}}{{\overline M }_{X1}}}}{{EI}}} }&{\int {\frac{{{{\overline M }_{Xn}}{{\overline M }_{X2}}}}{{EI}}} }&{...}&{\int {\frac{{{{\overline M }_{Xn}}{{\overline M }_{Xn}}}}{{EI}}} }
+\end{array}} \right]
+$$
+
+<p>根据其表达式可以得出柔度矩阵$[\delta ]$为对称矩阵。</p>
+<ul>
+<li>$[\Delta P]$为外荷载所引起的对应位置的位移列向量，其等于：${\left[ {\int {\frac{{{M_p}{{\overline M }_{X1}}}}{{EI}},} \int {\frac{{{M_p}{{\overline M }_{X2}}}}{{EI}},...,\int {\frac{{{M_p}{{\overline M }_{Xn}}}}{{EI}}} } } \right]^T}$</li>
+<li>其中$M_p$为所有的外荷载对于结构内力的组合效应。</li>
+</ul>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="将超静定变为静定问题求解"><a href="#将超静定变为静定问题求解" class="headerlink" title="将超静定变为静定问题求解"></a>将超静定变为静定问题求解</h3><p>超静定结构一般指的是自由度小于零的结构，一般该类结构都存在着多余约束。这些多余约束一般以力的形式作用在结构上，使得超静定结构的内力计算更加复杂。</p>
+<p>为了求解这类超静定结构，我们通过将这些<strong>多余的约束看作其存在为力</strong>的形式，而且大小为：$\{ {X_1},{X_2},…,{X_n}\} $。这样结构就由超静定结构转化为了静定结构，其存在两类荷载，一是在转化之前就存在的外荷载${\rm{[P]}}$；另一类是转化之后用以替换多余约束的支座反力。</p>
+<p>这样通过使用支座反力替换支座作用，即得到变换后的静定结构。</p>
+<h3 id="力法的典型方程"><a href="#力法的典型方程" class="headerlink" title="力法的典型方程"></a>力法的典型方程</h3><p>力法的典型方程是基于在所有作用下支座处产生支座反力的方向<strong>位移等于零</strong>为平衡条件所列出的典型方程。</p>
+<p>在结构中，当我们假设某超静定结构存在支座反力$X_1$时，该支座反力作用于结构上的某个位置$M$。我们需要通过计算得到外荷载在该位置引起的虚位移。根据虚功原理，我们假设的支座反力所引起的位移会平衡外荷载所引起的位移，使得位置$M$实际的位移等于0，据此通过列出各力在各平衡位置所列出位移表达式，即可建立力法的典型方程。</p>
+<p>根据这个上面所举例的简单例子，我们可以列出典型方程：</p>
+
+$$
+\begin{array}{l}
+{S_{X1}} + \Delta P = 0\\
+其中{S_{X1}} = {X_1}{\delta _{11}};\\
+\Delta P = P{\delta _{1P}}
+\end{array}
+$$
+
+<ul>
+<li>${\delta _{11}}$为假定的单位支座反力在该方向上引起的位移；</li>
+<li>${\delta _{1P}}$为外荷载综合作用在该支座反力方向上引起的位移</li>
+</ul>
+<p>简单例子的示意图如下图所示：</p>
+<p><img src="1.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="图乘法-lt-span-class-”hint—top-hint—rounded”-aria-label-”结构力学-图乘法"><a href="#图乘法-lt-span-class-”hint—top-hint—rounded”-aria-label-”结构力学-图乘法" class="headerlink" title="图乘法&lt;span class=”hint—top hint—rounded” aria-label=”结构力学-图乘法"></a>图乘法<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote">&lt;span class=”hint—top hint—rounded” aria-label=”结构力学-图乘法</h3><p>“&gt;[1]&lt;/span&gt;&lt;/a&gt;&lt;/sup&gt;</p>
+<p>计算荷载引起的结构位移可以采用图乘法，其基本原理和计算方法可以参考：<a href="https://eatrice.top/post/%E7%BB%93%E6%9E%84%E5%8A%9B%E5%AD%A6-%E5%9B%BE%E4%B9%98%E6%B3%95/">结构力学-图乘法</a><sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="结构力学-图乘法
+">[1]</span></a></sup></p>
+<p>通过对外荷载与该位移方向的单位力图乘，即可得到外荷载在力的方向上引起的位移；<br>同理将位移方向的单位力与位移方向的单位力进行自乘或对应不同的支座位移的单位力进行图乘可以得到单位支座反力在对应的位移方向所产生的位移。</p>
+<p>区别于<strong>位移法</strong>的刚度，单位力引起的位移称为柔度。</p>
+<h3 id="多支座反力的线性方程和求解"><a href="#多支座反力的线性方程和求解" class="headerlink" title="多支座反力的线性方程和求解"></a>多支座反力的线性方程和求解</h3><p>假设多余的约束有好多个，我们假定了一系列支座反力：$\{ {X_1},{X_2},...,{X_n}\} $。</p>
+<p>我们要求出这些支座反力相互作用在对应的位移方向上的<strong>柔度</strong>：</p>
+
+$$
+\left[ {\begin{array}{*{20}{c}}
+{{\delta _{11}}}&{{\delta _{12}}}&{...}&{{\delta _{1n}}}\\
+{{\delta _{21}}}&{{\delta _{22}}}&{...}&{{\delta _{2n}}}\\
+ \vdots & \vdots & \ddots & \vdots \\
+{{\delta _{n1}}}&{{\delta _{n2}}}&{...}&{{\delta _{nn}}}
+\end{array}} \right]
+$$
+
+<p>根据<strong>图乘法</strong>可以得到：</p>
+
+<div class='full-math-div'>
+$$
+{\begin{array}{*{20}{c}}
+{{\delta _{11}} = \int {\frac{{{{\overline M }_{X1}}{{\overline M }_{X1}}}}{{EI}}} }&{{\delta _{12}} = \int {\frac{{{{\overline M }_{X1}}{{\overline M }_{X2}}}}{{EI}}} }&{...}&{{\delta _{1n}} = \int {\frac{{{{\overline M }_{X1}}{{\overline M }_{Xn}}}}{{EI}}} }\\
+{{\delta _{21}} = \int {\frac{{{{\overline M }_{X2}}{{\overline M }_{X1}}}}{{EI}}} }&{{\delta _{22}} = \int {\frac{{{{\overline M }_{X2}}{{\overline M }_{X2}}}}{{EI}}} }&{...}&{{\delta _{2n}} = \int {\frac{{{{\overline M }_{X2}}{{\overline M }_{Xn}}}}{{EI}}} }\\
+ \vdots & \vdots & \ddots & \vdots \\
+{{\delta _{n1}} = \int {\frac{{{{\overline M }_{Xn}}{{\overline M }_{X1}}}}{{EI}}} }&{{\delta _{n2}} = \int {\frac{{{{\overline M }_{Xn}}{{\overline M }_{X2}}}}{{EI}}} }&{...}&{{\delta _{nn}} = \int {\frac{{{{\overline M }_{Xn}}{{\overline M }_{Xn}}}}{{EI}}} }
+\end{array}}
+$$
+</div>
+
+<p>显然该矩阵为对称矩阵，因此计算柔度时只需要计算一半的相对柔度。</p>
+<p>计算<strong>外荷载产生的位移</strong>${[\Delta {P_1},\Delta {P_2},...,\Delta {P_n}]^T}$：</p>
+
+<div class='full-math-div'>
+$$
+{\left[ {\Delta {P_1} = \int {\frac{{{M_p}{{\bar M}_{X1}}}}{{EI}},} \Delta {P_2} = \int {\frac{{{M_p}{{\bar M}_{X2}}}}{{EI}},...,\Delta {P_n}\int {\frac{{{M_p}{{\bar M}_{Xn}}}}{{EI}}} } } \right]^T}
+$$
+
+<p>&lt;/div&gt;</p>
+<p>列<strong>典型方程</strong>：</p>
+
+<div class='full-math-div'>
+$$
+\left\{ {\begin{array}{*{20}{c}}
+{{X_1}{\delta _{11}} + {X_2}{\delta _{21}} + ... + {X_n}{\delta _{n1}} + \Delta {P_1} = 0}\\
+{{X_2}{\delta _{12}} + {X_2}{\delta _{22}} + ... + {X_n}{\delta _{n2}} + \Delta {P_2} = 0}\\
+ \vdots \\
+{{X_n}{\delta _{1n}} + {X_2}{\delta _{2n}} + ... + {X_n}{\delta _{nn}} + \Delta {P_n} = 0}
+\end{array}} \right.
+$$
+</div>
+
+<p>该方程组为非齐次线性方程组，令支座反力向量$[X]={[{X_1},{X_2},...,{X_n}]^T}$，上面的柔度矩阵用$[\delta ]$表示，方程可表示为：$[X][\delta ] + [\Delta P] = 0$。</p>
+<p>当柔度矩阵满秩时，方程有唯一的实数解，求解出支座反力向量，将其代入原结构中，即可根据支座反力和外荷载绘制结构内力图。</p>
+<blockquote>
+<p>关于对称性利用的图文资料来自邱世勋，其中穿插了一些对称性的力法原理</p>
+</blockquote>
+<h2 id="基于力法的对称性求解的应用"><a href="#基于力法的对称性求解的应用" class="headerlink" title="基于力法的对称性求解的应用"></a>基于力法的对称性求解的应用</h2><h3 id="对称性利用原则和条件"><a href="#对称性利用原则和条件" class="headerlink" title="对称性利用原则和条件"></a>对称性利用原则和条件</h3><p><strong>原则：</strong>使副系数，自由项尽可能为0。</p>
+<p><strong>条件：</strong></p>
+<ol>
+<li>结构几何对称</li>
+<li>结构的刚度也互相对称</li>
+</ol>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><h4 id="正对称"><a href="#正对称" class="headerlink" title="正对称"></a>正对称</h4><p>正对称荷载作用下，内力和位移都正对称，反对称作用下，内力和位移都反对称。</p>
+<p>举例下图所示的简单示例：</p>
+<p><img src="2.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="3.png" srcset="/img/loading.gif" alt=""></p>
+<p>应用其对称性，立法的典型方程可以简化为：</p>
+
+$$
+\begin{array}{l}
+{\delta _{13}} = {\delta _{31}} = 0,{\delta _{23}} = {\delta _{32}} = 0\\
+\left\{ {\begin{array}{*{20}{c}}
+{{\delta _{11}}{X_1} + {\delta _{12}}{X_2} + {\Delta _{1P}} = 0}\\
+{{\delta _{21}}{X_1} + {\delta _{22}}{X_2} + {\Delta _{2P}} = 0}\\
+{{\delta _{33}}{X_3} + {\Delta _{3P}} = 0}
+\end{array}} \right.
+\end{array}
+$$
+
+<h4 id="反对称"><a href="#反对称" class="headerlink" title="反对称"></a>反对称</h4><p>对称结构在正对称结构下，内力位移都为正对称的，反对称结构下，内力位移都为反对称的。</p>
+<ol>
+<li>奇数跨对称刚架：</li>
+</ol>
+<p>奇数跨对称刚架。如图7 - 25a所示刚架，在正对称荷载作用下,由于只产生正对称的内力和位移，故可知在对称轴上的截面C处不可能发生转角和水平线位移,但可有竖向线位移同时,该截面上将有弯矩和轴力,而无剪力。因此,截取刚架的一半时，在该处应用一滑动支座(也称定向支座)来代替原有联系,从而得到图7-25b所示的计算简图。</p>
+<p><img src="4.png" srcset="/img/loading.gif" alt=""></p>
+<ol>
+<li>偶数跨对称刚架</li>
+</ol>
+<p>偶数跨对称刚架。如图7 - 26a所示刚架，在正对称荷载作用下,若忽略杆件的轴向变形,则在对称轴上的刚结点C处将不可能产生任何位移。同时,在该处的横梁杆端有弯矩、轴力和剪力存在。因此，截取一半时该处用固定支座代替,从而得到图7 - 26b所示的计算简图。<br>在反对称荷载作用下(图7 - 26c),可将其中间柱设想为由两根刚度各为I/2的竖柱组成,它们在顶端分别与横梁刚结(图7-26e),显然这与原结构是等效的。然后,设想将此两柱中间的横梁切开,则由于荷载是反对称的，故切口上只有剪力Fsc(图7-26f)。因忽略轴向变形,这对剪力将只使两柱分别产生等值反号的轴力,而不使其他杆件产生内力。而原结构中间柱的内力是等于该两柱内力之代数和,故剪力Fsc实际上对原结构的内力和变形均无影响。因此,可将其去掉不计，而取一半刚架的计算简图如图7-26d所示。</p>
+<p><img src="5.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://eatrice.top/post/%E7%BB%93%E6%9E%84%E5%8A%9B%E5%AD%A6-%E5%9B%BE%E4%B9%98%E6%B3%95/">结构力学-图乘法</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-hans/%E5%8A%9B%E6%B3%95">维基百科-力法</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BB%93%E6%9E%84%E5%8A%9B%E5%AD%A6/">结构力学</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/">工程结构设计</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+    Author：<a href='https://eatrice.top'> 吃白饭-EatRice</a><br />
+    Source：<a href="https://eatrice.top/post/%E7%BB%93%E6%9E%84%E5%8A%9B%E5%AD%A6-%E5%8A%9B%E6%B3%95/">
+        https://eatrice.top/post/结构力学-力法/</a><br />
+    
+    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+    
+</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6-%E4%B8%80%E5%85%83%E5%87%BD%E6%95%B0%E7%A7%AF%E5%88%86%E5%AD%A6%E8%A7%A3%E9%A2%98%E6%8A%80%E5%B7%A7-%E4%BA%8C/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">高等数学-一元函数积分学解题技巧(二)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/%E7%BB%93%E6%9E%84%E5%8A%9B%E5%AD%A6-%E5%9B%BE%E4%B9%98%E6%B3%95/">
+                        <span class="hidden-mobile">结构力学-图乘法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz",
+          app_key: "dzKTc4w4K1maxEg8E5243rrH",
+          placeholder: "休伯利安号在等待接收你的信号哟^0^\n(支持MarkDown语法)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+<br> <p><a id="rainbow"></a></p> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?71be728981300868000249d1707c92b7";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-160834801-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/HidenMath.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

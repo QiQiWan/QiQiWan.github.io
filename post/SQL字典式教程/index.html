@@ -1,0 +1,833 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favcion.png">
+  <link rel="icon" type="image/png" href="/img/favcion.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#3a311c">
+  <meta name="description" content="这里是一个工科男苦逼的小空间.记录一些我喜欢的东西比如平面设计，程序设计等等，还会有我不喜欢的东西，各种力学、结构学等等.我的专业是建筑工程，但是我喜欢鼓捣计算机专业相关方面的东西，如果看了我的博客对你有启发的话，记得留言收藏推荐三连击哦^O^">
+  <meta name="author" content="吃白饭-EatRice">
+  <meta name="keywords" content="随笔,分享,经历,吃白饭,休伯利安号,小万,开学啦,科比读后感,星际争霸,守望先锋,雷诺,休伯利安">
+  <meta name="theme-color" content="#3a311c">
+  <link rel="manifest" href="/manifest.json" />
+  
+  <title>SQL字典式教程 ~ 吃白饭的休伯利安号</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/tomorrow-night.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1746382_qrhzb41budd.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"eatrice.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="吃白饭的休伯利安号" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>吃白饭的休伯利安号</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Home/">
+                <i class="iconfont icon-addrcard"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/experience/">
+                <i class="iconfont icon-experiment"></i>
+                历程
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/RSS/">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="SQL字典式教程">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      吃白饭-EatRice
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-02-29 15:08" pubdate>
+        2020年2月29日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SQL字典式教程</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：1 年前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><p> <strong>SQL</strong>（<code>Structure Query Language</code>)又称结构化设计语言。是一门数据库语言，其作用包括数据定义<code>Statistic Define</code>、数据操纵<code>Maniplation</code>、数据控制<code>Control</code>三个主要部分。其运行基于数据库管理系统<code>（DBMS）</code>对数据库的外模式进行操作控制，为外置的数据库用户或程序提供对数据库数据进行操作提供一种方式，并集成常用的操作和功能。</p>
+<p>其语句结构包括一下方面：</p>
+<ol>
+<li>数据定义</li>
+<li>数据查询</li>
+<li>数据操作</li>
+<li>数据控制</li>
+<li>指针控制</li>
+<li>事务控制</li>
+</ol>
+<p>此篇文章主要介绍SQL语句结构的前三种</p>
+<h2 id="数据定义Data-Define-Language"><a href="#数据定义Data-Define-Language" class="headerlink" title="数据定义Data Define Language"></a>数据定义<code>Data Define Language</code></h2><p>SQL的数据定义有特定的谓词<code>CREATE</code>，<code>DROP</code>，<code>ALTER</code></p>
+<h3 id="谓词CREATE"><a href="#谓词CREATE" class="headerlink" title="谓词CREATE"></a>谓词<code>CREATE</code></h3><p>谓词<code>CREATE</code>用于创建数据类型 、表、模式。数据库等同时定义完整性约束。<br><strong>使用方法：</strong></p>
+<ul>
+<li><p>创建数据库<br>-<code>CREATR &#123;DATABASE | SCHEMA&#125; db_name [create_spcification[,create_specification]...]</code></p>
+<ul>
+<li><code>[create_specification]: [DEFAULT] CHARACTER SET charset_name | [DEFAULT] COLLATE collation_name</code></li>
+</ul>
+</li>
+<li><p>创建数据表</p>
+<ul>
+<li><code>CREATE [sc_name] TABLE table_name [(create_definition, create_definition, ...)] [table_options] [select_statement]</code></li>
+<li><code>[create_definition]</code>包括数据列名称<code>col_name</code>，数据类型<code>data type</code>，数据完整性约束<code>[[NOT] NULL]</code>，数据索引<code>[INDEX]</code>，数据主键<code>[PRIMARY KEY]</code></li>
+</ul>
+</li>
+<li><p>创建模式</p>
+<ul>
+<li><code>CREATE SCHEMA sc_name AUTHORIZATION &lt;user_name [&lt;CREATE DOMAIN 子句&gt;|&lt;CREATE TABLE 子句 &gt;|&lt;CREATE VIEW 子句&gt;|...]</code></li>
+</ul>
+</li>
+<li><p>创建索引</p>
+<ul>
+<li><code>CREATE [UNIQUE] [CLUSTER] INDEX &lt;index_name&gt; ON &lt;table_name&gt; [&lt;col_name&gt; [&lt;(ASC|DESC)&gt;]],...]);</code></li>
+</ul>
+</li>
+<li><p><code>UNIQUE</code>表示索引值唯一对应</p>
+<ul>
+<li><code>CLUSTER</code>表示要建立的索引为聚族索引,与表中记录顺序一致的索引组织</li>
+</ul>
+<p>关于<code>[create_definition]</code>的定义,其中包括三个部分</p>
+<p>[&lt;列名&gt; &lt;数据类型&gt; [列级完整性约束]]，其中不同层级的<code>[CREATE_DEFINITION]</code>用半角逗号<code>,</code>分隔</p>
+<p>数据库的数据类型分为:</p>
+<ol>
+<li>预定义数据类型: 即可在SQL中直接使用的数据类型(较为常用)<ol>
+<li><code>INT</code>整数类型, <code>SMALLINT</code>短整数类型</li>
+<li><code>REAL</code>浮点数类型, <code>DOUBLE PRECISION</code>双精度浮点数类型, <code>FLOAT(n)</code>浮点数类型, 精度至少为n位数字</li>
+<li><code>NUMERIC(p,d)</code>定点数类型,共有p位数字,其中小数点后d位</li>
+<li><code>CHAR(n)</code>长度为n的字符串, <code>VARCHAR(n)</code>最大长度为n的字符串</li>
+<li><code>BIT</code>(n)长度为n的二进制位串, <code>BIT</code>和<code>VARYING(n)</code>最大长度为n的二进制位串</li>
+<li><code>DATE</code>日期类型: <code>YYYY-MM-DD</code>, 时间类型: <code>HH:MM:SS</code>, <code>TIMESTAMP</code>时间戳(<code>DATE</code>加<code>TIME</code>)</li>
+<li><code>BOOLEAN</code>布尔型,有三个值<code>TRUE</code>、<code>FALSE</code>和<code>UNKNOWN</code></li>
+</ol>
+</li>
+<li>构造数据类型: 由特性的保留字和预定义数据类型构造而成, 如<code>REF</code>、<code>ROW</code>和<code>ARRAY</code>等</li>
+<li>用户定义数据类型: 是一个对象类型，是由用户按照一定的规则用预定义数据类型组合定义的用户自用的数据类型</li>
+<li>大对象类型: 可储存多达<code>1Gbyts</code>的串。称为<code>LOB</code>: <code>BLIB</code>二进制大对象，储存音频、图像、视频等。<code>CLOB</code></li>
+</ol>
+</li>
+</ul>
+<h3 id="谓词DROP"><a href="#谓词DROP" class="headerlink" title="谓词DROP"></a>谓词<code>DROP</code></h3><p>谓词<code>DROP</code>用于删除数据类型:</p>
+<ul>
+<li>删除模式<ul>
+<li><code>DROP SCHEMA sc_name (CASCADE | RESTRICT)</code></li>
+<li>CASCADE 删除模式时, 将模式及其下属的表、视图索引等全部删除</li>
+<li>RESTRICT 只删除空模式</li>
+</ul>
+</li>
+<li>删除表<ul>
+<li><code>DROP col_name (CASCADE | RESTRICT) [DROP 完整性约束]</code></li>
+</ul>
+</li>
+<li>删除索引<ul>
+<li><code>DROP INDEX [ON table_name] index_name</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="谓词MODIFY"><a href="#谓词MODIFY" class="headerlink" title="谓词MODIFY"></a>谓词<code>MODIFY</code></h3><p>谓词<code>MODIFY</code>用于修改数据类型:</p>
+<ul>
+<li>修改数据表的列:<ul>
+<li><code>MODIFY [TABLE table_name] col_name create_spcification</code> </li>
+</ul>
+</li>
+</ul>
+<h2 id="数据查询DATA-Query-Language"><a href="#数据查询DATA-Query-Language" class="headerlink" title="数据查询DATA Query Language"></a>数据查询<code>DATA Query Language</code></h2><p>SQL的数据查询有特定的谓词<code>SELECT</code>也是SQL用的最多的谓词</p>
+<h3 id="简单查询"><a href="#简单查询" class="headerlink" title="简单查询"></a>简单查询</h3><p>简单查询仅涉及数据库中的一个表,也称为单表查询</p>
+<ul>
+<li>查询表中的若干列(投影)<ul>
+<li><code>SELECT col_name1[, col_name2]... FROM table_name</code> //投影部分列</li>
+<li><code>SELECT * FROM table_name</code> //投影所有列</li>
+</ul>
+</li>
+<li>查询若干元组<ul>
+<li><code>SELECT &#123;[col_names]&#125; FROM table_name WHERE &#123;Expression&#125;</code></li>
+<li><code>SELECT &#123;[col_names]&#125; FROM table_name WHERE [col_name] BETWEEN [left_limit] AND [right_linit]</code></li>
+<li><code>SELECT &#123;[col_names]&#125; FROM table_name WHERE [col_name] [NOT] LIKE [Expression]</code><ul>
+<li><code>[Expression]</code>中使用’’包裹条件</li>
+<li>%匹配任意长的字符串</li>
+<li>_匹配单个任意字符</li>
+</ul>
+</li>
+<li><code>SELECT &#123;[col_names]&#125; FROM table_name WHERE [col_name] IN (&#39;MA&#39;, &#39;CS&#39;, &#39;EE&#39;);</code></li>
+</ul>
+</li>
+<li>排序查询结果<ul>
+<li><code>SELECT * FROM table_name ORGER BY &#123;[col_names]&#125; DESC;</code>数组中的第一列优先级最高</li>
+</ul>
+</li>
+<li>使用聚集函数<ul>
+<li><code>COUNT ([DISTINCT | ALL] *)</code> 统计元组个数</li>
+<li><code>COUNT ([DISTINCT | ALL] col_name)</code> 统计一列元组个数</li>
+<li><code>SUM ([DISTINCT | ALL] col_name)</code> 对数值列求和</li>
+<li><code>AVG ([DISTINCT | ALL] col_name)</code> 对数值求平均</li>
+<li><code>MAX ([DISTINCT | ALL] col_name)</code> 求最大值</li>
+<li><code>MIN ([DISTINCT | ALL] col_name)</code>求最小值</li>
+<li><code>SELECT COUNT(*) FROM table_name</code> 查询元组数量</li>
+</ul>
+</li>
+<li>对查询结果分组<ul>
+<li>SELECT {[col_names]} FROM table_name GROUP BY {[col_names]} [HAVING Expression]</li>
+</ul>
+</li>
+</ul>
+<h3 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h3><p>查询通过多个表取得数据,称为连接查询</p>
+<ul>
+<li>等值连接和非等值连接<ul>
+<li><code>SELECT table_name1 &#123;[col_names]&#125; FROM table_name2 WHERE table1.att1 = table2.att2</code>当两个表有相同的某列的值时,将其连接起来</li>
+</ul>
+</li>
+<li>符合条件链接<ul>
+<li><code>SELECT &#123;[col_names]&#125; FROM table_name WHERE [Express] [AND] [table1.att1 = table2.att2]</code></li>
+</ul>
+</li>
+<li>自身连接<ul>
+<li>`SELECT {[col_names]} FROM table_name AS [alias1], table_name AS [alias2] WHERE alias1.att1 &gt; alias2.att2 AND [Expression]</li>
+</ul>
+</li>
+<li>多表连接<ul>
+<li><code>SELECT &#123;[col_names]&#125; FROM table_name FROM &#123;[table_names]&#125; WHERE &#123;[Expression]&#125;</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="嵌套查询"><a href="#嵌套查询" class="headerlink" title="嵌套查询"></a>嵌套查询</h3><ul>
+<li>带有谓词<code>IN</code>的子查询<ul>
+<li>`SELECT {[col_names]} FROM table_name WHERE [clo_name] IN (SELECT [col_NAme] FROM table_name WHERE [Epression])</li>
+</ul>
+</li>
+<li>带有ANY(SOME)或ALL谓词的子查询<ul>
+<li><code>SELECT &#123;[col_names]&#125; FROM table_name WHERE [col_name] &lt; ANY(select_array)</code></li>
+<li><code>SELECT &#123;[col_names]&#125; FROM table_name WHERE [col_name] &lt; ALL(select_array)</code></li>
+</ul>
+</li>
+<li>带有`[NOT] EXISTS谓词的子查询<ul>
+<li><code>SELECT &#123;[col_names]&#125; FROM table_name WHERE EXISTS(select_array)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="集合查询"><a href="#集合查询" class="headerlink" title="集合查询"></a>集合查询</h3><ul>
+<li>并<code>(UNION)</code><ul>
+<li><code>SELECT &#123;[col_names]&#125; FROM table_name WHERE [Expression1] UNION SELECT  &#123;[col_names]&#125; FROM table_name WHERE [Expression2]</code></li>
+</ul>
+</li>
+<li>交<code>(Intersect)</code><ul>
+<li><code>SELECT &#123;[col_names]&#125; FROM table_name WHERE [Expression1] INTERSECT SELECT &#123;[col_names]&#125; FROM table_name WHERE [Expression2]</code></li>
+</ul>
+</li>
+<li>差<code>(EXCEPT)</code><ul>
+<li><code>SELECT &#123;[col_names]&#125; FROM table_name WHERE [Expression1] EXCEPT SELECT &#123;[col_names]&#125; FROM table_name WHERE [Expression1]</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="连接表"><a href="#连接表" class="headerlink" title="连接表"></a>连接表</h3><div class='alert alert-success'>
+
+<strong>连接表</strong>允许用户在一个`SELECT`语句的`FROM`子句中指定连接操作,这种连接操作所得到的表称为连接表。
+
+</div>
+
+<ul>
+<li>`<table_name1> [NATURAL] <Connection_Type> <table_name2> <Connection_Condition><ul>
+<li><code>Connect_Type</code> includes JOIN, OUTER, JOIN, NATURAL JOIN and CROSS JOIN</li>
+<li><code>Connect_Condition</code> includes ON, USING({col_names})</li>
+<li><code>SELECT &#123;col_names&#125; FROM (&lt;table_name1&gt; JOIN &#123;col_names&#125; ON &lt;table_name2.col_names&gt; [Judge_condition]) Where &#123;Judge_condition&#125;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="数据修改"><a href="#数据修改" class="headerlink" title="数据修改"></a>数据修改</h2><h3 id="数据插入"><a href="#数据插入" class="headerlink" title="数据插入"></a>数据插入</h3><p><code>SQL</code>的插入操作通过<code>INSERT</code>语句实现,该语句将数据插入到一个表中.其一般格式有两种:</p>
+<ol>
+<li>插入一行<ol>
+<li><code>INSERT INFO table_name [&#123;col_names&#125;] VALUES(&#123;col_values&#125;)</code></li>
+</ol>
+</li>
+<li>使用查询插入多行<ol>
+<li><code>INSERT INTO table_name[&#123;col_names&#125;] &#123;child_query&#125;</code></li>
+</ol>
+</li>
+</ol>
+<h3 id="数据删除"><a href="#数据删除" class="headerlink" title="数据删除"></a>数据删除</h3><p><code>SQL</code>的数据删除由<code>DELETE</code>实现</p>
+<p><code>DELETE FROM table_name [WHERE &#123;expressions&#125;]</code></p>
+<h3 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h3><p><code>SQL</code>数据更新操作由<code>UPDATE</code>语句实现</p>
+<p><code>UPDATE table_name SET &#123;col_names=col_values&#125; WHERE &#123;expressions&#125;</code></p>
+<p class='alert alert-success'>
+更新操作一次只能更新一个表,若更新多个表,需要执行多个更新语句
+</p>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%A8%8B%E5%BA%8F%E5%AD%97%E5%85%B8/">程序字典</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+    Author：<a href='https://eatrice.top'> 吃白饭-EatRice</a><br />
+    Source：<a href="https://eatrice.top/post/SQL%E5%AD%97%E5%85%B8%E5%BC%8F%E6%95%99%E7%A8%8B/">
+        https://eatrice.top/post/SQL字典式教程/</a><br />
+    
+    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+    
+</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/%E4%B8%9C%E4%BA%AC%E5%A5%A5%E8%BF%90%E4%BC%9A%E7%82%AB%E9%85%B7%E7%9A%84%E5%9B%BE%E6%A0%87/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">东京奥运会炫酷的图标</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E6%96%B9%E6%B3%95/">
+                        <span class="hidden-mobile">数学——模型评估方法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz",
+          app_key: "dzKTc4w4K1maxEg8E5243rrH",
+          placeholder: "休伯利安号在等待接收你的信号哟^0^\n(支持MarkDown语法)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+<br> <p><a id="rainbow"></a></p> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?71be728981300868000249d1707c92b7";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-160834801-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/HidenMath.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

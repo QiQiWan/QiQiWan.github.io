@@ -1,0 +1,1062 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favcion.png">
+  <link rel="icon" type="image/png" href="/img/favcion.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#3a311c">
+  <meta name="description" content="这里是一个工科男苦逼的小空间.记录一些我喜欢的东西比如平面设计，程序设计等等，还会有我不喜欢的东西，各种力学、结构学等等.我的专业是建筑工程，但是我喜欢鼓捣计算机专业相关方面的东西，如果看了我的博客对你有启发的话，记得留言收藏推荐三连击哦^O^">
+  <meta name="author" content="吃白饭-EatRice">
+  <meta name="keywords" content="随笔,分享,经历,吃白饭,休伯利安号,小万,开学啦,科比读后感,星际争霸,守望先锋,雷诺,休伯利安">
+  <meta name="theme-color" content="#3a311c">
+  <link rel="manifest" href="/manifest.json" />
+  
+  <title>高等数学-一元函数积分学解题技巧(一) ~ 吃白饭的休伯利安号</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/tomorrow-night.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1746382_qrhzb41budd.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"eatrice.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="吃白饭的休伯利安号" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>吃白饭的休伯利安号</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Home/">
+                <i class="iconfont icon-addrcard"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/experience/">
+                <i class="iconfont icon-experiment"></i>
+                历程
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/RSS/">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="高等数学-一元函数积分学解题技巧(一)">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      吃白饭-EatRice
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-29 08:13" pubdate>
+        2020年4月29日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      39
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">高等数学-一元函数积分学解题技巧(一)</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：6 个月前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>一元函数积分学是高等数学中最为基础且可拓展性非常强的一部分内容。其包含之前课程中的极限的原理和方法，定积分和不定积分的计算和方法，还承接着后面的多元函数微分学，甚至囊括了泰勒级数和傅里叶级数的一部分概念。因此作为一个承前启后的重要部分在考研数学所占的比重是非常大的，也是特别需要重视的一部分。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>一元函数积分学的相关试题可以出成选择填空题，或者大题。其中大题的分支一般较高，解题过程较为复杂，同时对于大题中的证明题更是结合了多个数学知识在其中。因此大题上拿到分值特别重要。笔者通过观看西安交通大学的相关的考研数学的网课，同时结合自己的一些学习笔记做了一点点基于自身水平的解题方法小结，来复习一下之前的学习内容，也和朋友们分享。</p>
+<h2 id="典例分析"><a href="#典例分析" class="headerlink" title="典例分析"></a>典例分析</h2><div class='alert alert-warning'>
+部分latex公式，mathjax引擎无法渲染，因此以图片显示。
+</div>
+
+<h3 id="不定积分的特性"><a href="#不定积分的特性" class="headerlink" title="不定积分的特性"></a>不定积分的特性</h3><p><strong>例题1：</strong>设$f(x)$是$(0, + \infty )$内的连续函数，对于任意的正整数$a,b$，积分$\int_a^{ab} {f(x)dx} $与$a$无关，且$f(1)=1$，求$\int {f({e^x} + 1)dx} $。</p>
+<p><strong>解答思路点：</strong></p>
+<ol>
+<li>本题考虑的是定积分的特性，只有在积分式中，将$a$参数进行消除，才会使得该式与参数$a$无关，既然式中不含有参数$a$，则为了避免引入更多的变量或公式，可以直接对该式子对$a$进行求导，且导数值为0。可以即得出一个结论，一个函数若要申明与某个变量无关，则可以对这个函数求关于该变量的导数，且导数值为0。即$\frac{{d\int_a^{ab} {f(x)dx} }}{{da}} = 0$</li>
+<li>对不定积分的求导方法；不定积分的求导可以假定其原函数，然后用原函数代入积分上下限得出积分表达式，后通过对积分表达式分别求导，即可得到求导公式：
+<div class='full-math-div'>
+$$
+\frac{{d\int_a^{ab} {f(x)dx} }}{{da}} = \frac{{d(F(ab) - F(a))}}{{da}} = bf(ab) - f(a) = 0
+$$
+</div>
+</li>
+<li>根据已知条件，结合到推导出的公式之中：由$f(1)=1$，将将$a=1$导入上式中，得到$bf(b) = 1 =  &gt; f(b) = \frac{1}{b}$。即能得到该函数表达式。之后只需根据题目要求计算该函数的定积分即可。</li>
+</ol>
+<hr />
+
+<p><strong>例题2：</strong>设$f(x),g(x)$在$[a, + \infty )$上有连续的导数。且$f’(x) \ge 0$，$\mathop {\lim }\limits_{x -  &gt;  + \infty } f(x) = 0$，$g(x)$在$[a, + \infty )$上有界，证明：$\int_a^{ + \infty } {f(x)g’(x)dx} $收敛。</p>
+<p><strong>解题思路点：</strong></p>
+<ol>
+<li>函数收敛的定义：如果一个序列(函数看作连续序列)是有极限的，我们称这个数列收敛，否则称其为发散。<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="极限和收敛
+">[1]</span></a></sup>要证明该函数收敛，即证明该函数存在极限。</li>
+<li><p>已知$f(x)$的极限和$g(x)$有界，而目标函数中包含$g'(x)$，需要将目标函数做一定的变换，去掉$g'(x)$，加上$f'(x)$，首先想到的即是采用分部积分法。</p>
+
+<div class='full-math-div'>
+$$
+\begin{array}{l}
+\int_a^{ + \infty } {f(x)g'(x)dx}  = \mathop {\lim }\limits_{A -  > \infty } \int_a^A {f(x)g'(x)dx} \\
+ = \mathop {\lim }\limits_{A -  > \infty } (f(A)g(A) - f(a)g(a) - \int_a^A {f'(x)g(x)dx} )
+\end{array}
+$$
+</div>
+
+</li>
+<li>$f(A)g(A)$等于0，$f(a)g(a)$为常数，即只需证明$\int_a^A {f'(x)g(x)dx} $收敛，由于$g(x)$有界，则可认为$|g(x)| \le  M$，则
+<div class='full-math-div'>
+$$
+\begin{array}{l}
+\frac{{\int_a^1 {f(x)dx} }}{{1 - a}} \le \frac{{\int_a^1 {f(x)dx} }}{{1 - a}} = f(a)\\
+\int_a^A {f'(x)g(x)dx}  \le \int_a^A {Mf'(x)dx} \\
+ \le M(f(A) - f(a))
+\end{array}
+$$
+</div>
+得证。
+</li>
+</ol>
+<hr />
+
+<p><strong>例题3：</strong>设$x \ge x,{f_0}(x) > 0$，若${f_n}(x) = \int_0^x {{f_{n - 1}}(t)dt} $，$n=1,2,3,...$，求证${f_n}(x) = \frac{1}{{(n - 1)!}}\int_0^x {{{(x - t)}^{n - 1}}{f_0}(t)dt} $。</p>
+<p><strong>解题思路点：</strong></p>
+<ol>
+<li>存在递推关系，因此可以用数学归纳法证明。数学归纳法<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="数学归纳法
+">[2]</span></a></sup><br>2.考虑当$n=1$时：
+<div class='full-math-div'>
+$$
+{f_1}(x) = \int_0^x {{f_0}(t)dt}  = \frac{1}{{0!}}\int_0^x {{{(x - t)}^0}{f_0}(t)dt} 
+$$
+</div>
+
+
+3. 当$n = n$时，成立，证明$n = n + 1$也成立。
+
+<div class='full-math-div'>
+$$
+\begin{array}{l}
+{f_{n + 1}}(x) = \int_0^x {{f_n}(t)dt}  = \int_0^x {\frac{1}{{(n - 1)!}}\int_0^u {{{(u - t)}^{n - 1}}{f_0}(t)dt} du} \\
+ = \frac{1}{{n!}}\int_0^x {{{(x - u)}^n}{f_0}(u)du} 
+\end{array}
+$$
+</div>
+
+
+### 函数的大小关系
+
+
+**例题4：**设函数$f(x),g(x)$在区间$[a,b]$上连续，且$f(x)$单调增加。$0<g(x)<1$，证明：
+1. $0 \le \int_a^x {g(t)dt}  \le x - a,x \in [a,b]$
+2. $\int_a^{a + \int_a^b {g(t)dt} } {f(x)dx}  \le \int_a^b {f(x)g(x)dx} $
+
+**解题思路点：**
+
+1. 可以直接由题目已知条件，代入（1）问的式子中，得到其满足条件。
+2. 比较两个函数的大小，一般构造两个函数相减得的形式。因此构造：
+
+<div class='full-mayh-div'>
+$$
+F(x) = \int_a^x {f(u)g(u)du}  - \int_a^{a + \int_a^x {g(t)dt} } {f(u)du} 
+$$
+</div>
+
+
+3. 根据题目已知$f(x)$单调增，可以得到$f'(x)>0$，同时又因为两个比较的函数积分上下限不同，被积函数也不同，所以通过对构造函数进行求导，来统一量纲：
+
+<div class='full-math-div'>
+$$
+\begin{array}{l}
+F'(x) = f(x)g(x) - g(x)f(a + \int_a^x {g(t)dt} )\\
+ = g(x)(f(x) - f(a + \int_a^x {g(t)dt} )) \ge 0
+\end{array}
+$$
+</div>
+
+4. 当$x=a$时，$F(x)=0$，且当$x \ge a$时，$F'(x) \ge 0$，得证。
+
+<hr />
+
+**例题5：**设函数$f(x)$在$[a,b]$上不恒为零，其导数连续，且$f(a)=0$.证明：存在$\xi  \in {\rm{(}}a,b)$，使$|f'(\xi )| > \frac{1}{{{{(b - a)}^2}}}\int_a^b {f(x)dx} $。
+</li>
+</ol>
+<p><strong>解题思路点：</strong></p>
+<ol>
+<li><p>分析题意可得，该题与拉格朗日中值定理的表述极为类似，因此可以转化为拉格朗日中值定理<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="拉格朗日中值定理
+">[3]</span></a></sup>的形式进行求解。</p>
+</li>
+<li><p>该不等式左边为正数或零，右边则有三种情况：</p>
+<ol>
+<li>右边为负：则不等式恒成立</li>
+<li>右边为0：因为$f(x)$不恒为零。因此必存在$f'(\xi )$不等于0，则不等式成立。</li>
+<li>右边为正：此时可以构造朗格朗日式：$f(\mu ) = \frac{1}{{b - a}}\int_a^b {f(x)dx} $，又因为
+<div class='full-math-div'>
+   f(a)=0$，则$f(\mu ) = f(\mu ) - f(a) = \int_a^\mu  {f'(x)dx} 
+   <br />
+   右侧再次构造拉格朗日公式：<br />
+   $$
+   \frac{{\int_a^\mu  {f'(x)dx} }}{{b - a}}
+   $$
+   <br />
+   则一定存在：<br />
+   $$
+   f'(\xi ) = \frac{{\int_a^\mu  {f'(x)dx} }}{{\mu  - a}} = \frac{{f(\mu )}}{{\mu  - a}} = \frac{1}{{(b - a)(\mu  - a)}}\int_a^b {f(x)dx} 
+   $$
+</div>
+
+</li>
+</ol>
+</li>
+<li><p>根据2.2得到$\mu &lt; b$，因此左式大于右式。</p>
+</li>
+</ol>
+<hr />
+
+<p><strong>例题6：</strong>设函数$f(x)$在$[a,b]$上有连续的导数，且$f(a)=0$，证明：$\int_a^b {{f^2}(x)dx}  \le \frac{{{{(b - a)}^2}}}{2}\int_a^b {{{(f'(x))}^2}dx} $.
+
+**解题思路点：**
+
+1.  该题题解需要使用到柯西-施瓦兹<sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span class="hint--top hint--rounded" aria-label="柯西-施瓦兹不等式
+">[4]</span></a></sup>不等式，该不等式数学符号表示如下所示：
+
+<div class='full-math-div'>
+$$
+{(\int_a^b {f(x)g(x)dx} )^2} \le \int_a^b {{f^2}(x)dx} \int_a^b {{g^2}(x)dx} 
+$$
+</div>
+
+2. 将题中原式化为柯西-施瓦兹不等式：
+
+<div class='full-math-div'>
+$$
+\begin{array}{l}
+{f^2}(x) = {(\int_a^x {f'(t)dt} )^2} \le \int_a^x {dx} \int_a^x {{{(f'(t))}^2}dt} \\
+ = (x - a)\int_a^x {{{(f'(t))}^2}dt}  \le (x - a)\int_a^b {{{(f'(t))}^2}dt} 
+\end{array}
+$$
+</div>
+
+
+3. 对不等式两边求积分，得证。
+4. 本题的关键是讲等式左边的表达式转换成右边的表达式，其中比较重要的一项变换为：${f^2}(x) = {(\int_a^x {f'(t)dt} )^2}$
+
+### 函数得极值和极点
+
+
+**例题7：**已知：$f(x) = \int_x^{x + \frac{\pi }{2}} {|\sin t|dt} $</p>
+<ol>
+<li>证明：$f(x)$是以$ \pi $为周期的周期函数；</li>
+<li>求函数f(x)的值域。</li>
+</ol>
+<p><strong>解题思路点：</strong></p>
+<ol>
+<li><p>要证明函数为周期函数，且其周期为$\pi$。即是证明：$f(x)=f(x+ \pi )$。将$u = t + \pi$代入原方程中，</p>
+
+<div class='full-math-div'>
+$$
+f(x) = \int_x^{x + \frac{\pi }{2}} {|\sin u|du}  = \int_x^{x + \frac{\pi }{2}} {|\sin t|dt} 
+$$
+</div>
+
+</li>
+<li><p>计算函数的值域，即是计算函数在定义域的取值范围内函数的极值，又因为函数是以$\pi$为周期周期函数，因此只需要在$[0, \pi]$找出极大值和极小值点的函数值即可。</p>
+</li>
+<li>对$f(x)$求导得:
+<div class='full-math-div'>
+$$
+f'(x) = |\sin (x + \frac{\pi }{2})| - |\sin x| = |\cos x| - |\sin x|
+$$
+</div>
+</li>
+<li>由题可知，该函数为分段函数，且存在两个极值点$\frac{\pi }{4}$和$\frac{{3\pi }}{4}$。计算这两点得函数值$f(\frac{{\pi }}{4})=-\sqrt 2  $，$f(\frac{{3\pi }}{4}) = \sqrt 2 $。即得函数得值域为：$[ 2 - \sqrt 2 ,\sqrt 2 ]$。</li>
+</ol>
+<hr />
+
+<p><strong>例题8：</strong>求$\mathop {\lim }\limits_{x -  >  + \infty } \frac{{\int_0^x {|\cos t|dt} }}{x}$</p>
+<p><strong>解题思路点：</strong></p>
+<ol>
+<li>同<em>例题6</em>，函数$f(x)={\int_0^x {|\cos t|dt} }$仍为周期为$\pi$的周期函数。因此可以将该不定积分拆分成为两个部分：<ol>
+<li>满足整数倍的周期函数值积分。</li>
+<li>不满足整数倍的周期函数积分。</li>
+</ol>
+</li>
+<li>设$x=n \pi + k$，可以得到：
+<div class='full-math-div'>
+$$
+f(x) = \int_0^{n\pi } {|\cos t|dt}  + \int_{n\pi }^x {|\cos t|dt} 
+$$
+</div>
+</li>
+<li>因为后一项远远小于前一项，因此可以只保留前一项，得到$f(X)=2n$，则原式变为：$\mathop {\lim }\limits_{n -  >  + \infty } \frac{{2n}}{{n\pi }} = \frac{2}{\pi }$</li>
+</ol>
+<hr />
+
+<p><strong>例题9：</strong>设函数$f(x)$在$[0,1]$上有二阶连续的导数，证明：对于任意的$a \in (0,\frac{1}{4})$和$b \in (\frac{3}{4},1)$，有：<br><img src="1.png" srcset="/img/loading.gif" alt=""></p>
+<p><strong>解题思路点：</strong></p>
+<ol>
+<li>根据朗格朗日中值定理，存在
+<div class='full-math-div'>
+$$
+\begin{array}{l}
+\theta  \in (a,b)\\
+使得：|f(a) - f(b)| = |f'(\theta )||(a - b)| > \frac{1}{2}|f'(\theta )|
+\end{array}
+$$
+</div>
+</li>
+<li>由第一步可以得到：<br><img src="2.png" srcset="/img/loading.gif" alt=""><br>而：<br><img src="3.png" srcset="/img/loading.gif" alt=""><br>从而得证，不等式成立。</li>
+</ol>
+<h3 id="积分式子的变形和构造"><a href="#积分式子的变形和构造" class="headerlink" title="积分式子的变形和构造"></a>积分式子的变形和构造</h3><div class='alert alert-success'>
+该部分十分考研对于积分公式的<strong>组合能力</strong>，其中很多积分变形特别难想，很难能够直接得到想要的正确构造积分式，同时得到符合题目要求的计算结果。
+</div>
+
+<p><strong>例题10：</strong>设函数$f(x)$在$[0,+ \infty )$上有连续的导数，且$f(0)=0$，$|f(x)-f'(x)| \le 1$。证明：$|f(x)| \le e^x - 1$，$x \in [0, + \infty )$</p>
+<p><strong>解题思路点：</strong></p>
+<ol>
+<li>根据题目的已知条件发现题目给出的条件与需要证明的不等式之间的差距较大，因此需要对已知条件进行一系列的变形。已知$f(x)-f'(x)$，则可以构造$((e^{-x}f(x))' = e^{-x}(f'(x)-f(x))$</li>
+<li>对第一步得到的积分式进行0到x的积分：
+<div class='full-math-div'>
+$$
+\begin{array}{l}
+{e^{ - x}}f(x) = \int_0^x {{e^{ - t}}(f'(t) - f(t))dt} \\
+|{e^{ - x}}f(x)| = \int_0^x {|{e^{ - t}}(f'(t) - f(t))|dt}  \le \int_0^x {|{e^{ - t}}|dt}  = 1 - {e^{ - x}}
+\end{array}
+$$
+</div>
+
+得证。</li>
+</ol>
+<p><strong>例题11：</strong>设函数$f(x)$在$[a.b]$上连续，且<br>
+<div class='full-math-div'>
+$$
+\int_a^b {f(x)dx}  = \int_a^b {f(x){e^x}dx}  = 0
+$$
+</div>
+</p>
+<p><strong>解题思路点：</strong></p>
+<ol>
+<li>一般零点个数计算一般是构造拉格朗日中值定理式，当原函数的被积函数存在三个零点时，即可通过拉格朗日中值定理证明原函数存在至少两个零点。因此可以通过构造原函数的被积函数证明题中结论。</li>
+<li>令$F(x) = \int_a^x {f(t)dt} (a \le x \le b)$，则$F(a)=F(b)=0$。</li>
+<li>对于后一道式子。采用分部积分法：
+<div class='full-math-div'>
+$$
+\begin{array}{l}
+\int_a^b {f(x){e^x}dx}  = \left. {F(x){e^x}} \right|_a^b - \int_a^b {F(x){e^x}dx} \\
+ =  - \int_a^b {F(x){e^x}dx}  = 0
+\end{array}
+$$
+</div>
+
+根据拉格朗日中值定理，必存在$c \in [a,b]$，使得$F(c){e^c}(b - a) = 0$，即找到第三个零点。得证。</li>
+</ol>
+<p><strong>例题12：</strong>设函数$f(x)$在$[0,1]$上可积，且当$0 \le x &lt; y \le 1$时，$|f(x)-f(y)| \le |\arctan{X}-\arctan{y}|$，$f(1)=0$，证明：$|\int_0^1 {f(x)dx} | \le \frac{1}{2}\ln 2$.</p>
+<p><strong>解题思路点：</strong></p>
+<ol>
+<li><p>构造题中所给条件的表达式：</p>
+
+<div class='full-math-div'>
+$$
+\begin{array}{l}
+|\int_0^1 {f(x)dx} | = |\int_0^1 {(f(x) - f(1))dx} |\\
+ \le \int_0^1 {|\arctan x - \arctan 1|dx} \\
+ = \int_0^1 {(\frac{\pi }{4} - \arctan x)dx} 
+\end{array}
+$$
+</div>
+
+</li>
+<li><p>采用分部积分法，积分上式，计算结果：</p>
+</li>
+</ol>
+
+<div class='full-math-div'>
+$$
+\int_0^1 {(\frac{\pi }{4} - \arctan x)dx}  = \frac{1}{2}\ln 2
+$$
+</div>
+
+<p><strong>例题13：</strong>设函数$f(x)$在$[0,1]$上单调减且连续<br>证明：对于任意$a \in (0,1)$，有$\int_0^a {f(x)dx}  \ge a\int_0^1 {f(x)dx} $</p>
+<p><strong>解题思路点：</strong></p>
+<ol>
+<li><p>分析证明对象，可以看出需要证明函数在$(0,a)$区间内的平均大小，大于$(a, 1)$区间内的平均大小，由此可以分解表达式：</p>
+
+<div class='full-math-div'>
+$$
+a\int_0^1 {f(x)dx}  = a\int_0^a {f(x)dx}  + a\int_a^1 {f(x)dx} 
+$$
+</div>
+
+</li>
+<li><p>证明：$\frac{{\int_0^a {f(x)dx} }}{a} \ge \frac{{\int_a^1 {f(x)dx} }}{{1 - a}}$。</p>
+</li>
+<li>因为：$\begin{array}{l}
+\frac{{\int_0^a {f(x)dx} }}{a} \ge \frac{{\int_0^a {f(a)dx} }}{a} = f(a)\\
+\frac{{\int_a^1 {f(x)dx} }}{{1 - a}} \le \frac{{\int_a^1 {f(x)dx} }}{{1 - a}} = f(a)
+\end{array}$<br>得证。</li>
+</ol>
+<h3 id="函数变上限构造和拉格朗日中值定理"><a href="#函数变上限构造和拉格朗日中值定理" class="headerlink" title="函数变上限构造和拉格朗日中值定理"></a>函数变上限构造和拉格朗日中值定理</h3><p><strong>例题14：</strong>设函数$f(x)$在$[a,b]$上单调增且连续。<br>证明：$\int_a^b {xf(x)dx}  \ge \frac{{a + b}}{2}\int_a^b {f(x)dx} $</p>
+<p><strong>解题思路点：</strong></p>
+<ol>
+<li>构造差函数</li>
+</ol>
+
+<div class='full-math-div'>
+$$F(x) = \int_a^x {tf(t)dt}  - \frac{{a + x}}{2}\int_a^x {f(t)dt} 
+$$
+</div>
+
+<ol>
+<li>对差函数进行求导即可得到差函数的变化规律：</li>
+</ol>
+
+<div class='full-math-div'>
+$$
+\begin{array}{l}
+F'(x) = xf(x) - \frac{1}{2}\int_a^x {f(t)dt}  - \frac{{a + x}}{2}f(x)\\
+ = \frac{1}{2}((x - a)f(x) - \int_a^x {f(t)dt} )
+\end{array}
+$$
+</div>
+
+<ol>
+<li>拉格朗日中值定理得原始可变换为：</li>
+</ol>
+
+<div class='full-math-div'>
+$$
+F(x) = \frac{1}{2}(x - a)[f(x) - f(c)]
+$$
+</div>
+
+<p>$x &gt; c$，因此$F(x) \ge 0$得证</p>
+<hr />
+
+<p><strong>例题15：</strong>设函数$f(x),g(x)$在$[0,1]$上有连续的导数，且$f(0)=0$，$f’\left( x \right) \ge 0,g’(x) \ge {\rm{0}}$，证明：对于任意$a \in [0,1]$，有$\int_0^a {g(x)f’(x)dx}  + \int_0^1 {g’(x)f(x)dx}  \ge f(a)g(1)$</p>
+<p><strong>解题思路点：</strong></p>
+<ol>
+<li><p>构造变上限函数：</p>
+
+<div class='full-math-div'>
+$$
+F{\rm{(}}x) = \int_0^x {g(x)f'(x)dx}  + \int_0^1 {g'(x)f(x)dx}  - f(x)g(1)
+$$
+</div>
+
+<p>该构造函数在定义域上恒大于0，可以通过证明先证明函数值在定义域的上限上大于等于0，然后证明函数在定义域中是减函数。</p>
+</li>
+<li><p>将$x=1$代入该构造函数，得到</p>
+
+<div class='full-math-div'>
+$$
+\begin{array}{l}
+F(1) = \int_0^1 {g(x)f'(x)dx}  + \int_0^1 {g'(x)f(x)dx}  - f(1)g{\rm{(1)}}\\
+{\rm{ = }}\left. {g(x)f(x)} \right|_0^1 - f(1)g(1) = 0
+\end{array}
+$$
+</div>
+
+</li>
+<li><p>将对构造函数求导，分析其单调性：</p>
+
+<div class='full-math-div'>
+$$
+\begin{array}{l}
+F'(x) = g(x)f'(x) - f'(x)g(1)\\
+ = f'(x)[g(x) - g(1)]
+由于g'\left( x \right) \ge 0\\
+因此F'(x) \le 0
+\end{array}
+$$
+</div>
+
+<p>得证。</p>
+</li>
+</ol>
+<p><strong>例题16：</strong>设函数$f(x)$在$[ - \frac{1}{a},a]$上连续$(a>0)$,且$f(x) \ge 0$,$\int_{\frac{{ - 1}}{a}}^a {xf(x)dx}  = 0$，证明：$\int_{\frac{{ - 1}}{a}}^a {xf(x)dx}  \ge \int_{\frac{{ - 1}}{a}}^a {{x^2}f(x)dx} $
+
+**解题思路点：**
+
+1. 构造函数：
+<div class="full-math-div">
+
+$$
+\begin{array}{l}
+F(x) = (x + \frac{1}{a})(a - x)f(x)\\
+ = f(x) + (a - \frac{1}{a})xf(x) - {x^2}f(x)
+\end{array}
+$$
+
+</div>
+
+2. 对该构造函数进行积分：
+
+<div class="full-math-div">
+$$
+\begin{array}{l}
+\int_{\frac{{ - 1}}{a}}^a {F(x)dx}  = \int_{\frac{{ - 1}}{a}}^a {f(x)dx}  - \int_{\frac{{ - 1}}{a}}^a {{x^2}f(x)dx}  + (a - \frac{1}{a})\int_{\frac{{ - 1}}{a}}^a {xf(x)dx} \\
+F(x) \ge 0,\int_{\frac{{ - 1}}{a}}^a {xf(x)dx}  = 0,所以\\
+\int_{\frac{{ - 1}}{a}}^a {f(x)dx}  - \int_{\frac{{ - 1}}{a}}^a {{x^2}f(x)dx}  \ge {\rm{0}}
+\end{array}
+$$
+</div>
+</p>
+<p>得证。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://zh.wikimirror.org/wiki/%E6%9E%81%E9%99%90">极限和收敛</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://zh.wikimirror.org/wiki/%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95">数学归纳法</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://zh.wikimirror.org/wiki/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86">拉格朗日中值定理</a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:4" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://zh.wikimirror.org/wiki/%E6%9F%AF%E8%A5%BF-%E6%96%BD%E7%93%A6%E8%8C%A8%E4%B8%8D%E7%AD%89%E5%BC%8F">柯西-施瓦兹不等式</a>
+<a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%80%83%E7%A0%94%E7%AC%94%E8%AE%B0/">考研笔记</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+    Author：<a href='https://eatrice.top'> 吃白饭-EatRice</a><br />
+    Source：<a href="https://eatrice.top/post/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6-%E4%B8%80%E5%85%83%E5%87%BD%E6%95%B0%E7%A7%AF%E5%88%86%E5%AD%A6%E8%A7%A3%E9%A2%98%E6%8A%80%E5%B7%A7/">
+        https://eatrice.top/post/高等数学-一元函数积分学解题技巧/</a><br />
+    
+    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+    
+</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/Rainbow/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Rainbow</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/%E7%BB%99hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0PWA%E6%94%AF%E6%8C%81/">
+                        <span class="hidden-mobile">给hexo博客添加PWA支持</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz",
+          app_key: "dzKTc4w4K1maxEg8E5243rrH",
+          placeholder: "休伯利安号在等待接收你的信号哟^0^\n(支持MarkDown语法)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+<br> <p><a id="rainbow"></a></p> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?71be728981300868000249d1707c92b7";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-160834801-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/HidenMath.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

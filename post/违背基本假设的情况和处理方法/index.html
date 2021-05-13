@@ -1,0 +1,1009 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favcion.png">
+  <link rel="icon" type="image/png" href="/img/favcion.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#3a311c">
+  <meta name="description" content="这里是一个工科男苦逼的小空间.记录一些我喜欢的东西比如平面设计，程序设计等等，还会有我不喜欢的东西，各种力学、结构学等等.我的专业是建筑工程，但是我喜欢鼓捣计算机专业相关方面的东西，如果看了我的博客对你有启发的话，记得留言收藏推荐三连击哦^O^">
+  <meta name="author" content="吃白饭-EatRice">
+  <meta name="keywords" content="随笔,分享,经历,吃白饭,休伯利安号,小万,开学啦,科比读后感,星际争霸,守望先锋,雷诺,休伯利安">
+  <meta name="theme-color" content="#3a311c">
+  <link rel="manifest" href="/manifest.json" />
+  
+  <title>线性回归(二)-违背基本假设的情况和处理方法 ~ 吃白饭的休伯利安号</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/tomorrow-night.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1746382_qrhzb41budd.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"eatrice.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="吃白饭的休伯利安号" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>吃白饭的休伯利安号</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Home/">
+                <i class="iconfont icon-addrcard"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/experience/">
+                <i class="iconfont icon-experiment"></i>
+                历程
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/RSS/">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="线性回归(二)-违背基本假设的情况和处理方法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      吃白饭-EatRice
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-10 16:18" pubdate>
+        2020年4月10日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      93
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">线性回归(二)-违背基本假设的情况和处理方法</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：6 个月前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="基本假设"><a href="#基本假设" class="headerlink" title="基本假设"></a>基本假设</h2><p>由线性回归(一)<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="线性回归一-多元线性回归原理介绍- 
+">[1]</span></a></sup>，我们通过数学中的极值原理推导出了一元线性回归的参数估计和多元线性回归的参数估计的拟合方程计算方法。同时为了检验拟合质量，我们引入了两种主要检验：</p>
+<ol>
+<li>样本的显著性检验：若已知总体方差则可使用t检验等参数检验；若总体方差未知，则可以使用卡方检验等非参数检验</li>
+<li>回归方程的检验：回归的显著性检验，对于回归参数采用t分布进行检验；对于回归方程采用F检验</li>
+</ol>
+<p>以上的检验方法均基于古典概型，同时在显著性检验的过程中默认了某些变量服从预先的基本假定，进而通过古典概型的检验方法，得到检验结果。</p>
+<div class='alert alert-danger'>
+同其他大部分的学科一样，这些前提假设的作用主要是为了对问题进行简化。因此其一定是舍弃了一些复杂的问题没有考虑，对于现实中的实际问题来说，大部分的情况都是违背了基本假设的，因此为了得到更准确的回归模型就要对这些违背基本假设的情况进行处理，以确保模型的准确程度。
+</div>
+
+<h3 id="基本假设的内容"><a href="#基本假设的内容" class="headerlink" title="基本假设的内容"></a>基本假设的内容</h3>
+由线性回归（一）中推导出的方程为：$Y = X\beta  + \varepsilon $，其中$\varepsilon$为随机误差项，其估计值为$e$，$e$为样本与模型的残差。
+
+<h4 id="随机误差项期望为0"><a href="#随机误差项期望为0" class="headerlink" title="随机误差项期望为0"></a>随机误差项期望为0</h4>
+前面提到评估拟合的质量可以使用$SSE$残差平方和来度量，同时模型得出的原则也是残差平方和最小。而残差为总体的随机误差项的估计值，且满足$\sum {{e_i}}  = 0$。因此在(一)中的模型有效性的前提是$\sum {{\varepsilon _i}}  = 0$，即随机误差项的期望等于0。而在实际的统计样本中，会有样本数量较小，或样本无法很好地代表整体等系统误差，而后导致样本残差不是随机误差项的无偏估计，就会对模型本身的精度产生影响。
+
+<h4 id="随机误差项的方差为常数，且等于样本方差"><a href="#随机误差项的方差为常数，且等于样本方差" class="headerlink" title="随机误差项的方差为常数，且等于样本方差"></a>随机误差项的方差为常数，且等于样本方差</h4>
+样本方差${S^2} = \frac{{\sum {{{({y_i} - \bar y)}^2}} }}{{n - 1}}$为总E体方差的无偏估计，由$SST=SSR+SSE$，其中SSR为离差平方和，为常数。SSE为残差平方和，可以得到，残差平方和的方差与总离差平方和SST相等，因此在使用样本估计整体时也需要保证样本方差与总体方差相同，即随机误差项的方差是常数，且等于样本方差。否则，参数估计和方程的显著性将会大受影响。
+
+<h4 id="随机误差项和因变量中不存在自相关"><a href="#随机误差项和因变量中不存在自相关" class="headerlink" title="随机误差项和因变量中不存在自相关"></a>随机误差项和因变量中不存在自相关</h4><p>首先对于因变量来说，若因变量自相关，即因变量的某个值由其前一项或多项的值决定，则因变量的变化与自变量无关。因此对自相关因变量使用自变量进行线性拟合没有意义，需用其自相关关系导出其递推关系。</p>
+<p>随机误差项为实际值与估计值的差值，线性回归得出的线性模型，其随机误差项的自相关反映的是样本的自相关，因此随机误差项不能存在自相关的情况。</p>
+<h4 id="随机误差项服从正态分布"><a href="#随机误差项服从正态分布" class="headerlink" title="随机误差项服从正态分布"></a>随机误差项服从正态分布</h4><p>所有的参数检验都基于切比雪夫大数定律，其检验变量和参数如t参数F参数等，都属于标准化后的正态分布参数。在对回归方程进行显著性检验时使用的t分布和F分布均是基于残差服从正态分布且期望和方差满足上文假设等前提假设进行检验，进行显著性检验时要保证检验的结果可信，则要保证其检验参数严格满足正态分布。</p>
+<h4 id="自变量的观测值为常数，且不存在精确的线性关系"><a href="#自变量的观测值为常数，且不存在精确的线性关系" class="headerlink" title="自变量的观测值为常数，且不存在精确的线性关系"></a>自变量的观测值为常数，且不存在精确的线性关系</h4><p>对于参与线性回归的自变量来说，其值必须保证为常数，不能为随机变量。将随机变量做为预测的依据会造成结果毫无意义，同样的，对于分布没有规律或没有具体含义的变量同样不能作为线性回归的自变量。</p>
+<p>对于自变量来说，多元线性回归中使用到了自变量矩阵，参数估计过程中有一步需要对该自变量矩阵转置相乘，而后计算逆矩阵。由于矩阵的行秩等于列秩，因此若自变量矩阵中存在线性相关的行或列，则经过转置相乘最后得出的矩阵必然存在线性相关的行或列，对于非满秩的矩阵在实数层面上无法求逆矩阵，因此在计算中要避免自变量中存在线性相关。</p>
+<p>实际情况中两个变量相关程度很大，但其自变量矩阵并不是精确相关，这样得出的矩阵可以计算逆矩阵，但相关程度较大的行或列对应的特征值接近于0，即对吼计算得出的参数往往会忽略该相似分布。由此两个自变量存在高度相关时，就需要将其从自变量矩阵中消除。</p>
+<h2 id="违背基本假设的处理"><a href="#违背基本假设的处理" class="headerlink" title="违背基本假设的处理"></a>违背基本假设的处理</h2><h3 id="随机误差项方差为异方差"><a href="#随机误差项方差为异方差" class="headerlink" title="随机误差项方差为异方差"></a>随机误差项方差为异方差</h3><h4 id="从一元线性回归讲起"><a href="#从一元线性回归讲起" class="headerlink" title="从一元线性回归讲起"></a>从一元线性回归讲起</h4>
+一元线性回归方程的主要形式为：$y = {\beta _0} + {\beta _{\rm{1}}}x + \varepsilon $其中随机误差项的估计值为$e_i$<br /><br />
+
+在极大似然估计得到的方程中有$y = e + \hat y = e + {{\hat \beta }_0} + {{\hat \beta }_{\rm{1}}}x$，其中样本y的方程等于残差方差加估计方差。样本y的方差为定值，且满足$\sigma _y^2 = \frac{{{S^2}(n - 1)}}{n}$，而残差方差要尽可能满足等于样本方差，则需要控制控制样本自变量方差。如何判断该方程中的随机误差项为常数呢？需要进行检验。
+
+<h4 id="异方差的检验"><a href="#异方差的检验" class="headerlink" title="异方差的检验"></a>异方差的检验</h4><p><strong>残差图直接观察:</strong> 绘制残差关于自变量的散点图，若残差均匀离散地分布在零线两侧则方差较为显著。若残差呈现一定趋势和规律，则说明残差方差为异方差，因为其变化趋势受自变量影响，其值在统计学上不能认为为常数。如下图所示：</p>
+<p><img src="1.png" srcset="/img/loading.gif" alt=""></p>
+<p><strong>等级相关系数法：</strong>斯皮尔曼检验（spearman）</p>
+
+<ol> 做$y$关于$x$的线性回归，计算$\varepsilon $的估计值${e_i} = {y_i} - {{\hat y}_i}$</ol><br />
+<ol> 将自变量$x_i$与$e_i$按升序或降序的规则排列，按照排列顺序相同等级的自变量和残差计算等级离差${d_i} = {x_i} - |{e_i}|$</ol><br />
+<ol> 计算等级相关系数${r_s} = 1 - \frac{6}{{n*({n^2} - 1)}}\sum {d_i^2} $，由方程可见，当残差和自变量等级变化趋势完全拟合时，相关系数等于1。若$d_i$差异较大时，则$r_s$越小。查阅资料得，等级相关系数的期望等于0，方程为$1-{r_s}^2$。</ol><br />
+<ol> 根据其期望和方差构造$t$统计量，$t = \frac{{\sqrt {n - 2} }}{{\sqrt {1 - r_S^2} }}{r_S}$。可以选择相应的置信区间进行单侧检验。若检验通过则认为随机误差项的方差等于常数，否则存在异方差的问题。</ol><br />
+
+<h4 id="异方差的消除"><a href="#异方差的消除" class="headerlink" title="异方差的消除"></a>异方差的消除</h4><p>随机误差项方差，通常与自变量的方差同步，要保持因变量$\hat y$的估计值保持稳定，则其自变量和随机误差项需要同步离散。因此为了减少随机误差项的方差，可以通过调节自变量的方差进行处理。</p>
+<p><strong>加权最小二乘：</strong></p>
+<p>加权最小二乘的原理是通过调整自变量其在回归方程中所占的比例实现方差调整。对于多元线性回归来说，若某个单一影响因素的方差较大，可以通过降低其的权重来减少其对于整体估计值的影响。对于一元线性回归来说，通过调整其中的每个变量的权重，以达到调整总体方差的目的。</p>
+
+对于单因素的权重估算公式为：${\omega _i} = \frac{1}{{x_i^m}}$其中$m$的值可自由选择，直至选出拟合结果最好的一组解。
+经过加权变换后的样本数据为：<br />
+$$
+\begin{array}{l}
+{x_{\omega i}} = {\omega _i}{x_i}\\
+{y_{\omega i}} = {y_i}\\
+{{\bar x}_\omega } = \frac{{\sum {{\omega _i}{x_i}} }}{{\sum {{\omega _i}} }}\\
+{{\bar y}_\omega } = \frac{{\sum {{\omega _i}{y_i}} }}{{\sum {{\omega _i}} }}
+\end{array}
+$$
+<br />
+最小二乘参数估计的导出公式为：
+<br />
+$$
+\left\{ {\begin{array}{*{20}{c}}
+{{{\hat \beta }_{\omega 0}} = {{\bar y}_\omega } - {{\hat \beta }_{w1}}{{\bar x}_\omega }}\\
+{{{\hat \beta }_{w1}} = \frac{{\sum {{w_i}({x_i} - {{\bar x}_\omega })({y_i} - {{\bar y}_\omega })} }}{{\sum {{w_i}{{({x_i} - {{\bar x}_\omega })}^2}} }}}
+\end{array}} \right.
+$$
+<br />
+
+
+计算得到基于加权系数法的最小二乘公式结果：$y = {{\hat \beta }_{\omega 0}} + {{\hat \beta }_{\omega 1}}x$
+
+<p>在计算完毕后，需要重新对拟合方程运用等级系数法进行检验，以消除异方差问题。在这个检验过程中唯一的改变量为计算权重系数时的m。因此可以对m的取值进行多次尝试，以随机误差项的方差显著性为目标函数，得到最优的权重系数拟合方程。</p>
+<h3 id="自相关的检验和处理"><a href="#自相关的检验和处理" class="headerlink" title="自相关的检验和处理"></a>自相关的检验和处理</h3><p>回归模型中的自相关是指，随机误差项的自相关系数不等于0，即随机误差项前后存在一定关系。按照前面的推论，若随机误差项存在自相关，则表明因变量本身也存在一定的自相关，即变量在很大程度上是由该变量先前的取值确定，而受自变量的影响较小。若一个自变量因变量的取值关系中，存在显著的自相关现象，那么对该关系进行线性拟合将会毫无意义。</p>
+<h4 id="自相关的检验方法"><a href="#自相关的检验方法" class="headerlink" title="自相关的检验方法"></a>自相关的检验方法</h4><p><strong>图示检验法：</strong></p>
+<p>计算随机误差项的估计值：残差，并绘制${e_t},{e_{t - 1}}$的散点图。若散点大部分落在二、四象限，则表明随机误差项$\varepsilon $存在负自相关；若大部分的点落在一、三象限，则表明其存在正自相关。</p>
+<p><strong>自相关系数检验法：</strong></p>
+<p>类似于协方差的计算方法，对于自相关可以采用自相关系数计算法进行自相关程度计算。计算公式为：</p>
+
+$$
+\rho  = \frac{{\sum {{\varepsilon _t}{\varepsilon _{t - 1}}} }}{{\sqrt {\sum {{\varepsilon _t}^2} \sum {\varepsilon _{t - 1}^2} } }}
+$$
+其中$t \ge 2$。
+
+<p>若要计算自相关系数的估计值，则可以使用前后残差进行计算。由公式可以得到，当残差前后相同时，其相关系数值接近1；若残差前后相反时，接近-1。该系数同协方差相关系数检验类似，当系数接近1时，表明其呈正相关关系；当系数接近-1时，表明其呈负相关关系。</p>
+<p><strong>DW检验法（重点）</strong></p>
+<p>DW检验法适用于小样本的一阶的自回归检验方法。</p>
+
+假设随机误差项存在着如下递推关系${\varepsilon _t} = \rho {\varepsilon _{t - 1}} + {u_t}$。
+<br />
+若变量不存在自相关，则应不满足该自相关关系，即${H_0}:\rho  \ne 0$。
+<br />
+由于该递推关系为线性递推关系，因此很容通过矩阵估计计算递推关系中低次项的系数。根据改递推系数$\rho$构造构造DW统计量。
+<br />
+$$
+DW = \frac{{\sum {{{({e_t} - {e_{t - 1}})}^2}} }}{{\sum {e_t^2} }} \approx 2(1 - \hat \rho )
+$$
+
+<p><strong>查附录</strong>提供的DW检验表，得到$D_L, D_U$：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">$\rho$</th>
+<th style="text-align:center">DW</th>
+<th style="text-align:center">自相关性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-1</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">完全负相关</td>
+</tr>
+<tr>
+<td style="text-align:center">(-1, 0)</td>
+<td style="text-align:center">(2, 4)</td>
+<td style="text-align:center">负自相关</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">无自相关</td>
+</tr>
+<tr>
+<td style="text-align:center">(0, 1)</td>
+<td style="text-align:center">(0, 2)</td>
+<td style="text-align:center">正相关</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">完全正相关</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>获得$D_L,D_U$可以通过DW与$D_L,D_U$的关系来判断自相关程度。</p>
+<p>当$DW &lt; {D_L}$时，则变量存在正相关<br>当${D_L} &lt; DW &lt; {D_U}$时，则不能判断是否有相关性<br>当${D_U} &lt; DW &lt; 4 - {D_U}$时，不存在自相关<br>当$4 - {D_U} &lt; DW &lt; 4 - {D_L}$不能判定其相关性<br>当$4 - {D_L} &lt; DW$时，则变量存在负相关</p>
+<div class='alert alert-success'>
+可以通过以上两种方法初步检验变量的自相关特性。
+</div>
+
+<h4 id="消除自相关的方法"><a href="#消除自相关的方法" class="headerlink" title="消除自相关的方法"></a>消除自相关的方法</h4><p><strong>迭代法：</strong></p>
+<p>按照之前推导的过程，若随机误差满足自相关，则其满足${\varepsilon _t} = \rho {\varepsilon _{t - 1}} + {u_t}$递推关系。<br>因此可以通过去除自相关部分，而保留随机误差部分以消除自相关的问题。</p>
+<p>在上式中，${\varepsilon _t},\rho $均为自相关的参量，则保留$u_t$以消除自相关的影响。将现有的变量进行处理，在参数检验的过程中我们会得到一个参数值$\hat {\rho}$，将该估计值代入递推公式得到${u_t} = {\varepsilon _t} - \hat {\rho} *{\varepsilon _{t - 1}}$，如此保留随机项，去除自相关项。</p>
+<p>同理，对其他需要估计的可能自相关参数做同样处理：</p>
+
+<div class='full-math-div'>
+$$
+\begin{array}{l}
+({y_t} - \hat \rho *{y_{t - 1}}) = ({\beta _0} - \hat \rho {\beta _0}) + {\beta _1}({x_t} - \hat \rho {x_{t - 1}}) + ({\varepsilon _t} - \hat \rho {\varepsilon _{t - 1}})\\
+ =  > {y_t}' = {\beta _0}' + {\beta _1}'{x_t}' + {u_t}
+\end{array}
+$$
+</div>
+
+<p>这样得到了对自相关变量做一定处理后的线性回归方程。该方程的样本数量比原方程需要计算的样本数量少一个，原因是其样本来自原样本相邻项的差。</p>
+<p>在经过变换后，仍需对变换后的变量进行DW检验，直至其满足DW检验的不存在自相关性为止。之后将样本计算回归方程，然后将原原变量依次进行还原，即能得到原原回归方程（不一定是线性了）</p>
+<p><strong>差分法：</strong></p>
+<p>其变换公式同迭代法，原理是当$\hat \rho = 1$时，通过差分数据来拟合方程。</p>
+
+$$
+\begin{array}{l}
+令：\Delta y = {y_t} - {y_{t - 1}}\\
+\Delta x = {x_t} - {x_{t - 1}}\\
+{\rm{ =  > }}\Delta y{\rm{ = }}{\beta _{\rm{0}}}{\rm{ + }}{\beta _{\rm{1}}}\Delta x
+\end{array}
+$$
+
+
+参数的估计公式为：${{\hat \beta }_{\rm{0}}} = 0,{{\hat \beta }_1} = \frac{{\sum {\Delta {x_i}\Delta {y_i}} }}{{\sum {\Delta x_i^2} }}$
+
+<p><strong>BOX-COX变换法：</strong></p>
+<p>该变换方法适用于异方差和自相关问题。其主要原理为：</p>
+
+<ol> 将因变量做一定的变换：${y^{(\lambda )}} = \left\{ {\begin{array}{*{20}{c}}
+{\frac{{{y^\lambda } - 1}}{\lambda },\lambda  \ne 0}\\
+{\ln y,\lambda  = 0}
+\end{array}} \right.$</ol><br />
+同异方差消除的权重系数法一样，其计算系数需要通过实验得出。选取不同的系数值，并计算最终结果，根据模型质量评价指标来评估模型的优略，而后得到适用性较好的系数的值。<br />
+该变换需满足$y$的取值全为正值，若不满足全为正值，则需要对y进行平移操作，使用$y'=y+a$来代替$y$，以达到该方法的使用要求。<br />
+变换后的因变量服从${Y^{(\lambda )}}\~{N_n}(X\beta ,{\sigma ^2}I)$，变换之后的分布能够得到：该变换消除异方差，和自相关的影响。<br />
+
+<ol> 应用极大似然估计法进行求解：</ol><br />
+<div class='full-math-div'>
+$$
+\begin{array}{l}
+{L_{\max }}(\lambda ) = {(2\pi e\hat \sigma _\lambda ^2)^{ - \frac{n}{2}}}|J|\\
+其中：\hat \sigma _\lambda ^2 = \frac{1}{n}SSE(\lambda ,{y^{(\lambda )}}),|J| = \prod {|\frac{{dy_i^{(\lambda )}}}{{d{y_i}}}|}  = \prod {y_i^{\lambda  - 1}} \\
+令：{z^{(\lambda )}} = \frac{{{y^{(\lambda )}}}}{{|J|}}
+\end{array}
+$$
+</div>
+<br />
+对${L_{\max }}(\lambda )$求对数可得：$\ln {L_{\max }}(\lambda ) =  - \frac{n}{2}\ln SSE(\lambda ,{z^{(\lambda )}})$
+<br />
+
+通过MLE求解可以得到该变换方法的较优$\lambda $值。
+
+<p>在进行消除自相关和异方差可以使用BOX-COX方法进行处理，选取合适的系数值进行变换后，求得回归方程。同时仍要对计算得到的回归方程计算等级相关系数和自相关检验，检验通过后才能获得结论，否则需要重新调整系数计算。使用伪代码的表示如下。</p>
+<figure class="highlight c#"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c#"><span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)<br>  调整变换系数$\lambda$的值，将因变量进行`BOX_CDX`变换;<br>  计算变换后的回归方程;<br>  将回归方程还原成原始数据的方程（不一定是线性关系）;<br>  计算残差，对残差进行等级相关系数检验和自相关检验;<br>  若检验通过则跳出循环，返回回归方程;<br>  若检验不通过则重新进入循环;<br>end <span class="hljs-keyword">while</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="异常值的检查与消除"><a href="#异常值的检查与消除" class="headerlink" title="异常值的检查与消除"></a>异常值的检查与消除</h3><p>异常值是指与取值群体偏差较大的部分取值，其产生原因一般来自记录时产生的误差、记录的变量为随机变量（无法控制取值）、缺少重要的自变量和观测数据等产生的误差。</p>
+<p>该误差会使得模型偏离较大，对回归模型得可信度和准确度存在很大的影响。</p>
+<h4 id="异常值得判定"><a href="#异常值得判定" class="headerlink" title="异常值得判定"></a>异常值得判定</h4><p>根据<strong>正态分布得显著性检验原理和中心化思想</strong>可得，当分布中得某个元素偏离中心越远，其分布概率越小。当小概率事件发生的时候，可以很显然表现出数据存在异常值。即概括来看，异常值即为小概率发生值，由于其对中心偏离甚远，因此会极大影响回归拟合的精确度。</p>
+<h5 id="异常值的常见情况和消除方法"><a href="#异常值的常见情况和消除方法" class="headerlink" title="异常值的常见情况和消除方法"></a>异常值的常见情况和消除方法</h5><p><strong>因变量Y异常</strong>，如下图的序列所示</p>
+<p><img src="2.png" srcset="/img/loading.gif" alt=""></p>
+<p>很明显图中有一点相当出类拔萃，若将此点代入回归方程的参数估计计算公式中，直接导致因变量或自变量的方差增大，造成异方差。因此需要对异常值进行处理或消除。</p>
+<p><strong>消除方法：</strong></p>
+
+<ol>对残差进行标准化，即$ZR{E_i} = \frac{{{e_i}}}{{\hat \sigma }}$。该标准化的目的是统一残差的偏离程度，即标准化后的样本方差等于1，减少异方差的影响</ol><br />
+<ol>删除偏离较大的残差，若样本数量足够，可以在一定程度上通过删除该异常值来达到忽略异常情况对拟合质量的影响。</ol><br />
+<ol>学生化残差，$SR{E_i} = \frac{{{e_i}}}{{\sigma \sqrt {1 - {h_{ii}}} }}$，其中$h_{ii}$为帽子矩阵<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="帽子矩阵- 
+">[2]</span></a></sup>主对角线上的元素，帽子矩阵计算：$H = X{({X^T}X)^{ - 1}}{X^T}$。其主对角线上的元素为变量Y与自变量X期望的偏离程度。</ol><br />
+<ol>删除学生化残差：学生化残差之后，残差的分布即变成：$e\~N(0,1)$，其满足正态分布，按照正态分布的中心化原则，当学生化的残差$e_t$的绝对值大于3时，可以将该残差进行删除。</ol><br />
+
+<p><strong>自变量X异常</strong></p>
+<p>自变量异常的检验：</p>
+
+<ol>当帽子矩阵对应杠杆值的$h_{ii}$较大时，可认为当前自变量X取值与因变量取值受影响较大，当杠杆值大于2倍或3倍的平均值${\bar h}$时，可认为该值异常。</ol><br />
+<ol>计算库克距离：${D_i} = \frac{{e_i^2}}{{(n + 1){{\hat \sigma }^2}}}*\frac{{{h_{ii}}}}{{{{{\rm{(1 - }}{h_{ii}}{\rm{)}}}^{\rm{2}}}}}$，库克距离反映的是残差和杠杆值的综合效应，当库克距离越小，表明值的偏差越小。因此取库克值小于0.5认为非异常值，值大于1认为为异常值，即${D_i}{\rm{ < 0}}{\rm{.5}}$非异常，${D_i}{\rm{ > 1}}$异常值。</ol><br />
+
+<p>自变量X的异常处理同Y变量异常处理相同，将异常值删去即可。</p>
+<h2 id="多元线性回归下的自变量选择与处理"><a href="#多元线性回归下的自变量选择与处理" class="headerlink" title="多元线性回归下的自变量选择与处理"></a>多元线性回归下的自变量选择与处理</h2><p>实际情况中，一个变量的取值不仅仅只受单一因素的影响。当一个变量受两个或以上的因素影响时，可以使用多元线性回归进行处理。不同的因素对于目标函数的影响程度各不相同，同时影响因素之间也可能存在相互关系，因此为了保证回归模型所选择的自变量合理，以保证最终的回归方程显著。需要对方程的影响因素做筛选，即对自变量进行选择和处理</p>
+<h3 id="自变量选择方法和影响"><a href="#自变量选择方法和影响" class="headerlink" title="自变量选择方法和影响"></a>自变量选择方法和影响</h3>
+在线性回归（一）中提到了多元线性回归的参数估计计算方程为：$\beta {\rm{ = (}}{X^T}X)'{X^T}Y$。由参数估计的原理可以得到估计的参数方差估计值为：${{\hat \sigma }_{\beta i}}{\rm{ = }}\frac{{\rm{1}}}{{n - m - 1}}SS{E_i}$。其中m为影响因素的数量，i为第i个估计的参数。
+
+<p>若在选择因素时放开了某些因素：</p>
+<ol>
+<li>最后的计算得到的参数估计值的方差为有偏估计</li>
+<li>部分因素的选择模型方差会小于全因素模型的方差</li>
+</ol>
+<h3 id="自变量选择的评价指标"><a href="#自变量选择的评价指标" class="headerlink" title="自变量选择的评价指标"></a>自变量选择的评价指标</h3><p>在线性回归(一)中,回归函数拟合的依据按照残差平方和最小原则，即SSE最小；同时通过皮尔逊相关系数检验来检验原始数据是否符合线性相关；和拟合的结果和原始数据之间是否存在强相关的关系。</p>
+<p>如果实际自变量之间存在多重共线性等问题，通过这两个系数反映的特征仍不完全，引入了一个<strong>调整决定系数</strong>。在进行自变量的选择时受到影响的主要是回归方程的自由度，同时因为选取的自变量的数目差异导致的随机误差项方差变化业主要受自由度的影响。因此对于需要对自由度进行系数调整；调整复决定系数的计算方进行系数调整；</p>
+
+调整复决定系数的计算方法：$adj{R^2} = 1 - \frac{{n - 1}}{{n - p - 1}}(1 - {R^2})$
+从计算公式中可以得出，当自变量的自由度增加时调整系数减小，即其对回归结果的贡献减小。因此，控制调整系数的大小，可以大概把握合理的方程自由度。
+
+
+<strong>赤池信息量（Akaike Information Criterion）</strong>是一个基于极大似然估计原理的模型选择准则<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="数学模型-参数估计和显著性- 
+">[3]</span></a></sup>。其计算公式为：$AIC =  - 2\ln L({{\hat \theta }_L},x) + 2p$其中$\ln L({{\hat \theta }_L},x)$为似然函数，$p$为自变量选择的数量。其中似然函数也可以改写为：$n\ln L(SSE)$。赤池信息量同时考虑了似然函数和方程维数，而残差平方和与维数的关系不确定，因此需要找到一个平衡位置以确保赤池信息量达到最小。该统计量确定最优与消除异方差的权重系数的计算和消除自相关的$BOX_CDX$变换一样，需要计算多个值，从中选出最满足条件的结果。<br />
+
+<strong>统计量$C_p$</strong>与赤池信息量的评估原理相同，其计算公式为：<br />
+
+$$
+\begin{array}{l}
+{C_p} = \frac{{SS{E_p}}}{{{{\hat \sigma }^2}}} - n + 2p\\
+ = (n - m - 1)\frac{{SS{E_p}}}{{SS{E_m}}} - n + 2p
+\end{array}
+$$
+<br />
+
+其中$SSE_p$为当前选择的的部分自变量回归模型的残差平方和，$SSE_m$为考虑所有自变量计算的残差平方和。
+同样确保该统计量最小得到最优。
+
+<h3 id="自变量的选择方式"><a href="#自变量的选择方式" class="headerlink" title="自变量的选择方式"></a>自变量的选择方式</h3><p>当自变量存在${x_1},{x_2},{x_3},{x_4},{x_5},{x_6}…$，等数量较多的自变量时，无法通过对这些自变量排列组合，然后分别计算对应组合下的残差平方和，相关系数，赤池信息量，$C_p$等统计量时，然后对组合进行对比得出最优组合时。需要通过一些更加高效的方法来遍历这些自变量信息。下面推荐两种自变量的遍历方法。</p>
+<p>若直接采用所有自变量的排列组合形式，若有m个自变量类型，则其全部组合的数量为：$C_m^1 + C_m^2 + … + C_m^m$</p>
+<p><strong>前进法</strong></p>
+<ol>
+<li>先对所有的单变量因素进行拟合，然后根据拟合结果计算上述4个统计量，得到效果最好的一个变量；</li>
+<li>考虑上一步增加的变量，在剩余变量中选取一个与当前选取变量组合，计算所有的组合情况，并选出最优组合与先前组合进行了比较，若更优则选取，若更差则放弃；</li>
+<li>考虑上一步增加的变量，再次在剩余变量中选取并组合，计算组合情况选择最优，并与与上次组合结果比较优劣；</li>
+<li>循环第3步，直到遍历变量全部完成或当优化程度下降时停止，得到最优组合。</li>
+</ol>
+<p><strong>说明：</strong></p>
+<p>若自变量包括${x_1},{x_2},{x_3},{x_4},{x_5},{x_6}…$，分析计算$y(x_1),y(x_2)…$若此时$y(x_{t1})$的拟合效果最好进行步骤2；<br>即分析计算$y(x_{t1}, x_1), y(x_{t1}, x_2),…$找到最优组合并于第一步计算得到的结果进行对比，若更优则继续循环，若更差则停止循环。</p>
+<p><strong>后退法</strong></p>
+<p>与前进法相反</p>
+<ol>
+<li>先将所有的因素进行分析计算，保存四个统计量</li>
+<li>删除其中一个变量的影响因素，并对进行分析计算，找出删除一个自变量的最优组合，并于先前组合进行对比。若结果更好则继续，若更差则停止。</li>
+<li>循环第2步直到自变量数量为一，或删除变量结果变坏为止。</li>
+</ol>
+<p>在对前进法和后退法进行优化检验时，除了使用四个统计量依据进行模型评估。还可以使用线性回归（一）中提到的回归方程的显著性检验进行检验，即F检验。</p>
+<p>当采用前进法时，当F检验计算得到的概率大于置信概率接受原假设，方程显著，添加变量。</p>
+<p>使用后退法进行F检验时，当检验结果概率小于置信概率，拒绝原假设，方程不显著，剔除当前变量。</p>
+<p>由变量的检验方法和计算过程可得，当变量被剔除后，若被剔除的变量不全为0时会增加随机误差项的方差，因此在使用前进法或后退法进行变量选择时，可适当保留一些非最优分支进行计算，以减少该方法产生的异方差影响。</p>
+<h2 id="多重共线性的处理"><a href="#多重共线性的处理" class="headerlink" title="多重共线性的处理"></a>多重共线性的处理</h2><p>多重共线性指的是不同的自变量之间本身存在显著的线性关系，即为开头讲到的自变量存在精确的线性关系。由于自变量存在精确的线性关系，若其中一个自变量对因变量的影响显著，则其他具有精确线性关系的自变量对因变量作用的效果也相同，这就导致在做多元线性回归时无法计算存在精确线性关系的自变量的系数。</p>
+<h3 id="多重共线性的检测和处理"><a href="#多重共线性的检测和处理" class="headerlink" title="多重共线性的检测和处理"></a>多重共线性的检测和处理</h3><p>为了确保精确线性关系被筛选出来，需要对多重共线性进行检验，下面详细介绍皮尔逊相关系数法、方差扩大因子法和特征根判定法。</p>
+<h4 id="皮尔逊相关系数检验法"><a href="#皮尔逊相关系数检验法" class="headerlink" title="皮尔逊相关系数检验法"></a>皮尔逊相关系数检验法</h4>
+自变量的检测与自变量和因变量的线性相关检测相同，通过对$x_1, x_2$变量直接计算相关系数，然后给相关系数设定一个临界值，根据临界值与相关系数之间的关系进行判断。相关系数的计算公式为：$\rho  = \frac{{\sum {({x_{1i}} - {{\bar x}_1})({x_{2i}} - {{\bar x}_2})} }}{{\sqrt {\sum {{{({x_{1i}} - {{\bar x}_1})}^2}} *\sum {{{({x_{2i}} - {{\bar x}_2})}^2}} } }}$。
+
+<p>同时可以通过直观判定来辅助检验：</p>
+<ol>
+<li>添加或删除一个变量，回归系数的估计值发生很大变化，可认为存在多重共线性。因为多重共线性的参数会叠加到其他共线变量的参数上。</li>
+<li>一些自变量在方程的显著性检验中未通过检验，可初步判定存在严重的多重共线性。</li>
+</ol>
+<h4 id="方差扩大因子法VIF"><a href="#方差扩大因子法VIF" class="headerlink" title="方差扩大因子法VIF"></a>方差扩大因子法VIF</h4><p>对自变量进行相关系数检验涉及到两个自变量相互检验，即有序数对。</p>
+<p>对所有的变量列表计算可以得到所有变量的相关性矩阵，如下所示：</p>
+
+$$
+{R_{p \times p}} = \left[ {\begin{array}{*{20}{c}}
+{r11}&{r12}&{...}&{r1p}\\
+{r21}&{r22}&{...}&{r2p}\\
+{...}&{...}&{...}&{...}\\
+{rp1}&{rp2}&{...}&{rpp}
+\end{array}} \right]
+$$
+
+<p>其中p为自变量数量，rij为第i个自变量与第j个自变量的相关系数计算值。</p>
+<p>对相关矩阵进行标准化之后<sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span class="hint--top hint--rounded" aria-label="标准化和归一化- 
+">[4]</span></a></sup>，其主对角线上的元素即为方差膨胀因子。令：$C = {({(R<em>)^T}R</em>)^{ - 1}}$<br>其中$R*$为相关矩阵的伴随矩阵。VIF为矩阵$C$的主对角线上的元素。</p>
+
+$$
+\begin{array}{l}
+VI{F_j} = \frac{1}{{1 - {R_j}^2}}\\
+\bar V\bar I\bar F = \frac{1}{p}VI{F_j}
+\end{array}
+$$
+
+<p>其中</p>
+<p>$$为矩阵上第i个主对角线上的元素对应得复决定系数</p>
+
+复决定系数计算公式为:$adj{R^2} = 1 - \frac{{n - 1}}{{n - p - 1}}(1 - {R^2})$，其中${R^2}$为C矩阵对应对角线的上元素
+<br />
+<br />
+$VIF_j$为膨胀因子。$\bar V\bar I\bar F$为平均膨胀因子。当膨胀银子大于10或平均膨胀因子大于1时，可认为自变量之间存在严重的线性关系，即存在多重共线性。
+
+<h4 id="特征根判定法"><a href="#特征根判定法" class="headerlink" title="特征根判定法"></a>特征根判定法</h4>
+对矩阵${X^T}X$求解特征值，若有特征值趋近于0，则表明其中存在多重共线性，近似于0的特征根的个数等于多重线性的重数。
+
+
+引入条件数${k_i} = \sqrt {\frac{{{\lambda _m}}}{{{\lambda _i}}}} $来度量特征根的离散程度。
+
+
+当$k \in (0,10)$，不存在多重共线性<br />
+当$k \in (10,100)$，存在较强的多重共线性<br />
+当$k \in [100,\infty )$，存在严重的多重共线性<br />
+
+<h4 id="多重共线性的处理-1"><a href="#多重共线性的处理-1" class="headerlink" title="多重共线性的处理"></a>多重共线性的处理</h4><p>若自变量之间存在多重共线性时，可以通过剔除共线的变量或增加样本量来解决多重共线性问题。</p>
+<h2 id="多元线性回归的优化方法"><a href="#多元线性回归的优化方法" class="headerlink" title="多元线性回归的优化方法"></a>多元线性回归的优化方法</h2><p>在实际情况下，多元线性回归的很多前提假设不能成立，因此可以在一定程度上对多元线性回归方法进行改良。改良的实质是牺牲某些信息或精度为代价，使得模型的表现更实际、更可靠</p>
+<h3 id="岭回归"><a href="#岭回归" class="headerlink" title="岭回归"></a>岭回归</h3><p>岭回归估计是基于最小二乘估计，通过改变自变量矩阵X标准化后的矩阵，来改变最终的回归结果。</p>
+
+对于多元线性回归有参数的估计公式：$\hat \beta  = ({X^T}X)'{X^T}Y$
+
+
+岭回归对这部分的参数进行处理，得到$\hat \beta (k) = ({X^T}X + kI)'{X^T}Y$
+
+
+其中$\hat \beta (k)$叫做岭回归参数，$k$为岭参数，当$k=0$时，岭回归等价于最小二乘回归。
+
+
+由岭回归的计算公式可知，参数$\hat \beta (k)$是关于岭参数的函数，其取值同k连续或离散。由于其由k决定，因此岭回归的主要目标是选择一个合适岭参数k来使得模型更加有效。
+
+
+首先可以对不同取值的k，作$\hat \beta (k)$关于k的函数图像，该函数图像称为<strong>岭迹</strong>，常见的岭迹如下图所示：
+
+<p><img src="3.png" srcset="/img/loading.gif" alt=""></p>
+<p><strong>岭参数确定依据：</strong></p>
+<ol>
+<li>各回归系数的岭迹基本稳定</li>
+<li>回归系数的符号合理</li>
+<li>取岭迹的平稳拐点</li>
+<li>方差扩大因子法，使得所有的膨胀系数小于10</li>
+<li>通过残差平方和最小确定k值</li>
+</ol>
+<h3 id="LASSO回归-lt-span-class-”hint—top-hint—rounded”-aria-label-”LASSO回归法"><a href="#LASSO回归-lt-span-class-”hint—top-hint—rounded”-aria-label-”LASSO回归法" class="headerlink" title="LASSO回归&lt;span class=”hint—top hint—rounded” aria-label=”LASSO回归法-"></a>LASSO回归<sup id="fnref:5" class="footnote-ref"><a href="#fn:5" rel="footnote">&lt;span class=”hint—top hint—rounded” aria-label=”LASSO回归法-</h3><p>“&gt;[5]&lt;/span&gt;&lt;/a&gt;&lt;/sup&gt;</p>
+<p>LASSO是一种压缩估计，通过构造一个惩罚函数(L1范数)，得到一个较为精炼的模型。</p>
+
+惩罚函数的构造方法为：$L = {\left| {\left| {\beta X - Y} \right|} \right|^2} + \lambda {\left| {\left| \beta  \right|} \right|_1}$
+
+
+惩罚函数对估计参数求偏导：$\frac{{\partial L}}{{\partial \beta }}{\rm{ = }}{X^T}(Y - X\hat \beta ) + \frac{{\partial (\lambda {{\left| {\left| \beta  \right|} \right|}_1})}}{{\partial \beta }}$
+
+
+得到LASSO回归的参数计算公式：${{\hat \beta }_j} = sign(\frac{1}{n}{X^T}Y){(\left| {\frac{1}{n}{X^T}Y} \right| - \frac{\lambda }{2})_ + }$
+
+<p>LASSO回归的计算公式相当复杂，一般通过坐标下降法<sup id="fnref:6" class="footnote-ref"><a href="#fn:6" rel="footnote"><span class="hint--top hint--rounded" aria-label="坐标下降法- 
+">[6]</span></a></sup>进行迭代求解，或使用最小角回归法<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span class="hint--top hint--rounded" aria-label="最小角回归
+">[7]</span></a></sup>。进行计算求解。</p>
+<h2 id="附表"><a href="#附表" class="headerlink" title="附表"></a>附表</h2><p><a href="统计量检索表.pdf">统计量检索表.pdf</a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://eatrice.top/post/%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%8E%A8%E5%AF%BC%E5%92%8C%E8%AF%AF%E5%B7%AE%E5%A4%84%E7%90%86/">线性回归一-多元线性回归原理介绍</a><br>-
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B8%BD%E5%AD%90%E7%9F%A9%E9%98%B5">帽子矩阵</a><br>-
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a href="https://eatrice.top/post/%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B-%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1%E5%92%8C%E6%98%BE%E8%91%97%E6%80%A7/">数学模型-参数估计和显著性</a><br>-
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:4" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20467170">标准化和归一化</a><br>-
+<a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:5" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pinard/p/6018889.html">LASSO回归法</a><br>-
+<a href="#fnref:5" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:6" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/59734411">坐标下降法</a><br>-
+<a href="#fnref:6" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:7" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://keson96.github.io/2016/10/26/2016-10-26-Least-Angle-Regression/">最小角回归</a>
+<a href="#fnref:7" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B/">数学模型</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+    Author：<a href='https://eatrice.top'> 吃白饭-EatRice</a><br />
+    Source：<a href="https://eatrice.top/post/%E8%BF%9D%E8%83%8C%E5%9F%BA%E6%9C%AC%E5%81%87%E8%AE%BE%E7%9A%84%E6%83%85%E5%86%B5%E5%92%8C%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/">
+        https://eatrice.top/post/违背基本假设的情况和处理方法/</a><br />
+    
+    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+    
+</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/%E7%BB%99hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0PWA%E6%94%AF%E6%8C%81/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">给hexo博客添加PWA支持</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%8E%A8%E5%AF%BC%E5%92%8C%E8%AF%AF%E5%B7%AE%E5%A4%84%E7%90%86/">
+                        <span class="hidden-mobile">线性回归(一)-多元线性回归原理介绍</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz",
+          app_key: "dzKTc4w4K1maxEg8E5243rrH",
+          placeholder: "休伯利安号在等待接收你的信号哟^0^\n(支持MarkDown语法)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+<br> <p><a id="rainbow"></a></p> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?71be728981300868000249d1707c92b7";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-160834801-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/HidenMath.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

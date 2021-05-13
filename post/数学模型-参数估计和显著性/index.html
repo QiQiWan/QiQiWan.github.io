@@ -1,0 +1,813 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favcion.png">
+  <link rel="icon" type="image/png" href="/img/favcion.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#3a311c">
+  <meta name="description" content="这里是一个工科男苦逼的小空间.记录一些我喜欢的东西比如平面设计，程序设计等等，还会有我不喜欢的东西，各种力学、结构学等等.我的专业是建筑工程，但是我喜欢鼓捣计算机专业相关方面的东西，如果看了我的博客对你有启发的话，记得留言收藏推荐三连击哦^O^">
+  <meta name="author" content="吃白饭-EatRice">
+  <meta name="keywords" content="随笔,分享,经历,吃白饭,休伯利安号,小万,开学啦,科比读后感,星际争霸,守望先锋,雷诺,休伯利安">
+  <meta name="theme-color" content="#3a311c">
+  <link rel="manifest" href="/manifest.json" />
+  
+  <title>数学模型-参数估计和显著性 ~ 吃白饭的休伯利安号</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/tomorrow-night.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1746382_qrhzb41budd.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"eatrice.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="吃白饭的休伯利安号" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>吃白饭的休伯利安号</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Home/">
+                <i class="iconfont icon-addrcard"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/experience/">
+                <i class="iconfont icon-experiment"></i>
+                历程
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/RSS/">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数学模型-参数估计和显著性">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      吃白饭-EatRice
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-27 16:03" pubdate>
+        2020年3月27日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数学模型-参数估计和显著性</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：1 年前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="参数估计"><a href="#参数估计" class="headerlink" title="参数估计"></a>参数估计</h2><h3 id="极大似然估计-MLE"><a href="#极大似然估计-MLE" class="headerlink" title="极大似然估计(MLE)"></a>极大似然估计(MLE)</h3><p><strong>极大似然估计(Maxinum Likelihood Estimation):</strong>利用总体的分布密度或概率分布的表达式及其样本所提供的信息求未知参数估计量的一种方法.</p>
+<p><strong>模型已定,参数未知</strong>即利用已知样本的结果,去反推既定模型中的参数最可能的取值.</p>
+<p>出现当前情形的概率为:</p>
+<div class='full-math-div'>
+
+$$
+f({x_1},{x_2},...,{x_n}{\rm{|}}\theta {\rm{) = }}f({x_1}|\theta )f({x_2}|\theta )...f({x_n}|\theta ),{\theta }未知
+$$
+
+</div>
+称其为似然函数$L$
+<div class='full-math-div'>
+
+$$
+\begin{array}{l}
+L(\theta |{x_1},{x_2},...,{x_n}) = f({x_1},{x_2},...,{x_n}{\rm{|}}\theta )\\
+ = \prod {\begin{array}{*{20}{c}}
+{\begin{array}{*{20}{c}}
+n\\
+{i = 1}
+\end{array}}&{f({x_i}|\theta )}
+\end{array}} 
+\end{array}
+$$
+
+</div>
+
+<div class='full-math-div'>
+
+$$
+令\hat l = \frac{1}{n}\ln L(\theta |{x_1},{x_2},...,{x_n})\\
+则{{\hat \theta }_{MLE}} = \arg \mathop {\max }\limits_{\theta  \in \Theta } \hat l
+$$
+ 
+</div>
+
+<h3 id="最大似然估计-LSE"><a href="#最大似然估计-LSE" class="headerlink" title="最大似然估计(LSE)"></a>最大似然估计(LSE)</h3>
+总体$X$为连续型分布,其分布密度族为$\{ f(x,\theta ),\theta  \in \Theta \} $,假设总体$X$的一个独立同分布的样本为${x_1},{x_2},...,{x_n}$,其似然函数为: $L(\theta |{x_1},{x_2},...,{x_n})$.最大似然估计应在一切$\theta$中选取随机样本(${X_1},{X_2},...,{X_n}$)落在点(${x_1},{x_2},...,{x_n}$)附近概率最大的${\hat \theta }$作为$\theta$的估计值.
+
+<p><strong>对于一元线性回归方程</strong></p>
+
+假设${\varepsilon _i}\text{~}N(0,{\sigma ^2})$$,则有${y_i}\text{~}N({\beta _0},{\beta _1}{x_i},{\sigma ^2})$
+<div class='full-math-div'>
+
+$$
+\begin{array}{l}
+{y_i}{\rm{:}}的概率密度函数为:\\
+{f_i}({y_i}) = \frac{1}{{\sqrt {2\pi } \sigma }}{e^{\{  - \frac{{{{[{y_i} - ({\beta _0} + {\beta _1}{x_i})]}^2}}}{{2{\sigma ^2}}}\} }}\\
+其似然函数为:\\
+L({\beta _0},{\beta _1},{\sigma ^2}) = \prod\limits_{i = 1}^n {{f_i}({y_i}) = {{(2\pi {\sigma ^2})}^{\frac{n}{2}}}{e^{\sum {\{  - \frac{{{{[{y_i} - ({\beta _0} + {\beta _1}{x_i})]}^2}}}{{2{\sigma ^2}}}\} } }}} \\
+ =  > \mathop {\min }\limits_{{\beta _0},{\beta _1}} \sum {{{[{y_i} - ({\beta _0} + {\beta _1}{x_i})]}^2}} \\
+ 
+对于一元线性回归,MSE和LSE是等价的.\\
+求{\sigma ^2}的估计值:\\
+
+{\sigma ^2} = \frac{1}{n}\sum {{{[{y_i} - ({{\hat \beta }_0} + {{\hat \beta }_1}{x_i})]}^2}} \\
+其无偏估计量:\\
+{\sigma ^2} = \frac{1}{{n - 2}}\sum {{{[{y_i} - ({{\hat \beta }_0} + {{\hat \beta }_1}{x_i})]}^2}}\\
+\end{array}\\
+
+$$
+
+</div>
+
+
+<h3 id="有偏估计和无偏估计"><a href="#有偏估计和无偏估计" class="headerlink" title="有偏估计和无偏估计"></a>有偏估计和无偏估计</h3><p><strong>无偏估计(Unbiased Estimate):</strong>用样本来估计总体参数时的一种无偏推断,估计量的数学期望等于估计量的真实值$E(\hat \theta ) = \theta $.换言之,在对某量进行估计时,针对不同的样本,估计结果对真实值来说有的偏大有的偏小,反复多次.”平均”来说,和真实值的偏差为0,反之即为有偏估计(Biased Estimate).无偏估计无系统性偏差,有偏估计有系统性偏差.</p>
+
+<div class='full-math-div'>
+$$
+\begin{array}{l}
+E({\overline X ^2}) = V{(\overline X )^2} + E{(\overline X )^2} = V(\frac{{\sum {{X_i}} }}{n}) + E{(\overline X )^2}\\
+ = \frac{{\sum {V({X_i})} }}{{{n^2}}} + E{(X)^2} = \frac{1}{n}{\sigma ^2} + {\mu ^2}\\
+E(\zeta ) = E[\frac{1}{n}{\sum {({X_i} - \overline X )} ^2}] = E[X_i^2] - E[{\overline X ^2}]\\
+ = {\sigma ^2} + {\mu ^2} - (\frac{1}{n}{\sigma ^2} + {\mu ^2}) = \frac{{n - 1}}{n}{\sigma ^2}\\
+E({S^2}) = E[\frac{1}{{n - 1}}\sum {{{({X_i} - \overline X )}^2}} ]\\
+ = \frac{1}{{n - 1}}\sum {[E(X_i^2) - E{{(\overline X )}^2}]} \\
+ = \frac{1}{{n - 1}}[E(X_i^2) - E{(\overline X )^2}] = {\sigma ^2}\\
+样本方程{S^2}是总体方差的无偏估计量
+\end{array}
+$$
+</div>
+
+<h2 id="显著性检验"><a href="#显著性检验" class="headerlink" title="显著性检验"></a>显著性检验</h2><h3 id="t检验"><a href="#t检验" class="headerlink" title="t检验"></a>t检验</h3><p>检验因变量y与自变量x之间是否存在线性关系,即${\beta _{\rm{1}}}$是否等于0,使用$t$检验进行判断。</p>
+
+<strong>确定假设：</strong>我们搜集数据是为了找到不达标的证据，即原假设${H_0}:{\beta _1} = 0$,备择假设${H_0}:{\beta _1} \ne 0$<br />
+<strong>确定检验水平：</strong>采取常用的$\alpha = 0.05$或者是更严格的$\alpha = 0.01$<br />
+<strong>构造统计量：</strong>${H_0}$成立时：$\hat \beta \text{~}N(0,\frac{{{\sigma ^2}}}{{{L_{xx}}}})$，构造$t$统计量:$t = \frac{{\hat \beta }}{{\sqrt {{\partial ^2}/{L_{xx}}} }} = \frac{{\hat \beta }}{{\sqrt {\frac{1}{{n - 2}}\sum {{{({y_i} - {{\hat y}_i})}^2}} } }}\sqrt {{L_{xx}}} $<br />
+<strong>得到p值:</strong>计算$t$统计量,符合自由度$n-2$的$t$分布,双尾检测,查临界值表,找到$p$值.<br />
+<strong>得到结论:</strong>p值若大于$ \alpha$值,不能拒绝原假设,即通过本次采样得到的样本数据,并不能证明原假设$H_0$不成立,即本次得到的回归系数${{\beta}_1}$无显著的统计意义,需要重新建模.<br />
+<strong>总离差平方和(Sum of Squares for Total)</strong><br />
+$$
+\sum {{{({y_i} - \bar y)}^2}} 
+$$
+
+<strong>残差平方和(Sum of Squares for Error)</strong><br />
+$$
+\sum {{{({y_i} - {{\hat y}_i})}^2}} 
+$$
+
+<strong>回归平方和(Sum of Squares for Regression)</strong><br />
+$$
+\sum {{{({{\hat y}_i} - \bar y)}^2}} 
+$$
+
+$ SST = SSE + SSR $
+
+<h3 id="F检验"><a href="#F检验" class="headerlink" title="F检验"></a>F检验</h3><p>F检验是根据平方和分解式,直接从回归效果检验回归方程的显著性.由平方和分解式可得到SSR越大,回归效果越好,据此构造F统计量。</p>
+
+$$
+
+\begin{array}{l}
+MSR = \frac{{SSR}}{{k - 1}}\\
+MSE = \frac{{SSE}}{{T - k}}\\
+F = \frac{{MSR}}{{MSE}}
+\end{array}
+
+$$
+
+<h3 id="相关系数显著性检验"><a href="#相关系数显著性检验" class="headerlink" title="相关系数显著性检验"></a>相关系数显著性检验</h3><p><strong>相关系数</strong>由卡尔·皮尔逊的统计指标，描述了了变量之间线性相关程度的量，一般用字母r表示，有多种定义方式，一般指皮尔逊相关系数。</p>
+
+<div class = 'full-math-div'>
+$$
+r(X,Y) = \frac{{Cov(X,Y)}}{{\sqrt {{\mathop{\rm var}} (X){\mathop{\rm var}} (Y)} }}
+$$
+$r$的取值范围$[-1, 1]$，r>0表示正相关，r<0表示负相关,r = 0表示不相关。
+
+<p>在抽样验证前需要排除抽样误差。</p>
+
+<strong>确定检验水平：</strong>采取较为严格的$\alpha = 0.01$<br />
+<strong>计算统计量：</strong>计算$t$统计量,原假设$H_0$成立，$t = \frac{{\sqrt {n - 2r} }}{{\sqrt {1 - {r^2}} }}$<br />
+<strong>计算p值：</strong>先计算$t$值，再根据$t$值查表.<br />
+
+<h3 id="决定系数"><a href="#决定系数" class="headerlink" title="决定系数"></a>决定系数</h3><p>通过平方和分解式$ SST = SSR + SSE $,$SSR$占的比重越大,线性回归效果越好.定义回归平方和占总离差平方和的比例为决定系数(Coefficient of Determination),也称确定系数,,记作$r^2$</p>
+
+$$
+{r^2} = \frac{{SSR}}{{SST}} = \frac{{\sum {{{({{\hat y}_i} - \bar y)}^2}} }}{{\sum {{{({y_i} - \bar y)}^2}} }}
+$$
+
+<div class='alert alert-warning'>
+<ol>样本较小时,需要调整决定系数</ol><br />
+<ol>决定系数较大,同样也不能肯定自变量与因变量之间的关系就是线性的,可能曲线拟合更好,特别当自变量取值范围较小时,决定系数通常较大,可以做模型失拟检验.</ol><br />
+<ol>决定系数较小,如果样本量较小,则得到线性回归不显著的结果.如果样本量较大,则会得到线性回归显著;最后改进回归,儒增加自变量、尝试曲线回归拟合等</ol><br />
+</div>
+
+<h3 id="残差分析"><a href="#残差分析" class="headerlink" title="残差分析"></a>残差分析</h3><p>真实值与回归拟合值的差，叫做<strong>残差</strong><br>
+${e_i} = {y_i} - {\hat y_i}$
+残差平方和：$\sum {e_i^2}  = \sum {{{({y_i} - {{\hat \beta }_0} - {{\hat \beta }_1}{x_i})}^2}} $
+
+<div class = 'alert alert-success'>
+
+<strong>误差：</strong>真实值与模型输出值的差：${\varepsilon _i} = {y_i} - {\beta _0} - {\beta _1}{x_i}$ <br />
+<strong>残差：</strong>如上
+<strong>离差：</strong>真实值与模拟拟合值的期望的差,离差平方和为：$SST$<br />
+<strong>偏差：</strong>事实上的真实值与估计值的差$bias = {y_T} - {{\hat y}_i}$<br />
+<strong>方差：</strong>模型估计值与模型估计期望的方差${\mathop{\rm var}}  = \sum {{{({{\hat y}_i} - \bar y)}^2}} $
+</div>
+</p>
+<p><strong>残差的期望：</strong>$E({e_i}) = 0$</p>
+<p><strong>残差的约束条件：</strong><br>
+$$
+\begin{array}{l}
+\sum {{e_i} = 0} \\
+\sum {{x_i}{e_i} = 0} 
+\end{array}
+$$
+
+
+**残差的方差：**
+
+
+<div class='full-math-div'>
+$$
+{\mathop{\rm var}} ({e_i}) = [1 - \frac{1}{n} - \frac{{{{({x_i} - \bar x)}^2}}}{{{L_{xx}}}}]{\sigma ^2} = (1 - {h_{ii}}){\sigma ^2}
+$$
+</div>
+其中$h_{ii}$称为杠杆值<br />
+
+<strong>标准化残差：</strong>$ZR{E_i} = \frac{{{e_i}}}{{\hat \sigma }}$
+
+<strong>学生化残差：</strong>$SR{E_i} = \frac{{{e_i}}}{{\sigma \sqrt {1 - {h_{ii}}} }}$
+</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+    Author：<a href='https://eatrice.top'> 吃白饭-EatRice</a><br />
+    Source：<a href="https://eatrice.top/post/%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B-%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1%E5%92%8C%E6%98%BE%E8%91%97%E6%80%A7/">
+        https://eatrice.top/post/数学模型-参数估计和显著性/</a><br />
+    
+    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+    
+</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%8E%A8%E5%AF%BC%E5%92%8C%E8%AF%AF%E5%B7%AE%E5%A4%84%E7%90%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">线性回归(一)-多元线性回归原理介绍</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/%E5%BC%A0%E9%9B%AF%E9%9B%AF%EF%BC%9A%E7%A0%94%E9%80%94%E6%9C%89%E9%81%93%EF%BC%8C%E8%81%8A%E8%81%8A%E8%80%83%E7%A0%94%E9%82%A3%E4%BA%9B%E4%BA%8B/">
+                        <span class="hidden-mobile">张雯雯：研途有道，聊聊考研那些事</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz",
+          app_key: "dzKTc4w4K1maxEg8E5243rrH",
+          placeholder: "休伯利安号在等待接收你的信号哟^0^\n(支持MarkDown语法)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+<br> <p><a id="rainbow"></a></p> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?71be728981300868000249d1707c92b7";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-160834801-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/HidenMath.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

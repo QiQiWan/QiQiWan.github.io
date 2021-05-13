@@ -1,0 +1,702 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favcion.png">
+  <link rel="icon" type="image/png" href="/img/favcion.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#3a311c">
+  <meta name="description" content="这里是一个工科男苦逼的小空间.记录一些我喜欢的东西比如平面设计，程序设计等等，还会有我不喜欢的东西，各种力学、结构学等等.我的专业是建筑工程，但是我喜欢鼓捣计算机专业相关方面的东西，如果看了我的博客对你有启发的话，记得留言收藏推荐三连击哦^O^">
+  <meta name="author" content="吃白饭-EatRice">
+  <meta name="keywords" content="随笔,分享,经历,吃白饭,休伯利安号,小万,开学啦,科比读后感,星际争霸,守望先锋,雷诺,休伯利安">
+  <meta name="theme-color" content="#3a311c">
+  <link rel="manifest" href="/manifest.json" />
+  
+  <title>nginx.conf的常用配置类型和方法 ~ 吃白饭的休伯利安号</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/tomorrow-night.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1746382_qrhzb41budd.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"eatrice.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="吃白饭的休伯利安号" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>吃白饭的休伯利安号</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Home/">
+                <i class="iconfont icon-addrcard"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/experience/">
+                <i class="iconfont icon-experiment"></i>
+                历程
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/RSS/">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="nginx.conf的常用配置类型和方法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      吃白饭-EatRice
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-31 15:20" pubdate>
+        2020年5月31日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">nginx.conf的常用配置类型和方法</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：1 年前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="关于Nginx"><a href="#关于Nginx" class="headerlink" title="关于Nginx"></a>关于Nginx</h2><p>Nginx是一个强大的网站服务器，它支持静态网站，本地代理和反向代理等等常用且实用的功能。该服务器包括很多的模块，不同的模块又有相应的指定的指令，ngingx通过读取这些指令进行相应的行为。</p>
+<p>nginx有一个全局配置文件：<code>nginx.conf</code>。该全局配置文件可以定义几乎所有的Nginx指令。当然也可以在其他的文件中定义Nginx的相关指令，并在<code>nginx.conf</code>使用<code>include xxx</code>将这些指令引用到全局配置文件中，有点像C语言中的<code>#include</code>预编译指令。将过长的指令分配到不同的配置文件中可以使得配置更有条理便于维护。这里主要分析常用的Nginx配置文件组成和常用的虚拟服务器功能的配置方法。</p>
+<h2 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h2><p>CentOS操作系统：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ sudo yum update<br>$ sudo yum install nginx -y<br>$ sudo yum install update<br></code></pre></div></td></tr></table></figure>
+<p>Ubuntu 和 Debian</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ sudo apt-get update<br>$ sudo apt-get install nginx -y<br>$ sudo apt-get update<br></code></pre></div></td></tr></table></figure>
+<p>按上述方法安装的Nginx的配置文件目录一般位于：<code>/etc/nginx/</code></p>
+<p>所以我们执行 <code>$ cd /etc/nginx/</code> 进入Nginx的安配置文件目录。</p>
+<p>执行 <code>$ ls</code> 命令可以看到Nginx配置文件目录的文件状态，如下图所示：</p>
+<p><img src="1.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="Nginx-conf-配置文件"><a href="#Nginx-conf-配置文件" class="headerlink" title="Nginx.conf 配置文件"></a>Nginx.conf 配置文件</h2><p>首先我们打开配置文件，<code>$ cat nginx.conf</code> 或 <code>$ vim nginx.conf</code></p>
+<p>在Nginx配置文件中 =，每行以 <code>‘#’</code> 号开头的行为注释，调整配置文件时可以对这些行进行忽略。</p>
+<p>Nginx配置文件每条配置语句均以半角分号’;’结尾。</p>
+<h3 id="main-模块"><a href="#main-模块" class="headerlink" title="main 模块"></a>main 模块</h3><p>main模块是定义Nginx的主要参数的模块。其包括几个配置：</p>
+<ul>
+<li><code>user nginx;</code> 这条指令定义了Nginx在操作系统中启动时使用的用户名，这里的配置意思是以nginx身份启动。</li>
+<li><code>worker_processes auto;</code> 这条指令是指定Nginx同时运行的进程数或Nginx的实例。Nginx有一个<code>master</code>进程，还有一些<code>worker</code>进。其中<code>master</code>进程是用来读取和鉴定配置，并将请求分配到不同的<code>worker</code>进程上去处理；<code>worker</code>进程是提供服务的进程，包括请求转发、代理、http缓存等等。这里的配置意思是自动分配<code>worker</code>进程数量。</li>
+<li><code>error_log  /var/log/nginx/error.log;</code> 指定了发生错误时错误日志的目录。</li>
+<li><code>pid /run/nginx.pid;</code> 指定了Nginx的<code>master</code> 进程ID(PID)写入的位置，操作系统会用到PID跟踪和发信号给Nginx进程。</li>
+<li><code>include /usr/share/nginx/modules/*.conf;</code> 指定了外部模块文件的储存位置，Nginx在该目录中找到这些文件并导入配置。</li>
+</ul>
+<p>main 模块是Nginx配置模块中最地层的模块，其配置直接影响Nginx服务器，当然可以在更高级的服务器模块中配置相同的指令，这些指令将覆盖在 main 中配置的相关指令。</p>
+<h3 id="events"><a href="#events" class="headerlink" title="events"></a>events</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs comf">events &#123;<br>    worker_connections  1024;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>这组配置使用到了一组大括号，该模块的上下文为<code>events</code>，里面用到了<code>worker_connections  1024;</code>指定了<code>worker</code>进程可以同时提供多少的连接服务。</p>
+<h3 id="http"><a href="#http" class="headerlink" title="http"></a>http</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs comf">http &#123;<br>    worker_connections  1024;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li><code>include /etc/nginx/mime.types;</code> 加载http服务使用到的 <code>MIME type</code>。<code>MiME type</code> 告诉浏览器，如何处理不同类型的文件。输出该文件，其内容可能如下：</li>
+</ul>
+<p><img src="2.png" srcset="/img/loading.gif" alt=""></p>
+<ul>
+<li><code>access_log /var/log/nginx/access.log  main;</code> 该指令指定了http访问日志的储存位置，该指令也可以在<code>server</code>和<code>location</code>模块中使用。</li>
+<li><code>index index.html index.htm;</code> 该指令指定了请求地址不包含指定文件时在该目录下查找的文件，若该文件不存在，则返回404错误。</li>
+</ul>
+<h3 id="server"><a href="#server" class="headerlink" title="server"></a>server</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs conf">server &#123;<br>    ...<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>server 模块定义了一个虚拟主机，若想在服务器上配置多个网站，可以通过配置不同的server模块实现。一般每个server模块的配置可以单独使用文件进行保存。</p>
+<ul>
+<li><code>listen 80 default_server;</code> 改指令指定了服务器的监听端口。监听端口前也可以加上IP地址，或主机地址。default_server的意思是如果是请求头不匹配其他虚拟主机名时，默认匹配给改虚拟主机。</li>
+<li><code>server_name localhost;</code> 该指令定义了服务器的虚拟主机名，当有请求时，Nginx获取请求头匹配来匹配使用哪个虚拟主机提供服务。若要配置域名访问或指定的IP地址访问，可以将<code>localhost</code>替换成需要的域名或IP地址即可。支持配置泛域名<code>*.eaample.com</code></li>
+<li><code>root /usr/share/nginx/html;</code> 该指令指定了该虚拟主机的请求地址对应的物理根目录，直接访问主机头可以得到该目录下的对应页面。</li>
+</ul>
+<h3 id="location"><a href="#location" class="headerlink" title="location"></a>location</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs conf">location &#x2F; &#123;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>location模块是server的二级模块，其配置Nginx响应请求的方式，如定义不同的请求目录等。若 <code>location</code> 后面接的是 ‘/‘ ，则对请求地址的根目录映射root所对应的根目录。</p>
+<p><strong>定义指定文件请求：</strong></p>
+<p><code>location</code> 可以定义指定文件的处理方式，格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs conf"><br>location ~* \.(gif|jpg|png)$ &#123;<br>  ...<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<p>表示定义对图片的请求方式，使用该请求方式可以实现将请求代理到CDN图床等等。。。</p>
+<p><code>location</code> 可以定义指定请求目录的处理方式，格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs conf"><br>location ^~ &#x2F;blog&#x2F; &#123;<br>  ...  <br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<p>改定义方式匹配/blog/请求目录，如匹配：<code>localhost/blog/</code>、<code>example.com/blog/</code>等等。</p>
+<p>精确匹配可将 <code>^~</code> 换成 <code>=</code>。</p>
+<h2 id="Nginx-的常用服务器配置"><a href="#Nginx-的常用服务器配置" class="headerlink" title="Nginx 的常用服务器配置"></a>Nginx 的常用服务器配置</h2><h3 id="静态网站虚拟主机"><a href="#静态网站虚拟主机" class="headerlink" title="静态网站虚拟主机"></a>静态网站虚拟主机</h3><p>配置一个静态网站，至少需要指定以下几项参数：</p>
+<ol>
+<li>网站监听端口<code>listen</code>；</li>
+<li>虚拟主机名<code>server_name</code>；</li>
+<li>网站根目录<code>root</code>；</li>
+<li>虚拟主机目录<code>location</code>；</li>
+<li>404页面<code>error_page</code>；</li>
+</ol>
+<p>如：需要在80和443端口上监听 <code>www.aaa.com</code> 和 <code>aaa.com</code> 虚拟主机根目录对应静态网站物理路径 <code>/var/www/aaa.com/</code> ，错误页面在静态网站路径中。网站使用SSL证书加密，证书路径为：<code>/var/www/aaa.com/crt/</code>，配置图床地址为<code>https://pic.aaa.com</code>。则可以参考配置如下。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>  <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>  <span class="hljs-attribute">server_name</span> www.aaa.com aaa.com;<br>  <span class="hljs-attribute">root</span> /var/www/aaa.com/;<br>  <span class="hljs-attribute">index</span> index.html index.htm;<br><br>  <span class="hljs-attribute">location</span> <span class="hljs-regexp">~* \.(gif|jpg|png)$</span> &#123;<br>    <span class="hljs-attribute">root</span> https://pic.aaa.com;<br>  &#125;<br>&#125;<br><span class="hljs-section">server</span> &#123;<br>  <span class="hljs-attribute">listen</span> <span class="hljs-number">443</span>;<br>  <span class="hljs-attribute">server_name</span> www.aaa.com aaa.com;<br>  <span class="hljs-attribute">root</span> /var/www/aaa.com/;<br>  <span class="hljs-attribute">index</span> index.html index.htm;<br><br>  <span class="hljs-attribute">location</span> <span class="hljs-regexp">~* \.(gif|jpg|png)$</span> &#123;<br>    <span class="hljs-attribute">root</span> https://pic.aaa.com;<br>  &#125;<br><br>  <span class="hljs-attribute">ssl</span> <span class="hljs-literal">on</span>;<br>  <span class="hljs-attribute">ssl_certificate</span> /var/www/aaa.com/crt/aaa.com.crt;<span class="hljs-comment">#证书路径</span><br>  <span class="hljs-attribute">ssl_certificate_key</span> /var/www/aaa.com/crt/aaa.com.key;<span class="hljs-comment">#证书密钥</span><br>  <span class="hljs-attribute">ssl_session_timeout</span> <span class="hljs-number">5m</span>;<br>  <span class="hljs-attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="hljs-number">1</span> TLSv1.<span class="hljs-number">2</span> TLSv1.<span class="hljs-number">3</span>; <span class="hljs-comment">#TLS协议</span><br>  <span class="hljs-attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;<span class="hljs-comment">#SSL加密套件</span><br>  <span class="hljs-attribute">ssl_prefer_server_ciphers</span> <span class="hljs-literal">on</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>如果配置http重定向至https可以修改80端口的虚拟主机为以下二选1：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span>       <span class="hljs-number">80</span>;<br>    <span class="hljs-attribute">server_name</span>  www.aaa.com aaa.com;<br>    <span class="hljs-attribute">rewrite</span><span class="hljs-regexp"> ^(.*)</span> https://$host<span class="hljs-variable">$1</span> <span class="hljs-literal">permanent</span>;<br>&#125;<br><br><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>    <span class="hljs-attribute">server_name</span> tuhongwei.com www.tuhongwei.com;<br>    <span class="hljs-attribute">return</span> <span class="hljs-number">301</span> https://$host<span class="hljs-variable">$1</span> <span class="hljs-literal">permanent</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="Nginx-配置端口代理"><a href="#Nginx-配置端口代理" class="headerlink" title="Nginx 配置端口代理"></a>Nginx 配置端口代理</h3><p>端口代理即nginx代替客户端访问本地端口服务，至少需要提供以下参数：</p>
+<ol>
+<li>网站监听端口<code>listen</code>；</li>
+<li>虚拟主机名<code>server_name</code>；</li>
+<li>反向代理的地址<code>proxy_pass</code>；</li>
+</ol>
+<p>假设在本地有监听服务在<code>http://127.0.0.1:1234</code>，该服务需要获取远程IP，获取远程cookies。虚拟主机名为 <code>aaa.com</code>。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><br><span class="hljs-section">server</span> &#123;<br>  <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>  <span class="hljs-attribute">server_name</span> aaa.com;<br><br>  <span class="hljs-attribute">location</span> / &#123;<br>    <span class="hljs-attribute">proxy_pass</span> http://127.0.0.1:1234;<br>    <span class="hljs-attribute">proxy_set_header</span> HOST $host; <span class="hljs-comment"># 将主机名添加到请求头</span><br>    <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-Proto $scheme; <span class="hljs-comment"># 将协议类型添加到请求头</span><br>    <span class="hljs-attribute">proxy_set_header</span> X-Real-IP $remote_addr; <span class="hljs-comment"># 将远程客户端IP发送至请求头</span><br>    <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-For $proxy_add_x_forwarded_for; <span class="hljs-comment"># 将http拓展头添加至请求头 </span><br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>若要进行TLS访问，可以如上一条所示添加443端口的虚拟主机监听。</p>
+<h3 id="Nginx-文件服务器"><a href="#Nginx-文件服务器" class="headerlink" title="Nginx 文件服务器"></a>Nginx 文件服务器</h3><p>nginx的文件服务器同静态网站，其直接指向虚拟主机的主目录文件。配置方法：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>  <span class="hljs-attribute">listen</span>       <span class="hljs-number">80</span>;<br>  <span class="hljs-attribute">server_name</span>  file.aaa.com;<br>  <span class="hljs-comment">#root     /usr/share/nginx/html;</span><br>  <span class="hljs-attribute">root</span>     /;<br>  <span class="hljs-attribute">autoindex</span> <span class="hljs-literal">on</span>;<span class="hljs-comment"># 显示目录</span><br>  <span class="hljs-attribute">autoindex_exact_size</span> <span class="hljs-literal">on</span>;<span class="hljs-comment"># 显示文件大小</span><br>  <span class="hljs-attribute">autoindex_localtime</span> <span class="hljs-literal">on</span>;<span class="hljs-comment"># 显示文件时间</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Web/">Web</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/nginx/">nginx</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Web%E6%9C%8D%E5%8A%A1%E5%99%A8/">Web服务器</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+    Author：<a href='https://eatrice.top'> 吃白饭-EatRice</a><br />
+    Source：<a href="https://eatrice.top/post/nginx-conf%E7%9A%84%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%96%B9%E6%B3%95/">
+        https://eatrice.top/post/nginx-conf的常用配置类型和方法/</a><br />
+    
+    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+    
+</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/Git%E7%AE%80%E6%98%8E%E5%AE%9E%E7%94%A8%E6%95%99%E7%A8%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Git简明实用教程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/%E9%92%A2%E7%BB%93%E6%9E%84-%E5%8D%95%E5%B1%82%E5%B7%A5%E4%B8%9A%E5%8E%82%E6%88%BF%E5%B1%8B%E6%9E%B6%E8%AE%BE%E8%AE%A1%E8%AE%A1%E7%AE%97%E4%B9%A6/">
+                        <span class="hidden-mobile">钢结构-单层工业厂房屋架设计计算书</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz",
+          app_key: "dzKTc4w4K1maxEg8E5243rrH",
+          placeholder: "休伯利安号在等待接收你的信号哟^0^\n(支持MarkDown语法)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+<br> <p><a id="rainbow"></a></p> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?71be728981300868000249d1707c92b7";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-160834801-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/HidenMath.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

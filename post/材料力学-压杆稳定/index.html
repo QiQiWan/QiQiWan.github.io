@@ -1,0 +1,936 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favcion.png">
+  <link rel="icon" type="image/png" href="/img/favcion.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#3a311c">
+  <meta name="description" content="这里是一个工科男苦逼的小空间.记录一些我喜欢的东西比如平面设计，程序设计等等，还会有我不喜欢的东西，各种力学、结构学等等.我的专业是建筑工程，但是我喜欢鼓捣计算机专业相关方面的东西，如果看了我的博客对你有启发的话，记得留言收藏推荐三连击哦^O^">
+  <meta name="author" content="吃白饭-EatRice">
+  <meta name="keywords" content="随笔,分享,经历,吃白饭,休伯利安号,小万,开学啦,科比读后感,星际争霸,守望先锋,雷诺,休伯利安">
+  <meta name="theme-color" content="#3a311c">
+  <link rel="manifest" href="/manifest.json" />
+  
+  <title>材料力学-压杆稳定 ~ 吃白饭的休伯利安号</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/tomorrow-night.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1746382_qrhzb41budd.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"eatrice.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="吃白饭的休伯利安号" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>吃白饭的休伯利安号</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/Home/">
+                <i class="iconfont icon-addrcard"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                博客
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/experience/">
+                <i class="iconfont icon-experiment"></i>
+                历程
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/RSS/">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="材料力学-压杆稳定">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      吃白饭-EatRice
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-06-18 10:43" pubdate>
+        2020年6月18日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      64
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">材料力学-压杆稳定</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：1 年前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>大学本科土木工程的材料力学和结构力学课程中提到了两类结构失稳问题。材料力学中探究长细杆在轴向压力和可能的垂直轴向压力的共同作用下，构件沿其长度方向发生侧向挠度的情况，该侧向挠度的发生是由于杆件柔度较大，当发生挠度时杆件中主应力尚未达到破坏极限，杆件产生的内力和外部荷载在杆件任意位置处于静力学平衡状态。结构力学中引入了非完善体系的失稳状态，根据大小挠度理论，体系在外荷载小于一定范围时，其发生的形变与荷载成正相关，且体系的静力学特征处于平衡状态；当荷载超过某一极限时，荷载与形变的关系发生显著变化，此时发生体系失稳。由于两类失稳状态分类在两门不同的学科中，使用过程中，对两种原理的比较和应用存在不便。笔者将两类失稳的原理推导和静力学分析进行整合，导出两种失稳状态下的力学特点，并将归纳整理得到的性质用于解决实际问题，并给出实际问题的解决过程。</p>
+<h3 id="1细长杆件的失稳：分支失稳"><a href="#1细长杆件的失稳：分支失稳" class="headerlink" title="1细长杆件的失稳：分支失稳"></a>1细长杆件的失稳：分支失稳</h3><hr>
+<p>由平时的生活经验：假设我们有一根长的杆件，如图1。若在杆的两端施加轴向压力，若压力足够大可能发生两种情况：</p>
+<p><img src="1.png" srcset="/img/loading.gif" alt=""></p>
+<p><strong>受压破坏：</strong>杆中截面应力超过材料的最大许用应力$ [\sigma ] $，材料发生破坏。</p>
+<p><strong>失稳破坏：</strong>杆件的长细比过大使得杆件在两端压力作用下发生弯曲失稳，如图2。此时发生侧向挠度，可认为杆件失效。</p>
+<p><img src="2.png" srcset="/img/loading.gif" alt=""></p>
+<p>根据材料力学的正截面材料破坏条件：$ [\sigma ] < {\sigma _{}} = \frac{F}{A} $</p>
+<p>其中：$F$为施加在杆件正截面的轴力；</p>
+$ A $为构件的横截面积（假定该杆件横截面处处相等）
+
+设当$ F = {F_{\max }}$时，$\frac{F}{A} = [\sigma ] $。
+
+再对失稳条件进行分析：
+
+由正截面的微元曲率分析可得挠度与弯矩的关系公式：$  - \frac{{M(x)}}{{EI}} = \frac{{{d^2}w(x)}}{{d{x^2}}} $
+<p>其中$ M(x)$为弯矩函数，$EI$为材料刚度，$w(x) $为挠度函数。</p>
+<p>由图3</p>
+<p><img src="3.png" srcset="/img/loading.gif" alt=""></p>
+<p>得出该杆件的力矩平衡方程：（不考虑水平力）$ \frac{{{d^2}w}}{{d{x^2}}} + \frac{F}{{EI}}w = 0 \text{    ①} $</p>
+<p><img src="4.png" srcset="/img/loading.gif" alt=""></p>
+<p>若杆端存在水平力时，平衡方程变为： $\frac{{{d^2}w}}{{d{x^2}}} + \frac{F}{{EI}}w = \frac{{{F_R}(l - x)}}{{EI}}\text{②} $</p>
+<p>该方程有通解：$ w*(x) = A\sin \omega x + B\cos \omega x $</p>
+<p>对于式②</p>
+$ w(x) = \frac{{{F_R}}}{F}(l - x) + w*(x) $
+<p>令$ k = \sqrt {\frac{F}{{EI}}}  $代入原方程得：</p>
+$ w*(x) = A\sin kx + B\cos kx $
+$ w'(x) = Ak\cos kx - Bk\sin kx - \frac{{{F_R}}}{F} $
+$ {w^{(2)}}(x) =  - A{k^2}\sin kx - B{k^2}\cos kx $
+<p>此时的通解为自由条件下杆的挠曲平衡方程，而实际情况，往往会有支座进行固定，主要的支座类型有铰支座和固定支座。固定支座和铰支座在计算时得主要区别在于：固定支座处的挠度和转角均等于零；铰支座处挠度为零，转角不一定为零。因此此处将固定支座和铰支座相互搭配形成四种情况分别就其不同的边界条件进行讨论：</p>
+<h4 id="1-1失稳状态公式导出"><a href="#1-1失稳状态公式导出" class="headerlink" title="1.1失稳状态公式导出"></a>1.1失稳状态公式导出</h4><p><strong>两端铰支：</strong>示意见图4，该支座类型没有非轴向力。</p>
+<p><img src="4.png" srcset="/img/loading.gif" alt=""></p>
+<p>支座处不提供弯矩，且支座两端均无竖直方向的支座反力，即杆中不存在竖直方向的力产生弯矩。</p>
+<p>因此只需要将边界条件$ {w^{(2)}}(0) = 0 $带入原方程中得：</p>
+$ {w^{(2)}}(0) =  - A{k^2}\sin k*0 + B{k^2}\cos k*0 = 0 $
+<p>=&gt; $ B = 0 $</p>
+<p>同理 $ {w^{(2)}}(l) = 0 $</p>
+<p>得：$ A\sin kl \to 0$ => $kl = n\pi  $ 由</p>
+<div class='full-math-div'>
+
+ $$ 
+ k = \sqrt {\frac{F}{{EI}}}  =  > \frac{F}{{EI}} = \frac{{{n^2}{\pi ^2}}}{{{l^2}}} =  > {F_{cr}} = \frac{{{n^2}{\pi ^2}EI}}{{{l^2}}} 
+ $$ 
+
+</div>
+
+<p>得到杆件失稳的极限平衡条件。</p>
+<p>平衡方程中存在整数数列n，n在这里指的是挠度形式，如图5</p>
+<p><img src="5.png" srcset="/img/loading.gif" alt=""></p>
+<p>图5展示了$ n = 2 $当时的极限状态。</p>
+<p><strong>一端固定：</strong>示意见图6，该支座类型没有非轴向力。</p>
+<p><img src="6.png" srcset="/img/loading.gif" alt=""></p>
+<p>因为发生弯曲变形后固定端会存在弯矩$ {w^{(2)}}(0) \ne 0$，但是固定端处的转角为零，即$w'(0) = 0$。即：$w'(0) = Ak\cos k*0 - Bk\sin k*0 = Ak = 0 $</p>
+<p>又$ {w^{(2)}}(l) = 0$ => $kl = \frac{{(2n + 1)\pi }}{2} $</p>
+<p>n为整数数列</p>
+<p>令$ m = \frac{{2n + 1}}{2}$，$kl = m\pi  =  > {F_{cr}} = \frac{{{m^2}{\pi ^2}EI}}{{{l^2}}} $</p>
+<p>一阶失稳时，此时$ m = \frac{1}{2}$，${F_{cr}} = \frac{{{\pi ^2}EI}}{{{{({\rm{2}}l)}^2}}} $</p>
+<p><strong>两端固定：</strong>该支座类型没有非轴向力。</p>
+<p>同上$ w'(0) = 0$ => $A = 0 $</p>
+<p>又因为两端固定对称，且有：$ w(0) = w(l) $</p>
+<p>即：$ B\cos k*0 = B\cos k*l $</p>
+<div class='full-math-div'>
+
+ $$ 
+ kl = 2n\pi  =  > {F_{cr}} = \frac{{4{n^2}{\pi ^2}EI}}{{{l^2}}} = \frac{{{n^2}{\pi ^2}EI}}{{{{(\frac{1}{2}l)}^2}}} 
+ $$ 
+
+</div>
+
+<p>一端固定一端铰接：见图7</p>
+<p><img src="7.png" srcset="/img/loading.gif" alt=""></p>
+<p>边界条件$ w(0) = 0$，支座提供得水平力不一定为零，代入式②，得：$B + \frac{{{F_R}}}{F}l = 0 $</p>
+<p>又$ w'(0) = 0$ => $Ak = \frac{{{F_R}}}{F}$，且$w(l) = 0$ => $A\sin kl + B\cos kl = 0 $</p>
+<p>有：$ B + Akl = 0$，因为不全为零，即$A \ne 0,B \ne 0 $</p>
+<p>联立两式得：$ \tan kl = kl $</p>
+<p>解得：$ kl = 4.49 $</p>
+<p>因为</p>
+<div class='full-math-div'>
+
+ $$ 
+ kl = 4.49 = \frac{{10}}{7}\pi  =  > {F_{cr}} = \frac{{{\pi ^2}EI}}{{{{(0.7l)}^2}}} 
+ $$ 
+
+</div>
+
+<h4 id="1-2四种失稳破坏条件的通用公式"><a href="#1-2四种失稳破坏条件的通用公式" class="headerlink" title="1.2四种失稳破坏条件的通用公式"></a>1.2四种失稳破坏条件的通用公式</h4><p>总结以上四个失稳极限条件得到，在不同情况下杆件极限承载力计算时采用的实际计算长度只与两端的支座形式有关。引入系数描述不同支座特征的计算长度折算系数。得出一般公式：</p>
+$ {F_{cr}} = \frac{{{\pi ^2}EI}}{{{{(\mu l)}^2}}} $不同支座类型对应的折算系数如下表：
+
+| | | | | |
+| :---: | :---: |  :---: |  :---: |  :---: | 
+| 支座类型 | 两端铰支 | 一端固定 | 两端铰支 | 一端较支一端固定 |
+| μ |　1 | 2 | 0.5 | 0.7 |
+
+### 1.3受压破坏和失稳破坏的极限条件
+
+由材料力学的初步分析结果得：杆件有两种破坏形式，一是受压破坏，二为失稳破坏。这两种破坏形式在所需得极限作用计算方法不同，所以对于同一根杆件其受压破坏极限和失稳极限也不同，我们需要找一种方法以衡量在实际工程中，该杆件在受到足够大得轴向作用时是先发生失稳还是正截面直接达到正截面承载极限破坏。
+
+根据$\left\{ {\begin{array}{*{20}{c}}
+{{F_{\max }} = [\sigma ]A}\\
+{{F_{cr}} = \frac{{{\pi ^2}EI}}{{{{(\mu l)}^2}}}}
+\end{array}} \right.$当两个极限相等时
+
+得出： $ \frac{{{{(\mu l)}^2}}}{{\frac{I}{A}}} = \frac{{{\pi ^2}E}}{{[\sigma ]}} \text{③} $
+<p>其中，$ [\sigma ] $与所计算的材料有关；</p>
+$ I$和$A$与截面的形式有关，可以用来描述截面在某一方向上的力学特性。令，$i = \sqrt {\frac{I}{A}} $,③式变为${(\frac{{\mu l}}{i})^2} = \frac{{{\pi ^2}E}}{{[\sigma ]}} $
+<p>该式的意义为当杆件的计算长度与截面的力学特性比值等于右边时，杆件在受到轴向荷载时正截面破坏和失稳破坏会同时发生。当增大杆件的计算长度时，其截面保持不变，由$ {F_{cr}}$计算公式，{F_{cr}},${F_{cr}} $减小，此时失稳先发生。即当截面一定时，失稳与正截面破坏的先发生与否与杆件的计算长度有关。</p>
+<p>定义$ \lambda  = \frac{{\mu l}}{i}$作为杆件失稳发生条件的判断系数，当${\lambda ^2} > \frac{{{\pi ^2}E}}{{[\sigma ]}} $<br>截面先发生失稳破坏；相等时两种破坏理论上同时发生。</p>
+<h3 id="2019周培源力学竞赛失稳条件题解"><a href="#2019周培源力学竞赛失稳条件题解" class="headerlink" title="2019周培源力学竞赛失稳条件题解"></a>2019周培源力学竞赛失稳条件题解</h3><p>如题：弹性软基体中有一细长等截面 梁，弯曲刚度EI，梁受轴向压缩。</p>
+<p>(1) 若将弹性基体等效为分布弹簧，其刚度为K<br>(弹性基体对梁单位长度上产生单位挠度时的反力)，<br>试根据图建立分析该长梁失稳的平衡微分方程；</p>
+<p>(2) 假设失稳模式为$ w = Asin\frac{{2\pi }}{\lambda }x$，试求梁发生失稳时的临界载荷和临界失稳波长。${\lambda _{cr}} $</p>
+<p><strong>解：</strong>式①的平衡方程实质上是对杆件的力矩平衡方程，题设中所给的弹簧刚度K可求解竖向力，由于杆件受压发生挠度后在杆件任意截面会对应有相应转角，同上面压杆稳定公式推导类似，对杆件进行弯矩平衡。</p>
+<p>杆长为$ l$，设从左至右的距离为$x $，则：</p>
+<p>杆件本身产生挠度在$ x$处引起的弯矩：$ - EI\frac{{{d^2}w}}{{d{x^2}}}$,外力在$x$截面处产生的弯矩：$Fw(x)$，弹簧弹力在处引起的截面弯矩：$\int\limits_0^l {2Kw(x)(l - x)dx}  $。</p>
+<p>得出平衡方程：</p>
+<div class='full-math-div'>
+
+ $$ 
+  - EI\frac{{{d^2}w}}{{d{x^2}}} = Fw(x) + \int\limits_0^l {2Kw(x)(l - x)dx}  
+ $$ 
+<br />
+=><br />
+
+ $$ 
+ EI\frac{{{d^3}w}}{{d{x^3}}} + F\sin \frac{{dw}}{{dx}} + 2Kw(x)dx = 0 
+ $$ 
+
+</div>
+
+<p>由挠度是无穷小量，且等式两边消去，得：</p>
+$ EI\frac{{{d^4}w}}{{d{x^4}}} + F\frac{{{d^2}w}}{{d{x^2}}} + 2Kw(x) = 0 $
+<p>设方程通解：$ w*(x) = A\sin kx + B\cos kx $</p>
+<p>原式：</p>
+<div class='full-math-div'>
+$$
+\begin{array}{l}
+(EIA{k^4} + 2KA - FA{k^2})\sin kx + \\
+(EIB{k^4} + 2KB - FB{k^2})\cos kx = 0
+\end{array}
+$$
+</div>
+
+<p>由题可得：$ A,B $不同时为0</p>
+<p>所以：$ EI{k^4} - F{k^2} + 2K = 0 $</p>
+<p><strong>解得：$ {k^2} = \frac{{F \pm \sqrt {{F^2} - 8KEI} }}{{2EI}} $，</strong>分析得：当：</p>
+<p>$ {F^2} &gt; 8KEI $杆件发生失稳，且有4钟振型</p>
+<p>$ {F^2} = 8KEI $杆件处于失稳极限状态</p>
+<p>$ {F^2} &lt; 8KEI $无实数解，杆件不失稳</p>
+<p>根据极限条件得：$ {F_{cr}} = \sqrt {8EIK}  $，此时</p>
+<div class='full-math-div'>
+
+
+ $$ 
+ k = {(\frac{{{F_{cr}}}}{{2EI}})^{\frac{1}{2}}} = {(\frac{{2K}}{{EI}})^{\frac{1}{4}}} 
+ $$ 
+
+
+</div>
+
+<p>波长：</p>
+<div class='full-math-div'>
+
+ $$ 
+ \lambda  = \frac{{2\pi }}{k} = 2\pi {(\frac{{EI}}{{2K}})^{\frac{1}{4}}} 
+ $$ 
+
+</div>
+
+<h3 id="2非完善体系中的失稳"><a href="#2非完善体系中的失稳" class="headerlink" title="2非完善体系中的失稳"></a>2非完善体系中的失稳</h3><hr>
+<p>相比于材料力学的关于材料本身的力矩平衡方程，作为一个体系，其约束不完整或构件在加载一开始就呈现出变形状态，该类体系称为非完善体系。非完善压杆在加载一开始就处于变形平衡状态。按照最小挠度理论，当荷载增加到一定程度时，体系得位移会趋于无穷大；按照大挠度理论，体系受到的荷载达到一定程度后会发生荷载不变甚至减小，位移仍在增加的情况。该极限点则为极限失稳点。该失稳形态称为极值点失稳，极值点对于的荷载最大值称为临界荷载。简单示例如图8</p>
+<p><img src="8.png" srcset="/img/loading.gif" alt=""></p>
+<p>用静力学方法解决这类题型的关键是分析体系的自由度——按照节点特性找到所有对指定节点的作用效果——根据作用效果列出力矩平衡方程。</p>
+<p>应用静力学方法的基本原理是将体系的位移看作线性变形。即认为变形和荷载呈线性关系。在进行相关参数计算时忽略体系中已经存在的位移，仍按照其变形之前的体系参数进行计算。该计算结果由于体系变形后相关参数较其变形前会发生改变，因此计算出的结果为近似精确解。该计算方法在结构力学中称为线性分析。同时该方法适用荷载叠加原理。</p>
+<p>该问题中解决的核心思想为将体系看作通过约束单个结构得到的约束体系，约束体系发生小位移，此时作用在体系上的外荷载和体系中由于位移而产生的约束力在发生位移的条件下处于静力学平衡状态。即体系中所有的静力特征对该体系的所有作用的总和平衡。</p>
+<p>本文通过对单自由度体系，有限自由度体系，和无限自由度体系分别进行分析，并进行计算，以得到相关问题的一般解法。</p>
+<h3 id="2-1单自由度体系分析"><a href="#2-1单自由度体系分析" class="headerlink" title="2.1单自由度体系分析"></a>2.1单自由度体系分析</h3><p>如图9，各杆$ EI = \infty $，在体系的最上端作用一个力$F$，弹簧弹性系数为$k$，求解当体系失稳时的极限荷载$F_{cr} $。</p>
+<p><img src="9.png" srcset="/img/loading.gif" alt=""></p>
+<p>解：</p>
+<p>由题意可得：该体系的自由度为1。该体系中有两个力未知，其一是带求的极限荷载F，第二是下部的铰支座提供的向上的支撑力Q。</p>
+<p><img src="10.png" srcset="/img/loading.gif" alt=""></p>
+<p>绘制虚位移示意图：如图10。假设A点侧移距离为y。由于体系中含有两个未知数F、Q，所以对A，B点分别取矩：</p>
+<div class='full-math-div'>
+
+$$
+\begin{array}{l}
+\sum {{M_A}}  = 0\\
+ - 2Fy + 2kyb + Qb = 0\\
+\sum {{M_B}}  = 0\\
+ - Fy + ky(a + 2b) + Q(a + b) = 0
+\end{array}
+$$
+
+</div>
+
+<p>最后解得：$ {F_{cr}} = \frac{{(3a + 4b)kb}}{{2a + 3b}} $</p>
+<h3 id="2-2多自由度体系分析"><a href="#2-2多自由度体系分析" class="headerlink" title="2.2多自由度体系分析"></a>2.2多自由度体系分析</h3><p>由2.1中的静力特征分析不难得出此类稳定问题的解法主要时探究体系从原始平衡形式受到外部作用后变化为新的平衡形式平衡性推导问题。由此引入多自由度体系的静力平衡问题。</p>
+<p><img src="media/53c42f4e76271a3afb2599bab3349772.png" srcset="/img/loading.gif" alt=""></p>
+<p>如图11，在该体系右端作用一个力$ F$，每根杆件的长度为$l$，$EI = \infty $，弹簧的位移刚度为$k $，求该体系极限荷载。</p>
+<p><img src="11.png" srcset="/img/loading.gif" alt=""></p>
+<p>解：</p>
+<p>分析其变形平衡状态，绘制静力平衡图，如图12：</p>
+<p><img src="12.png" srcset="/img/loading.gif" alt=""></p>
+<p>设从左至右第一根弹簧的反力为：$ {F_{r1}} = {k_1}{y_1}$，第二根为：${F_{r2}} = {k_2}{y_2} $，</p>
+<p>A点和D点的支座反力分别为：</p>
+<div class='full-math-div'>
+
+ $$ 
+ {F_{Ax}} = F( \to ),{F_{Ay}} = \frac{{F{y_1}}}{l}( \downarrow ),{F_{Dy}} = \frac{{F{y_2}}}{l}( \downarrow ) 
+ $$ 
+
+</div>
+
+<p>静力平衡条件为：</p>
+<div class='full-math-div'>
+
+$$
+\left\{ {\begin{array}{*{20}{c}}
+{\sum {{M_C} = 0,{k_1}{y_1}l - (\frac{{F{y_1}}}{l})} 2l + F{y_2} = 0}\\
+{\sum {{M_B} = 0,{k_2}{y_2}l - (\frac{{F{y_2}}}{l})} 2l + F{y_1} = 0}
+\end{array}} \right.
+$$
+
+</div>
+
+<p>即：</p>
+<div class='full-math-div'>
+
+$$
+\left. {\begin{array}{*{20}{c}}
+{({k_1}l - 2F){y_1} + F{y_2} = 0}\\
+{F{y_1} + ({k_2}l - 2F){y_2} = 0}
+\end{array}} \right\}
+$$
+
+</div>
+
+<p>提取系数矩阵：</p>
+
+$$
+[\delta ] = \left[ {\begin{array}{*{20}{c}}
+{{k_1}l - 2F}&F\\
+F&{{k_2}l - 2F}
+\end{array}} \right]
+$$
+
+<p>该齐次线性方程组的解与系数矩阵的行列式值有关，当：</p>
+$ |\delta | \ne 0 $时，方程有唯一的实数解
+
+$ |\delta | \ne 0 $时，除零解外，只能解出和的关系，意味着原结构有不止一种的平衡形式，此时为临界平衡状态的静力特征。
+
+展开$ |\delta | = 0 $
+$ ({k_1}l - 2F)({k_2}l - 2F) - {F^2} = 0 $
+<p>可解得$ F$的两个特征值，其中最小的为临界荷载。此时将$F$带入原平衡方程，可求得$y_1$和$y_2 $的比值。进而得出临界荷载的失稳变形形式。</p>
+<p><img src="13.png" srcset="/img/loading.gif" alt=""></p>
+<p>同理，对于多自由度体系，如图13：</p>
+<p>题目大意：A,B,C三处节点的均可发生位移，属于三自由度体系，每根杆件刚度为$ EI$  ，长度为$l$。作用在最右端有荷载$F$，近似求解临界极限荷载$F_{cr} $。</p>
+<p><strong>解析：</strong>该题可应用矩阵位移法计算节点处发生单位位移引起的弯矩。A,B,C处的节点形式均为刚节点，发生失稳时节点处即发生侧挠，也发生转角。将整个杆件分为四个杆件单元OA为①，AB为②，BC为③，CD为④。写出每个杆件单元的单元刚度矩阵，组合成总刚。如①单元处的单刚为：</p>
+
+$$
+[{k^①}] = \left[ {\begin{array}{*{20}{c}}
+{\frac{{12i}}{{{l^2}}}}&{\frac{{6i}}{l}}&{ - \frac{{12i}}{{{l^2}}}}&{\frac{{6i}}{l}}\\
+{\frac{{6i}}{l}}&{4i}&{ - \frac{{6i}}{l}}&{2i}\\
+{ - \frac{{12i}}{{{l^2}}}}&{ - \frac{{6i}}{l}}&{\frac{{12i}}{{{l^2}}}}&{ - \frac{{6i}}{l}}\\
+{\frac{{6i}}{l}}&{2i}&{ - \frac{{6i}}{l}}&{4i}
+\end{array}} \right]
+$$
+
+<p>假设A,B,C节点处的位移分别为${y_1},{y_2},{y_3},{\theta _1},{\theta _2},{\theta _3}$，可得到各节点处的剪力和弯矩，最后对节点进行弯矩剪力静力学平衡，求解当刚度矩阵行列式等于零时F的最小特征值，即为临界力的近似解。</p>
+<h3 id="2-3无限自由度体系分析"><a href="#2-3无限自由度体系分析" class="headerlink" title="2.3无限自由度体系分析"></a>2.3无限自由度体系分析</h3><p><img src="14.png" srcset="/img/loading.gif" alt=""></p>
+<p>如图14，一等截面压杆,下端固定,上端有水平支杆。杆长l，刚度为EI，用静力法求其反力。</p>
+<p><strong>解析：</strong>分析题面可得，在轴向压力超过临界值时，该杆的所有位置都可能发生侧挠。即对于该杆的每个dx长度都是一个发生挠度的微元体，当dx足够小时该杆件即是无限自由度的结构体系。</p>
+<p>仔细分析不难发现该杆与1.1导出的一端固定一端铰支的杆件失稳形式如出一辙。故可用1.1中导出的失稳公式进行计算。</p>
+<h2 id="3总结"><a href="#3总结" class="headerlink" title="3总结"></a>3总结</h2><hr>
+<ol>
+<li><p>从细长杆件的失稳状态可以得出：把杆件作为一个连续体，则其上的挠度变形在杆的长度方向也连续。要求解该类问题，需找到杆件上每一段微元段上的弯矩平衡方程，带入边界条件对该方程求解即可求得杆件的变形状态。</p>
+</li>
+<li><p>非完善体系的失稳分析时，若体系的自由度有限，体系中一定有一部分为刚体。相比于对细长杆件的失稳状态求解，体系失稳中部分问题需要对外力进行假设，且体系失稳实质上属于变形状态的稳定，杆件失稳更多属于静止状态的稳定。</p>
+</li>
+<li><p>对无限自由度体系分析，即杆件可被划分为会发生变形的无数个变形单元，其原理与细长杆件的失稳原理相似，故其解法可以有相通之处。</p>
+</li>
+<li><p>非完善体系的稳定性计算，其形变和荷载假定为线性关系。与细长杆件失稳相比，其的变形状态和原理在一定程度上与细长杆件的失稳相似，换言之，在一定程度上，细长杆件的失稳属于非完善体系失稳的一种特殊状态。</p>
+</li>
+</ol>
+<h2 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h2><p>[1]周海龙,安珍,李平,李昊.平面体系的自由度计算及分析步骤刍议[J].科技创新与应用,2019(31):32-34.</p>
+<p>[1] Zhou Hailong, an Zhen, Li Ping, Li Hao. Discussion on the calculation and<br>Analysis of degree of Freedom of Planar system [J]. Innovation and Application<br>of Science and Technology, 2019 (31): 32-34.</p>
+<p>[2]牛峰.显控台气弹簧支撑结构的力学分析[J/OL].中国舰船研究:1-6[2019-11-14].<a target="_blank" rel="noopener" href="https://doi.org/10.19693/j.issn.1673-3185.01356">https://doi.org/10.19693/j.issn.1673-3185.01356</a>.</p>
+<p>[2]Niu Feng. Mechanical analysis of air spring supporting structure of display<br>and control platform [J/OL]. Chinese warship Research: 1-6 [2019-11-14].<br>Https://doi.org/10.19693/j.issn.1673-3185.01356.</p>
+<p>[3]乔朋,李悦,马乾瑛.大学生结构设计竞赛对结构力学课程教学的启示[J].高等建筑教育,2019,28(05):74-79.</p>
+<p>[3]Qiao Peng, Li Yue, Ma Qianying. The Enlightenment of College students’<br>structural Design Competition to the Teaching of structural Mechanics [J].<br>Higher Architectural Education, 2019, 28 (05): 74-79.</p>
+<p>[4]唐少强.知与用：理科力学的微积分教学再议[J].力学与实践,2019,41(04):442-444.</p>
+<p>[4] Tang Shaoqiang.Knowledge and use: further discussion on Calculus Teaching of<br>Science Mechanics [J].Mechanics and practice, 2019, 41 (04): 442-444.</p>
+<p>[5].第十二届全国周培源大学生力学竞赛(个人赛)试题及解答[J].力学与实践,2019,41(04):505-507.</p>
+<p>[5]The 12th National Zhou Peiyuan College students Mechanics Competition<br>(individual Competition) questions and solutions [J]. Mechanics and practice,<br>2019, 41 (04): 505-507.</p>
+<p>[6]高雅巍.力学在土木工程中的应用[J].居舍,2019(22):166.</p>
+<p>[6]Gao Yawei. Application of mechanics in civil engineering [J]. Housing, 2019<br>(22): 166.</p>
+<p>[7]杨甜.《建筑力学与结构》中增设实践形式课程设计的探索和实践[J].江西建材,2019(07):242-243.</p>
+<p>[7]Yang Tian. Exploration and practice of adding practical form course Design in<br>Architectural Mechanics and structure [J]. Jiangxi Building Materials, 2019<br>(07): 242-243.</p>
+<p>[8]胡国辉,楚海建,卢志明,郭兴明.从大学的理念谈力学本科人才培养[J].力学与实践,2019,41(03):323-329.</p>
+<p>[8]Hu Guohui, Chu Haijian, Lu Zhiming, Guo Xingming.</p>
+<p>On the cultivation of undergraduate talents in Mechanics from the concept of<br>University [J]. Mechanics and practice, 2019, 41 (03): 323-329</p>
+<p>[9]贾若迪,赵丽滨,张会利.基于力学思想的字体结构评价方[J].力学与实践,2019,41(03):337-340+319.</p>
+<p>[9]Jia Ruodi, Zhao Libin, Zhang Huili. Evaluation method of font structure based<br>on mechanics [J]. Mechanics and practice, 2019, 41 (03): 337-340: 319.</p>
+<p>[10]王少伟,赵茉莉,冯维明.力学和数学中的“调和”释义[J].力学与实践,2018,40(05):560-562.</p>
+<p>[10]Wang Shaowei, Zhao Moli, Feng Weiming.</p>
+<p>Interpretation of “Harmony” in Mechanics and Mathematics [J]. Mechanics and<br>practice, 2018,40 (05): 560-562.</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BB%93%E6%9D%90%E6%96%99%E5%8A%9B%E5%AD%A6/">结材料力学</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/">工程结构设计</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+    Author：<a href='https://eatrice.top'> 吃白饭-EatRice</a><br />
+    Source：<a href="https://eatrice.top/post/%E6%9D%90%E6%96%99%E5%8A%9B%E5%AD%A6-%E5%8E%8B%E6%9D%86%E7%A8%B3%E5%AE%9A/">
+        https://eatrice.top/post/材料力学-压杆稳定/</a><br />
+    
+    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+    
+</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/%E7%A4%BE%E7%95%9C%E5%B7%A5%E5%8E%82-%E8%8D%89%E6%B0%91%E7%9A%84%E5%A4%B1%E8%B4%A5/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">社畜工厂——草民的失败</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/Git%E7%AE%80%E6%98%8E%E5%AE%9E%E7%94%A8%E6%95%99%E7%A8%8B/">
+                        <span class="hidden-mobile">Git简明实用教程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz",
+          app_key: "dzKTc4w4K1maxEg8E5243rrH",
+          placeholder: "休伯利安号在等待接收你的信号哟^0^\n(支持MarkDown语法)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+<br> <p><a id="rainbow"></a></p> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?71be728981300868000249d1707c92b7";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-160834801-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/HidenMath.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
