@@ -7,13 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favcion.png">
-  <link rel="icon" type="image/png" href="/img/favcion.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#3a311c">
   <meta name="description" content="这里是一个工科男苦逼的小空间.记录一些我喜欢的东西比如平面设计，程序设计等等，还会有我不喜欢的东西，各种力学、结构学等等.我的专业是建筑工程，但是我喜欢鼓捣计算机专业相关方面的东西，如果看了我的博客对你有启发的话，记得留言收藏推荐三连击哦^O^">
@@ -24,22 +22,22 @@
   
   <title>一次指导学弟C语言基础的记录(学弟写的) ~ 吃白饭的休伯利安号</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/tomorrow-night.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
@@ -57,16 +55,10 @@
 
 <!-- 自定义样式保持在最底部 -->
 
-  
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1746382_qrhzb41budd.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
-<link rel="stylesheet" href="/css/custom.css">
-
-
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"eatrice.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"eatrice.cn","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -189,13 +181,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -204,7 +196,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('/img/background.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -273,11 +265,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -285,7 +277,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：10 个月前
+                  本文最后更新于：1 年前
                 
               </p>
             
@@ -296,41 +288,41 @@
 <li>先是无所畏惧的笑到飙泪，春风得意马蹄疾，一日看尽长安花<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="孟郊《登科后》
 ">[1]</span></a></sup>：</li>
 </ol>
-<p><img src="1.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="1.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <ol>
 <li>再是遇到问题的平静无感，人生无根蒂，飘如陌上尘<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="陶渊明《杂诗》
 ">[2]</span></a></sup>：</li>
 </ol>
-<p><img src="2.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="2.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <ol>
 <li>最后是被我打回去好几次后的捂脸痛哭，上穷碧落下黄泉，两处茫茫皆不见<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="白居易《长恨歌》
 ">[3]</span></a></sup>：</li>
 </ol>
-<p><img src="3.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="3.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>问题解决了我想记录下这件事情，然后发现自己太懒了，不想写东西，于是就让学弟写一下感想，铭记这一时刻。我也是感觉学弟写的总是比我写的看起来更加有趣，所以就用他的记录下。</p>
 <h2 id="学弟的纪实原文"><a href="#学弟的纪实原文" class="headerlink" title="学弟的纪实原文"></a>学弟的纪实原文</h2><blockquote>
 <p>你遇过在表格里文寻找数据而感到眼花的时候吗？（如果没有肯定是你没碰见过或是数据太少(╥╯^╰╥)）<br>7月14日这天，我接受到了一个编程项目（─━ _ ─━✧）</p>
 </blockquote>
-<p><img src="4.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="4.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
 <p>接收任务的我</p>
 </blockquote>
-<p><img src="5.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="5.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
 <p>当进行自我安慰，默默地打开文档时</p>
 </blockquote>
-<p><img src="6.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="6.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
 <p>再放大时（##########）</p>
 </blockquote>
-<p><img src="7.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="7.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <div class='alert alert-success'>
 可想而知，没有动手编程，而去一一寻找是不太可能的。这时我的思绪进入了前天的......<br />
 想想现在的问题，嗯，还好，可以解决<br />
 于是经过一番思索
 </div>
 
-<p><img src="8.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="8.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <h3 id="一开始的流程"><a href="#一开始的流程" class="headerlink" title="一开始的流程"></a>一开始的流程</h3><blockquote>
 <p>第一步（文件读取，并赋给a[][]的数组中）就完成了</p>
 </blockquote>
@@ -342,15 +334,15 @@
 <blockquote>
 <p>开心的我（轻轻松松地解决了问题）按下了运行命令<br>结果…..</p>
 </blockquote>
-<p><img src="9.jpg" srcset="/img/loading.gif" alt=""><br><img src="10.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="9.jpg" srcset="/img/loading.gif" lazyload alt=""><br><img src="10.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
 <p>经过万般无奈后的寻找（同时也请教了17 万学长）</p>
 </blockquote>
-<p><img src="11.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="11.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
 <p>文件fgetc（）函数的作用（其读取指针可以自动进行向下读取内容，过不需要*fp++）<br>但当以为符合逻辑的代码可以执行最后的命令时，计算机又在这时</p>
 </blockquote>
-<p><img src="12.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="12.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
 <p>与上次一样，只能读取文件16个数值（上图是未去除*fp++时读取个数。个数是是一个）<br>在万学长的帮助下，他进行了算法中的改进</p>
 </blockquote>
@@ -373,11 +365,11 @@
 <blockquote>
 <p>就认为这样就结束了吗？</p>
 </blockquote>
-<p><img src="13.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="13.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <h3 id="还未结束"><a href="#还未结束" class="headerlink" title="还未结束"></a>还未结束</h3><blockquote>
 <p>随后万学长拿出了一幅图</p>
 </blockquote>
-<p><img src="14.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="14.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <div class='alert alert-wrong'>
 学长的话：从图来看应该有数千个极值,所以说你的程序有问题
 </div>
@@ -385,30 +377,30 @@
 <blockquote>
 <p>于是接下来就是…..</p>
 </blockquote>
-<p><img src="15.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="15.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
 <p>反反复复，用过if—else if，用过switch…结果都是达不到上千个数值。<br>但快要自闭的我准备关闭电脑时，学长又发了一个图</p>
 </blockquote>
-<p><img src="16.jpg" srcset="/img/loading.gif" alt=""><br><img src="17.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="16.jpg" srcset="/img/loading.gif" lazyload alt=""><br><img src="17.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
 <p>一脸懵逼的我终于知道数据是图片<del>数学矩阵</del>灰度矩阵（上图绿色部分是当前计算到的值，而未计算到的是红色部分）<br>就这样，又开始了</p>
 </blockquote>
-<p><img src="18.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="18.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <h3 id="LONG-TIME-LATER…………"><a href="#LONG-TIME-LATER…………" class="headerlink" title="LONG TIME LATER………….."></a>LONG TIME LATER…………..</h3><div class="note note-success">
             <p>计算机的显示内容是有限的，大部分数据是被隐藏起来了<br>代码逻辑没问题，是计算机数据提供的只是部分，所以会有上面的事情发生<br>最最重要的是，黑色区域或白色区域的数值并不是特定的一个数字，是一块区域（具体是人眼所看到的是一个数值区域，该区域中大脑会自动认为是与之相关的颜色。）</p>
           </div>
 <blockquote>
 <p>当知道真相的我。。。。</p>
 </blockquote>
-<p><img src="19.jpg" srcset="/img/loading.gif" alt=""><br><img src="20.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="19.jpg" srcset="/img/loading.gif" lazyload alt=""><br><img src="20.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
 <p>但现在的目标只是求最大值，最小值问题吗？</p>
 </blockquote>
-<p><img src="21.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="21.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
 <p>于是：进行了一批细节操作</p>
 </blockquote>
-<p><img src="22.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="22.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <div class="alert alert-wrong">
 学长说：取出极小值当然是黄色部分的轨迹，但你的取“黑”空间是否能在精确一些，毕竟你的范围是从0-50。（即只要是50以下的我都认为是黑区间）<br />
 PS: &nbsp;我似乎没有说过黑区间就是0-50...
@@ -417,11 +409,11 @@ PS: &nbsp;我似乎没有说过黑区间就是0-50...
 <blockquote>
 <p>沉默中的我。。。。。。。</p>
 </blockquote>
-<p><img src="23.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="23.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
 <p>于是再次思考：“极值点可以是导数为0，但导数为0不一定是极值点”。但在上面的图像中，可以发现蓝色箭头最后所指的是极值点，为什么不用这一方法呢？</p>
 </blockquote>
-<p><img src="24.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="24.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
 <p>于是在一波猛如虎的操作后。。</p>
 </blockquote>
@@ -435,15 +427,15 @@ PS: &nbsp;我似乎没有说过黑区间就是0-50...
 <figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">FILE *fp1;<br><span class="hljs-keyword">char</span> c;<br>fp1=fopen(<span class="hljs-string">&quot;data.txt&quot;</span>,<span class="hljs-string">&quot;w+&quot;</span>);<br><span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">576</span>;i++)<br>&#123;<br>    <span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;<span class="hljs-number">798</span>;j++)<br>    &#123;<br>        c=(<span class="hljs-keyword">char</span>)a[i][j];<br>        <span class="hljs-built_in">fputs</span>(c,fp1);<br>    &#125;<br>&#125;<br>fclose(fp1);<br></code></pre></div></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>先很感谢万学长的帮助，然我认识到，学习到这样的编程内容。在编程中也有出现一定的问题，语法结构的生疏（好久没用C语言了），以及”文件“这一章的知识点内容没有太多的学习，也因此在编程上浪费较多的时间。但任务完成是最最最开心的，同时再次感谢学长的细心帮助啦！</p>
 <h3 id="以下是展示了中间红色部分区域的数据"><a href="#以下是展示了中间红色部分区域的数据" class="headerlink" title="以下是展示了中间红色部分区域的数据"></a>以下是展示了中间红色部分区域的数据</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs plain">黑域是：行11,列295   黑域是：行14,列287   黑域是：行14,列288   黑域是：行14,列289   黑域是：行14,列291   黑域是：行16,列277   黑域是：行16,列278   黑<br>域是：行16,列284   黑域是：行16,列285   黑域是：行16,列286   黑域是：行16,列287   黑域是：行16,列288   黑域是：行16,列289   黑域是：行16,列290   黑域<br>是：行16,列291   黑域是：行16,列292   黑域是：行17,列285   黑域是：行17,列286   黑域是：行17,列287   黑域是：行17,列288   黑域是：行17,列291   黑域是<br>：行17,列292   黑域是：行17,列295   黑域是：行17,列296   黑域是：行17,列317   黑域是：行17,列318   黑域是：行18,列108   黑域是：行18,列109   黑域是：<br>行18,列110   黑域是：行18,列158   黑域是：行18,列159   黑域是：行18,列171   黑域是：行18,列179   黑域是：行18,列180   黑域是：行18,列181   黑域是：行<br>18,列182   黑域是：行18,列199   黑域是：行18,列200   黑域是：行18,列278   黑域是：行18,列279   黑域是：行18,列280   黑域是：行18,列281   黑域是：行18,列282   黑域是：行18,列283   黑域是：行18,列284   黑域是：行18,列285   黑域是：行18,列286   黑域是：行18,列287   黑域是：行18,列288   黑域是：行18,<br>列289   黑域是：行18,列290   黑域是：行18,列295   黑域是：行18,列296   黑域是：行18,列297   黑域是：行18,列298   黑域是：行18,列299   黑域是：行18,列<br>315   黑域是：行18,列316   黑域是：行18,列317   黑域是：行18,列330   黑域是：行18,列331   黑域是：行19,列119   黑域是：行19,列142   黑域是：行19,列143   黑域是：行19,列159   黑域是：行19,列160   黑域是：行19,列161   黑域是：行19,列164   黑域是：行19,列171   黑域是：行19,列177   黑域是：行19,列178<br>  黑域是：行19,列180   黑域是：行19,列181   黑域是：行19,列188   黑域是：行19,列189   黑域是：行19,列190   黑域是：行19,列193   黑域是：行19,列194<br>黑域是：行19,列195   黑域是：行19,列196   黑域是：行19,列197   黑域是：行19,列200   黑域是：行19,列272   黑域是：行19,列273   黑域是：行19,列280   黑<br>域是：行19,列281   黑域是：行19,列282   黑域是：行19,列284   黑域是：行19,列285   黑域是：行19,列286   黑域是：行19,列287   黑域是：行19,列288   黑域<br>是：行19,列289   黑域是：行19,列290   黑域是：行19,列291   黑域是：行19,列292   黑域是：行19,列293   黑域是：行19,列296   黑域是：行19,列299   黑域是<br>：行19,列307   黑域是：行19,列308   黑域是：行19,列309   黑域是：行19,列330   黑域是：行19,列335   黑域是：行20,列132   黑域是：行20,列138   黑域是：<br>行20,列139   黑域是：行20,列140   黑域是：行20,列141   黑域是：行20,列142   黑域是：行20,列143   黑域是：行20,列144   黑域是：行20,列145   黑域是：行<br>20,列146   黑域是：行20,列147   黑域是：行20,列148   黑域是：行20,列149   黑域是：行20,列150   黑域是：行20,列155   黑域是：行20,列157   黑域是：行20,列158   黑域是：行20,列159   黑域是：行20,列160   黑域是：行20,列164   黑域是：行20,列165   黑域是：行20,列173   黑域是：行20,列174   黑域是：行20,<br>列175   黑域是：行20,列176   黑域是：行20,列178   黑域是：行20,列179   黑域是：行20,列180   黑域是：行20,列181   黑域是：行20,列182   黑域是：行20,列<br>183   黑域是：行20,列185   黑域是：行20,列186   黑域是：行20,列187   黑域是：行20,列190   黑域是：行20,列191   黑域是：行20,列192   黑域是：行20,列193   黑域是：行20,列194   黑域是：行20,列195   黑域是：行20,列198   黑域是：行20,列199   黑域是：行20,列200   黑域是：行20,列203   黑域是：行20,列204<br>  黑域是：行20,列205   黑域是：行20,列206   黑域是：行20,列207   黑域是：行20,列208   黑域是：行20,列209   黑域是：行20,列210   黑域是：行20,列212<br>黑域是：行20,列213   黑域是：行20,列223   黑域是：行20,列268   黑域是：行20,列273   黑域是：行20,列274   黑域是：行20,列275   黑域是：行20,列276   黑<br>域是：行20,列277   黑域是：行20,列278   黑域是：行20,列279   黑域是：行20,列280   黑域是：行20,列281   黑域是：行20,列282   黑域是：行20,列283   黑域<br>是：行20,列284   黑域是：行20,列285   黑域是：行20,列286   黑域是：行20,列287   黑域是：行20,列291   黑域是：行20,列292   黑域是：行20,列293   黑域是<br>：行20,列294   黑域是：行20,列295   黑域是：行20,列296   黑域是：行20,列310   黑域是：行20,列311   黑域是：行20,列312   黑域是：行20,列313   黑域是：<br>行20,列314   黑域是：行20,列315   黑域是：行20,列316   黑域是：行20,列317   黑域是：行20,列318   黑域是：行20,列319   黑域是：行20,列321   黑域是：行<br>20,列325   黑域是：行20,列329   黑域是：行20,列330   黑域是：行20,列331   黑域是：行20,列332   黑域是：行21,列137   黑域是：行21,列138   黑域是：行21,列140   黑域是：行21,列141   黑域是：行21,列142   黑域是：行21,列143   黑域是：行21,列144   黑域是：行21,列145   黑域是：行21,列146   黑域是：行21,<br>列147   黑域是：行21,列148   黑域是：行21,列150   黑域是：行21,列151   黑域是：行21,列156   黑域是：行21,列160   黑域是：行21,列161   黑域是：行21,列<br>164   黑域是：行21,列165   黑域是：行21,列166   黑域是：行21,列167   黑域是：行21,列168   黑域是：行21,列169   黑域是：行21,列170   黑域是：行21,列171   黑域是：行21,列172   黑域是：行21,列173   黑域是：行21,列174   黑域是：行21,列175   黑域是：行21,列176   黑域是：行21,列177   黑域是：行21,列178<br>  黑域是：行21,列179   黑域是：行21,列180   黑域是：行21,列181   黑域是：行21,列182   黑域是：行21,列183   黑域是：行21,列184   黑域是：行21,列185<br>黑域是：行21,列186   黑域是：行21,列187   黑域是：行21,列188   黑域是：行21,列189   黑域是：行21,列190   黑域是：行21,列193   黑域是：行21,列194   黑<br>域是：行21,列195   黑域是：行21,列196   黑域是：行21,列197   黑域是：行21,列199   黑域是：行21,列203   黑域是：行21,列204   黑域是：行21,列205   黑域<br>是：行21,列206   黑域是：行21,列207   黑域是：行21,列208   黑域是：行21,列209   黑域是：行21,列210   黑域是：行21,列211   黑域是：行21,列212   黑域是<br>：行21,列215   黑域是：行21,列216   黑域是：行21,列218   黑域是：行21,列219   黑域是：行21,列220   黑域是：行21,列221   黑域是：行21,列224   黑域是：<br>行21,列228   黑域是：行21,列229   黑域是：行21,列237   黑域是：行21,列238   黑域是：行21,列243   黑域是：行21,列244   黑域是：行21,列252   黑域是：行<br>21,列259   黑域是：行21,列260   黑域是：行21,列261   黑域是：行21,列262   黑域是：行21,列265   黑域是：行21,列266   黑域是：行21,列267   黑域是：行21,列268   黑域是：行21,列269   黑域是：行21,列270   黑域是：行21,列271   黑域是：行21,列272   黑域是：行21,列273   黑域是：行21,列274   黑域是：行21,<br>列275   黑域是：行21,列276   黑域是：行21,列277   黑域是：行21,列278   黑域是：行21,列279   黑域是：行21,列280   黑域是：行21,列281   黑域是：行21,列<br>282   黑域是：行21,列284   黑域是：行21,列285   黑域是：行21,列286   黑域是：行21,列287   黑域是：行21,列288   黑域是：行21,列289   黑域是：行21,列290   黑域是：行21,列291   黑域是：行21,列292   黑域是：行21,列293   黑域是：行21,列294   黑域是：行21,列295   黑域是：行21,列296   黑域是：行21,列297<br>  黑域是：行21,列298   黑域是：行21,列299   黑域是：行21,列300   黑域是：行21,列301   黑域是：行21,列302   黑域是：行21,列303   黑域是：行21,列304<br>黑域是：行21,列305   黑域是：行21,列306   黑域是：行21,列307   黑域是：行21,列308   黑域是：行21,列309   黑域是：行21,列310   黑域是：行21,列311   黑<br>域是：行21,列312   黑域是：行21,列313   黑域是：行21,列314   黑域是：行21,列317   黑域是：行21,列318   黑域是：行21,列319   黑域是：行21,列320   黑域<br>是：行21,列333   黑域是：行21,列334   黑域是：行21,列335   黑域是：行21,列336   黑域是：行21,列337   黑域是：行22,列138   黑域是：行22,列139   黑域是<br>：行22,列140   黑域是：行22,列141   黑域是：行22,列142   黑域是：行22,列143   黑域是：行22,列144   黑域是：行22,列145   黑域是：行22,列146   黑域是：<br>行22,列147   黑域是：行22,列149   黑域是：行22,列150   黑域是：行22,列151   黑域是：行22,列152   黑域是：行22,列153   黑域是：行22,列154   黑域是：行<br>22,列155   黑域是：行22,列156   黑域是：行22,列157   黑域是：行22,列158   黑域是：行22,列159   黑域是：行22,列160   黑域是：行22,列161   黑域是：行22,列162   黑域是：行22,列163   黑域是：行22,列164   黑域是：行22,列165   黑域是：行22,列166   黑域是：行22,列168   黑域是：行22,列169   黑域是：行22,<br>列170   黑域是：行22,列171   黑域是：行22,列172   黑域是：行22,列173   黑域是：行22,列175   黑域是：行22,列176   黑域是：行22,列177   黑域是：行22,列<br>178   黑域是：行22,列179   黑域是：行22,列180   黑域是：行22,列181   黑域是：行22,列182   黑域是：行22,列183   黑域是：行22,列184   黑域是：行22,列185   黑域是：行22,列186   黑域是：行22,列187   黑域是：行22,列188   黑域是：行22,列189   黑域是：行22,列190   黑域是：行22,列191   黑域是：行22,列192<br>  黑域是：行22,列193   黑域是：行22,列194   黑域是：行22,列195   黑域是：行22,列196   黑域是：行22,列197   黑域是：行22,列198   黑域是：行22,列199<br>黑域是：行22,列200   黑域是：行22,列201   黑域是：行22,列202   黑域是：行22,列203   黑域是：行22,列204   黑域是：行22,列205   黑域是：行22,列206   黑<br>域是：行22,列207   黑域是：行22,列208   黑域是：行22,列209   黑域是：行22,列210   黑域是：行22,列211   黑域是：行22,列212   黑域是：行22,列213   黑域<br>是：行22,列214   黑域是：行22,列217   黑域是：行22,列218   黑域是：行22,列219   黑域是：行22,列220   黑域是：行22,列221   黑域是：行22,列225   黑域是<br>：行22,列226   黑域是：行22,列230   黑域是：行22,列231   黑域是：行22,列232   黑域是：行22,列233   黑域是：行22,列236   黑域是：行22,列237   黑域是：<br>行22,列238   黑域是：行22,列241   黑域是：行22,列245   黑域是：行22,列246   黑域是：行22,列247   黑域是：行22,列256   黑域是：行22,列258   黑域是：行<br>22,列259   黑域是：行22,列260   黑域是：行22,列261   黑域是：行22,列262   黑域是：行22,列263   黑域是：行22,列264   黑域是：行22,列265   黑域是：行22,列266   黑域是：行22,列267   黑域是：行22,列268   黑域是：行22,列269   黑域是：行22,列270   黑域是：行22,列271   黑域是：行22,列272   黑域是：行22,<br>列273   黑域是：行22,列274   黑域是：行22,列275   黑域是：行22,列276   黑域是：行22,列277   黑域是：行22,列278   黑域是：行22,列279   黑域是：行22,列<br>280   黑域是：行22,列281   黑域是：行22,列282   黑域是：行22,列283   黑域是：行22,列284   黑域是：行22,列285   黑域是：行22,列286   黑域是：行22,列287   黑域是：行22,列288   黑域是：行22,列289   黑域是：行22,列290   黑域是：行22,列291   黑域是：行22,列292   黑域是：行22,列293   黑域是：行22,列294<br>  黑域是：行22,列295   黑域是：行22,列296   黑域是：行22,列297   黑域是：行22,列298   黑域是：行22,列299   黑域是：行22,列301   黑域是：行22,列302<br>黑域是：行22,列303   黑域是：行22,列304   黑域是：行22,列305   黑域是：行22,列306   黑域是：行22,列307   黑域是：行22,列308   黑域是：行22,列309   黑<br>域是：行22,列310   黑域是：行22,列311   黑域是：行22,列312   黑域是：行22,列313   黑域是：行22,列314   黑域是：行22,列315   黑域是：行22,列316   黑域<br>是：行22,列317   黑域是：行22,列318   黑域是：行22,列321   黑域是：行22,列324   黑域是：行22,列325   黑域是：行22,列326   黑域是：行22,列327   黑域是<br>：行22,列328   黑域是：行22,列330   黑域是：行22,列331   黑域是：行22,列332   黑域是：行22,列333   黑域是：行22,列334   黑域是：行22,列335   黑域是：<br>行22,列336   黑域是：行23,列139   黑域是：行23,列140   黑域是：行23,列141   黑域是：行23,列142   黑域是：行23,列143   黑域是：行23,列144   黑域是：行<br>23,列145   黑域是：行23,列146   黑域是：行23,列147   黑域是：行23,列148   黑域是：行23,列149   黑域是：行23,列150   黑域是：行23,列151   黑域是：行23,列152   黑域是：行23,列153   黑域是：行23,列154   黑域是：行23,列155   黑域是：行23,列156   黑域是：行23,列157   黑域是：行23,列158   黑域是：行23,<br>列161   黑域是：行23,列162   黑域是：行23,列163   黑域是：行23,列164   黑域是：行23,列165   黑域是：行23,列166   黑域是：行23,列168   黑域是：行23,列<br>169   黑域是：行23,列170   黑域是：行23,列171   黑域是：行23,列172   黑域是：行23,列173   黑域是：行23,列174   黑域是：行23,列175   黑域是：行23,列176   黑域是：行23,列177   黑域是：行23,列178   黑域是：行23,列179   黑域是：行23,列180   黑域是：行23,列181   黑域是：行23,列182   黑域是：行23,列183<br>  黑域是：行23,列184   黑域是：行23,列185   黑域是：行23,列186   黑域是：行23,列187   黑域是：行23,列188   黑域是：行23,列189   黑域是：行23,列190<br>黑域是：行23,列191   黑域是：行23,列192   黑域是：行23,列193   黑域是：行23,列194   黑域是：行23,列195   黑域是：行23,列196   黑域是：行23,列197   黑<br>域是：行23,列198   黑域是：行23,列199   黑域是：行23,列200   黑域是：行23,列201   黑域是：行23,列202   黑域是：行23,列203   黑域是：行23,列204   黑域<br>是：行23,列205   黑域是：行23,列206   黑域是：行23,列207   黑域是：行23,列208   黑域是：行23,列209   黑域是：行23,列210   黑域是：行23,列211   黑域是<br>：行23,列212   黑域是：行23,列213   黑域是：行23,列214   黑域是：行23,列215   黑域是：行23,列216   黑域是：行23,列217   黑域是：行23,列218   黑域是：<br>行23,列219   黑域是：行23,列220   黑域是：行23,列221   黑域是：行23,列224   黑域是：行23,列225   黑域是：行23,列226   黑域是：行23,列227   黑域是：行<br>23,列228   黑域是：行23,列229   黑域是：行23,列232   黑域是：行23,列237   黑域是：行23,列238   黑域是：行23,列241   黑域是：行23,列242   黑域是：行23,列243   黑域是：行23,列244   黑域是：行23,列245   黑域是：行23,列247   黑域是：行23,列248   黑域是：行23,列249   黑域是：行23,列250   黑域是：行23,<br>列251   黑域是：行23,列253   黑域是：行23,列254   黑域是：行23,列256   黑域是：行23,列257   黑域是：行23,列258   黑域是：行23,列259   黑域是：行23,列<br>260   黑域是：行23,列261   黑域是：行23,列262   黑域是：行23,列264   黑域是：行23,列265   黑域是：行23,列266   黑域是：行23,列267   黑域是：行23,列268   黑域是：行23,列269   黑域是：行23,列272   黑域是：行23,列273   黑域是：行23,列274   黑域是：行23,列275   黑域是：行23,列276   黑域是：行23,列277<br>  黑域是：行23,列278   黑域是：行23,列279   黑域是：行23,列280   黑域是：行23,列281   黑域是：行23,列282   黑域是：行23,列283   黑域是：行23,列284<br>黑域是：行23,列285   黑域是：行23,列286   黑域是：行23,列287   黑域是：行23,列288   黑域是：行23,列289   黑域是：行23,列290   黑域是：行23,列291   黑<br>域是：行23,列292   黑域是：行23,列293   黑域是：行23,列294   黑域是：行23,列295   黑域是：行23,列296   黑域是：行23,列297   黑域是：行23,列301   黑域<br>是：行23,列302   黑域是：行23,列303   黑域是：行23,列304   黑域是：行23,列305   黑域是：行23,列306   黑域是：行23,列307   黑域是：行23,列308   黑域是<br>：行23,列309   黑域是：行23,列312   黑域是：行23,列313   黑域是：行23,列314   黑域是：行23,列315   黑域是：行23,列316   黑域是：行23,列317   黑域是：<br>行23,列318   黑域是：行23,列319   黑域是：行23,列321   黑域是：行23,列322   黑域是：行23,列323   黑域是：行23,列324   黑域是：行23,列325   黑域是：行<br>23,列326   黑域是：行23,列327   黑域是：行23,列328   黑域是：行23,列329   黑域是：行23,列330   黑域是：行23,列335   黑域是：行23,列336   黑域是：行24,列140   黑域是：行24,列141   黑域是：行24,列144   黑域是：行24,列145   黑域是：行24,列146   黑域是：行24,列147   黑域是：行24,列148   黑域是：行24,<br>列149   黑域是：行24,列150   黑域是：行24,列151   黑域是：行24,列152   黑域是：行24,列153   黑域是：行24,列154   黑域是：行24,列155   黑域是：行24,列<br>156   黑域是：行24,列157   黑域是：行24,列158   黑域是：行24,列160   黑域是：行24,列161   黑域是：行24,列162   黑域是：行24,列163   黑域是：行24,列164   黑域是：行24,列165   黑域是：行24,列166   黑域是：行24,列167   黑域是：行24,列168   黑域是：行24,列169   黑域是：行24,列170   黑域是：行24,列171<br>  黑域是：行24,列172   黑域是：行24,列173   黑域是：行24,列174   黑域是：行24,列175   黑域是：行24,列176   黑域是：行24,列177   黑域是：行24,列178<br>黑域是：行24,列179   黑域是：行24,列180   黑域是：行24,列181   黑域是：行24,列182   黑域是：行24,列183   黑域是：行24,列184   黑域是：行24,列185   黑<br>域是：行24,列186   黑域是：行24,列187   黑域是：行24,列188   黑域是：行24,列189   黑域是：行24,列190   黑域是：行24,列191   黑域是：行24,列192   黑域<br>是：行24,列193   黑域是：行24,列194   黑域是：行24,列195   黑域是：行24,列196   黑域是：行24,列197   黑域是：行24,列198   黑域是：行24,列199   黑域是<br>：行24,列200   黑域是：行24,列201   黑域是：行24,列202   黑域是：行24,列203   黑域是：行24,列204   黑域是：行24,列205   黑域是：行24,列206   黑域是：<br>行24,列207   黑域是：行24,列208   黑域是：行24,列209   黑域是：行24,列210   黑域是：行24,列211   黑域是：行24,列212   黑域是：行24,列213   黑域是：行<br>24,列214   黑域是：行24,列215   黑域是：行24,列216   黑域是：行24,列217   黑域是：行24,列218   黑域是：行24,列219   黑域是：行24,列220   黑域是：行24,列221   黑域是：行24,列222   黑域是：行24,列223   黑域是：行24,列224   黑域是：行24,列225   黑域是：行24,列226   黑域是：行24,列227   黑域是：行24,<br>列228   黑域是：行24,列229   黑域是：行24,列230   黑域是：行24,列231   黑域是：行24,列232   黑域是：行24,列233   黑域是：行24,列234   黑域是：行24,列<br>235   黑域是：行24,列236   黑域是：行24,列237   黑域是：行24,列238   黑域是：行24,列239   黑域是：行24,列240   黑域是：行24,列242   黑域是：行24,列243   黑域是：行24,列244   黑域是：行24,列245   黑域是：行24,列246   黑域是：行24,列247   黑域是：行24,列248   黑域是：行24,列249   黑域是：行24,列250<br>  黑域是：行24,列251   黑域是：行24,列252   黑域是：行24,列253   黑域是：行24,列254   黑域是：行24,列255   黑域是：行24,列256   黑域是：行24,列257<br>黑域是：行24,列258   黑域是：行24,列259   黑域是：行24,列260   黑域是：行24,列261   黑域是：行24,列262   黑域是：行24,列263   黑域是：行24,列264   黑<br>域是：行24,列265   黑域是：行24,列267   黑域是：行24,列268   黑域是：行24,列269   黑域是：行24,列270   黑域是：行24,列271   黑域是：行24,列272   黑域<br>是：行24,列273   黑域是：行24,列274   黑域是：行24,列275   黑域是：行24,列276   黑域是：行24,列277   黑域是：行24,列278   黑域是：行24,列279   黑域是<br>：行24,列280   黑域是：行24,列281   黑域是：行24,列282   黑域是：行24,列283   黑域是：行24,列284   黑域是：行24,列285   黑域是：行24,列286   黑域是：<br>行24,列287   黑域是：行24,列288   黑域是：行24,列289   黑域是：行24,列290   黑域是：行24,列291   黑域是：行24,列292   黑域是：行24,列293   黑域是：行<br>24,列294   黑域是：行24,列295   黑域是：行24,列296   黑域是：行24,列297   黑域是：行24,列298   黑域是：行24,列299   黑域是：行24,列300   黑域是：行24,列301   黑域是：行24,列302   黑域是：行24,列303   黑域是：行24,列304   黑域是：行24,列305   黑域是：行24,列306   黑域是：行24,列307   黑域是：行24,<br>列308   黑域是：行24,列309   黑域是：行24,列310   黑域是：行24,列311   黑域是：行24,列312   黑域是：行24,列313   黑域是：行24,列314   黑域是：行24,列<br>315   黑域是：行24,列316   黑域是：行24,列317   黑域是：行24,列318   黑域是：行24,列319   黑域是：行24,列320   黑域是：行24,列321   黑域是：行24,列322   黑域是：行24,列323   黑域是：行24,列324   黑域是：行24,列325   黑域是：行24,列326   黑域是：行24,列327   黑域是：行24,列328   黑域是：行25,列140<br>  黑域是：行25,列141   黑域是：行25,列144   黑域是：行25,列145   黑域是：行25,列146   黑域是：行25,列147   黑域是：行25,列148   黑域是：行25,列149<br>黑域是：行25,列150   黑域是：行25,列151   黑域是：行25,列152   黑域是：行25,列153   黑域是：行25,列154   黑域是：行25,列155   黑域是：行25,列156   黑<br>域是：行25,列157   黑域是：行25,列158   黑域是：行25,列159   黑域是：行25,列160   黑域是：行25,列161   黑域是：行25,列162   黑域是：行25,列163   黑域<br>是：行25,列164   黑域是：行25,列165   黑域是：行25,列166   黑域是：行25,列167   黑域是：行25,列168   黑域是：行25,列169   黑域是：行25,列170   黑域是<br>：行25,列171   黑域是：行25,列172   黑域是：行25,列173   黑域是：行25,列174   黑域是：行25,列175   黑域是：行25,列176   黑域是：行25,列177   黑域是：<br>行25,列178   黑域是：行25,列179   黑域是：行25,列180   黑域是：行25,列181   黑域是：行25,列182   黑域是：行25,列183   黑域是：行25,列184   黑域是：行<br>25,列185   黑域是：行25,列186   黑域是：行25,列187   黑域是：行25,列188   黑域是：行25,列189   黑域是：行25,列190   黑域是：行25,列191   黑域是：行25,列192   黑域是：行25,列193   黑域是：行25,列194   黑域是：行25,列195   黑域是：行25,列196   黑域是：行25,列197   黑域是：行25,列198   黑域是：行25,<br>列199   黑域是：行25,列200   黑域是：行25,列201   黑域是：行25,列202   黑域是：行25,列203   黑域是：行25,列204   黑域是：行25,列205   黑域是：行25,列<br>206   黑域是：行25,列207   黑域是：行25,列208   黑域是：行25,列209   黑域是：行25,列210   黑域是：行25,列211   黑域是：行25,列212   黑域是：行25,列213   黑域是：行25,列214   黑域是：行25,列215   黑域是：行25,列216   黑域是：行25,列217   黑域是：行25,列218   黑域是：行25,列219   黑域是：行25,列220<br>  黑域是：行25,列221   黑域是：行25,列222   黑域是：行25,列223   黑域是：行25,列224   黑域是：行25,列225   黑域是：行25,列226   黑域是：行25,列227<br>黑域是：行25,列228   黑域是：行25,列229   黑域是：行25,列230   黑域是：行25,列231   黑域是：行25,列232   黑域是：行25,列233   黑域是：行25,列234   黑<br>域是：行25,列235   黑域是：行25,列236   黑域是：行25,列237   黑域是：行25,列238   黑域是：行25,列239   黑域是：行25,列240   黑域是：行25,列241   黑域<br>是：行25,列242   黑域是：行25,列243   黑域是：行25,列244   黑域是：行25,列245   黑域是：行25,列246   黑域是：行25,列247   黑域是：行25,列248   黑域是<br>：行25,列249   黑域是：行25,列250   黑域是：行25,列251   黑域是：行25,列252   黑域是：行25,列253   黑域是：行25,列254   黑域是：行25,列255   黑域是：<br>行25,列256   黑域是：行25,列257   黑域是：行25,列258   黑域是：行25,列259   黑域是：行25,列260   黑域是：行25,列261   黑域是：行25,列262   黑域是：行<br>25,列263   黑域是：行25,列264   黑域是：行25,列265   黑域是：行25,列266   黑域是：行25,列267   黑域是：行25,列268   黑域是：行25,列269   黑域是：行25,列270   黑域是：行25,列271   黑域是：行25,列272   黑域是：行25,列273   黑域是：行25,列274   黑域是：行25,列275   黑域是：行25,列276   黑域是：行25,<br>列277   黑域是：行25,列278   黑域是：行25,列279   黑域是：行25,列280   黑域是：行25,列281   黑域是：行25,列282   黑域是：行25,列283   黑域是：行25,列<br>284   黑域是：行25,列285   黑域是：行25,列286   黑域是：行25,列287   黑域是：行25,列288   黑域是：行25,列289   黑域是：行25,列290   黑域是：行25,列291   黑域是：行25,列292   黑域是：行25,列293   黑域是：行25,列294   黑域是：行25,列295   黑域是：行25,列296   黑域是：行25,列297   黑域是：行25,列298<br>  黑域是：行25,列299   黑域是：行25,列300   黑域是：行25,列301   黑域是：行25,列302   黑域是：行25,列303   黑域是：行25,列304   黑域是：行25,列305<br>黑域是：行25,列306   黑域是：行25,列307   黑域是：行25,列308   黑域是：行25,列309   黑域是：行25,列310   黑域是：行25,列311   黑域是：行25,列312   黑<br>域是：行25,列315   黑域是：行25,列316   黑域是：行25,列317   黑域是：行25,列318   黑域是：行25,列319   黑域是：行25,列320   黑域是：行25,列324   黑域<br>是：行25,列325   黑域是：行25,列326   黑域是：行26,列142   黑域是：行26,列143   黑域是：行26,列144   黑域是：行26,列145   黑域是：行26,列146   黑域是<br>：行26,列147   黑域是：行26,列148   黑域是：行26,列149   黑域是：行26,列150   黑域是：行26,列151   黑域是：行26,列152   黑域是：行26,列153   黑域是：<br>行26,列154   黑域是：行26,列155   黑域是：行26,列156   黑域是：行26,列157   黑域是：行26,列158   黑域是：行26,列159   黑域是：行26,列160   黑域是：行<br>26,列161   黑域是：行26,列162   黑域是：行26,列163   黑域是：行26,列164   黑域是：行26,列165   黑域是：行26,列166   黑域是：行26,列167   黑域是：行26,列168   黑域是：行26,列169   黑域是：行26,列170   黑域是：行26,列171   黑域是：行26,列172   黑域是：行26,列173   黑域是：行26,列174   黑域是：行26,<br>列175   黑域是：行26,列176   黑域是：行26,列177   黑域是：行26,列178   黑域是：行26,列179   黑域是：行26,列180   黑域是：行26,列181   黑域是：行26,列<br>182   黑域是：行26,列183   黑域是：行26,列184   黑域是：行26,列185   黑域是：行26,列186   黑域是：行26,列187   黑域是：行26,列188   黑域是：行26,列189   黑域是：行26,列190   黑域是：行26,列191   黑域是：行26,列192   黑域是：行26,列193   黑域是：行26,列194   黑域是：行26,列195   黑域是：行26,列196<br>  黑域是：行26,列197   黑域是：行26,列198   黑域是：行26,列199   黑域是：行26,列200   黑域是：行26,列201   黑域是：行26,列202   黑域是：行26,列203<br>黑域是：行26,列204   黑域是：行26,列205   黑域是：行26,列206   黑域是：行26,列207   黑域是：行26,列208   黑域是：行26,列209   黑域是：行26,列210   黑<br>域是：行26,列211   黑域是：行26,列212   黑域是：行26,列213   黑域是：行26,列214   黑域是：行26,列215   黑域是：行26,列216   黑域是：行26,列217   黑域<br>是：行26,列218   黑域是：行26,列219   黑域是：行26,列220   黑域是：行26,列222   黑域是：行26,列223   黑域是：行26,列224   黑域是：行26,列225   黑域是<br>：行26,列226   黑域是：行26,列227   黑域是：行26,列228   黑域是：行26,列229   黑域是：行26,列230   黑域是：行26,列231   黑域是：行26,列232   黑域是：<br>行26,列233   黑域是：行26,列234   黑域是：行26,列235   黑域是：行26,列236   黑域是：行26,列237   黑域是：行26,列238   黑域是：行26,列239   黑域是：行<br>26,列240   黑域是：行26,列241   黑域是：行26,列242   黑域是：行26,列243   黑域是：行26,列244   黑域是：行26,列245   黑域是：行26,列246   黑域是：行26,列247   黑域是：行26,列248   黑域是：行26,列249   黑域是：行26,列250   黑域是：行26,列251   黑域是：行26,列252   黑域是：行26,列253   黑域是：行26,<br>列254   黑域是：行26,列255   黑域是：行26,列256   黑域是：行26,列257   黑域是：行26,列258   黑域是：行26,列259   黑域是：行26,列260   黑域是：行26,列<br>261   黑域是：行26,列262   黑域是：行26,列263   黑域是：行26,列264   黑域是：行26,列265   黑域是：行26,列266   黑域是：行26,列267   黑域是：行26,列268   黑域是：行26,列269   黑域是：行26,列270   黑域是：行26,列271   黑域是：行26,列272   黑域是：行26,列273   黑域是：行26,列274   黑域是：行26,列275<br>  黑域是：行26,列276   黑域是：行26,列277   黑域是：行26,列278   黑域是：行26,列279   黑域是：行26,列280   黑域是：行26,列281   黑域是：行26,列282<br>黑域是：行26,列283   黑域是：行26,列284   黑域是：行26,列285   黑域是：行26,列286   黑域是：行26,列287   黑域是：行26,列288   黑域是：行26,列289   黑<br>域是：行26,列290   黑域是：行26,列291   黑域是：行26,列292   黑域是：行26,列293   黑域是：行26,列295   黑域是：行26,列296   黑域是：行26,列297   黑域<br>是：行26,列298   黑域是：行26,列299   黑域是：行26,列300   黑域是：行26,列301   黑域是：行26,列302   黑域是：行26,列303   黑域是：行26,列304   黑域是<br>：行26,列305   黑域是：行26,列306   黑域是：行26,列307   黑域是：行26,列308   黑域是：行26,列309   黑域是：行26,列310   黑域是：行26,列311   黑域是：<br>行26,列312   黑域是：行26,列313   黑域是：行26,列314   黑域是：行26,列316   黑域是：行27,列141   黑域是：行27,列142   黑域是：行27,列143   黑域是：行<br>27,列144   黑域是：行27,列145   黑域是：行27,列146   黑域是：行27,列147   黑域是：行27,列148   黑域是：行27,列149   黑域是：行27,列150   黑域是：行27,列151   黑域是：行27,列152   黑域是：行27,列153   黑域是：行27,列154   黑域是：行27,列156   黑域是：行27,列157   黑域是：行27,列158   黑域是：行27,<br>列159   黑域是：行27,列160   黑域是：行27,列161   黑域是：行27,列162   黑域是：行27,列163   黑域是：行27,列164   黑域是：行27,列165   黑域是：行27,列<br>166   黑域是：行27,列167   黑域是：行27,列168   黑域是：行27,列169   黑域是：行27,列170   黑域是：行27,列171   黑域是：行27,列172   黑域是：行27,列173   黑域是：行27,列174   黑域是：行27,列175   黑域是：行27,列176   黑域是：行27,列177   黑域是：行27,列178   黑域是：行27,列179   黑域是：行27,列180<br>  黑域是：行27,列181   黑域是：行27,列182   黑域是：行27,列183   黑域是：行27,列184   黑域是：行27,列185   黑域是：行27,列186   黑域是：行27,列187<br>黑域是：行27,列188   黑域是：行27,列189   黑域是：行27,列190   黑域是：行27,列191   黑域是：行27,列192   黑域是：行27,列193   黑域是：行27,列194   黑<br>域是：行27,列195   黑域是：行27,列196   黑域是：行27,列197   黑域是：行27,列198   黑域是：行27,列199   黑域是：行27,列200   黑域是：行27,列201   黑域<br>是：行27,列202   黑域是：行27,列203   黑域是：行27,列204   黑域是：行27,列205   黑域是：行27,列206   黑域是：行27,列207   黑域是：行27,列208   黑域是<br>：行27,列209   黑域是：行27,列210   黑域是：行27,列211   黑域是：行27,列212   黑域是：行27,列213   黑域是：行27,列214   黑域是：行27,列215   黑域是：<br>行27,列216   黑域是：行27,列217   黑域是：行27,列218   黑域是：行27,列219   黑域是：行27,列220   黑域是：行27,列221   黑域是：行27,列222   黑域是：行<br>27,列223   黑域是：行27,列224   黑域是：行27,列225   黑域是：行27,列226   黑域是：行27,列227   黑域是：行27,列228   黑域是：行27,列229   黑域是：行27,列230   黑域是：行27,列231   黑域是：行27,列232   黑域是：行27,列233   黑域是：行27,列234   黑域是：行27,列235   黑域是：行27,列236   黑域是：行27,<br>列237   黑域是：行27,列238   黑域是：行27,列239   黑域是：行27,列240   黑域是：行27,列241   黑域是：行27,列242   黑域是：行27,列243   黑域是：行27,列<br>244   黑域是：行27,列245   黑域是：行27,列246   黑域是：行27,列247   黑域是：行27,列248   黑域是：行27,列251   黑域是：行27,列252   黑域是：行27,列253   黑域是：行27,列254   黑域是：行27,列255   黑域是：行27,列256   黑域是：行27,列257   黑域是：行27,列258   黑域是：行27,列259   黑域是：行27,列260<br>  黑域是：行27,列261   黑域是：行27,列262   黑域是：行27,列263   黑域是：行27,列264   黑域是：行27,列265   黑域是：行27,列266   黑域是：行27,列267<br>黑域是：行27,列269   黑域是：行27,列270   黑域是：行27,列271   黑域是：行27,列272   黑域是：行27,列273   黑域是：行27,列274   黑域是：行27,列275   黑<br>域是：行27,列276   黑域是：行27,列277   黑域是：行27,列278   黑域是：行27,列279   黑域是：行27,列280   黑域是：行27,列288   黑域是：行27,列289   黑域<br>是：行27,列290   黑域是：行27,列292   黑域是：行27,列293   黑域是：行27,列294   黑域是：行27,列295   黑域是：行27,列296   黑域是：行27,列297   黑域是<br>：行27,列298   黑域是：行27,列299   黑域是：行27,列300   黑域是：行27,列301   黑域是：行27,列302   黑域是：行27,列303   黑域是：行28,列140   黑域是：<br>行28,列141   黑域是：行28,列142   黑域是：行28,列143   黑域是：行28,列144   黑域是：行28,列145   黑域是：行28,列146   黑域是：行28,列148   黑域是：行<br>28,列149   黑域是：行28,列150   黑域是：行28,列151   黑域是：行28,列152   黑域是：行28,列153   黑域是：行28,列154   黑域是：行28,列157   黑域是：行28,列158   黑域是：行28,列159   黑域是：行28,列160   黑域是：行28,列162   黑域是：行28,列163   黑域是：行28,列164   黑域是：行28,列165   黑域是：行28,<br>列166   黑域是：行28,列167   黑域是：行28,列168   黑域是：行28,列169   黑域是：行28,列170   黑域是：行28,列171   黑域是：行28,列172   黑域是：行28,列<br>173   黑域是：行28,列174   黑域是：行28,列175   黑域是：行28,列176   黑域是：行28,列177   黑域是：行28,列178   黑域是：行28,列179   黑域是：行28,列180   黑域是：行28,列181   黑域是：行28,列182   黑域是：行28,列183   黑域是：行28,列184   黑域是：行28,列185   黑域是：行28,列186   黑域是：行28,列187<br>  黑域是：行28,列190   黑域是：行28,列191   黑域是：行28,列192   黑域是：行28,列193   黑域是：行28,列194   黑域是：行28,列195   黑域是：行28,列196<br>黑域是：行28,列197   黑域是：行28,列198   黑域是：行28,列199   黑域是：行28,列202   黑域是：行28,列203   黑域是：行28,列204   黑域是：行28,列206   黑<br>域是：行28,列207   黑域是：行28,列208   黑域是：行28,列209   黑域是：行28,列212   黑域是：行28,列213   黑域是：行28,列214   黑域是：行28,列215   黑域<br>是：行28,列216   黑域是：行28,列217   黑域是：行28,列221   黑域是：行28,列222   黑域是：行28,列225   黑域是：行28,列226   黑域是：行28,列228   黑域是<br>：行28,列229   黑域是：行28,列230   黑域是：行28,列231   黑域是：行28,列232   黑域是：行28,列233   黑域是：行28,列234   黑域是：行28,列238   黑域是：<br>行28,列243   黑域是：行28,列244   黑域是：行28,列245   黑域是：行28,列252   黑域是：行28,列253   黑域是：行28,列254   黑域是：行28,列255   黑域是：行<br>28,列256   黑域是：行28,列260   黑域是：行28,列263   黑域是：行28,列264   黑域是：行28,列275   黑域是：行28,列276   黑域是：行29,列149   黑域是：行29,列161   黑域是：行29,列162   黑域是：行29,列163   黑域是：行29,列164   黑域是：行29,列166   黑域是：行29,列167   黑域是：行29,列168   黑域是：行29,<br>列169   黑域是：行29,列170   黑域是：行29,列173   黑域是：行29,列174   黑域是：行29,列181   黑域是：行29,列182   黑域是：行29,列183   黑域是：行29,列<br>184   黑域是：行78,列355   黑域是：行78,列356   黑域是：行78,列357   黑域是：行78,列358   黑域是：行218,列194   黑域是：行218,列195   黑域是：行219,<br>列193   黑域是：行219,列194   黑域是：行219,列195   黑域是：行219,列196   黑域是：行219,列359   黑域是：行219,列360   黑域是：行220,列193   黑域是：<br>行220,列194   黑域是：行220,列195   黑域是：行220,列196   黑域是：行220,列198   黑域是：行220,列358   黑域是：行220,列359   黑域是：行221,列194   黑<br>域是：行221,列195   黑域是：行221,列196   黑域是：行221,列197   黑域是：行222,列195   黑域是：行272,列160   黑域是：行272,列161   黑域是：行275,列157   黑域是：行276,列156   黑域是：行276,列157   黑域是：行276,列158   黑域是：行277,列158   黑域是：行277,列159   黑域是：行277,列160   黑域是：行295,列474   黑域是：行295,列475   黑域是：行295,列476   黑域是：行296,列474   黑域是：行296,列475   黑域是：行296,列476   黑域是：行297,列473   黑域是：<br>行297,列474   黑域是：行297,列475   黑域是：行298,列225   黑域是：行298,列472   黑域是：行298,列526   黑域是：行299,列472   黑域是：行299,列473   黑<br>域是：行300,列472   黑域是：行319,列164   黑域是：行319,列165   黑域是：行320,列163   黑域是：行320,列164   黑域是：行320,列165   黑域是：行320,列321   黑域是：行320,列322   黑域是：行321,列318   黑域是：行321,列319   黑域是：行321,列320   黑域是：行321,列321   黑域是：行321,列322   黑域是：行322,列319   黑域是：行322,列320   黑域是：行346,列477   黑域是：行346,列478   黑域是：行379,列176   黑域是：行379,列177   黑域是：行380,列176   黑域是：<br>行381,列177   黑域是：行381,列178   黑域是：行381,列179   黑域是：行382,列178   黑域是：行382,列181   黑域是：行382,列182   黑域是：行384,列221   黑<br>域是：行387,列221   黑域是：行387,列222   黑域是：行387,列223   黑域是：行387,列224   黑域是：行387,列225   黑域是：行387,列226   黑域是：行388,列222   黑域是：行388,列223   黑域是：行388,列224   黑域是：行388,列225   黑域是：行389,列222   黑域是：行389,列223   黑域是：行389,列224   黑域是：行389,列225   黑域是：行390,列222   黑域是：行390,列223   黑域是：行390,列224   黑域是：行393,列165   黑域是：行394,列299   黑域是：行394,列300   黑域是：<br>行394,列301   黑域是：行395,列300   黑域是：行395,列301   黑域是：行395,列302   黑域是：行396,列299   黑域是：行396,列300   黑域是：行396,列301   黑<br>域是：行396,列302   黑域是：行396,列303   黑域是：行397,列298   黑域是：行397,列299   黑域是：行398,列296   黑域是：行398,列297   黑域是：行398,列300   黑域是：行398,列301   黑域是：行398,列302   黑域是：行464,列303   黑域是：行465,列303   黑域是：行465,列304   黑域是：行465,列305   黑域是：行465,列306   黑域是：行466,列300   黑域是：行466,列301   黑域是：行466,列302   黑域是：行466,列303   黑域是：行466,列304   黑域是：行466,列305   黑域是：<br>行466,列306   黑域是：行466,列307   黑域是：行467,列301   黑域是：行467,列302   黑域是：行467,列303   黑域是：行467,列304   黑域是：行467,列305   黑<br>域是：行467,列306   黑域是：行468,列301   黑域是：行468,列302   黑域是：行468,列303   黑域是：行468,列304   黑域是：行468,列305   黑域是：行468,列306   黑域是：行468,列307   黑域是：行469,列300   黑域是：行469,列301   黑域是：行469,列302   黑域是：行469,列303   黑域是：行469,列304   黑域是：行469,列305   黑域是：行469,列306   黑域是：行469,列307   黑域是：行470,列300   黑域是：行470,列301   黑域是：行470,列302   黑域是：行470,列303   黑域是：<br>行470,列304   黑域是：行470,列305   黑域是：行471,列215   黑域是：行471,列301   黑域是：行471,列302<br></code></pre></div></td></tr></table></figure>
-<p><img src="25.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="25.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <blockquote>
 <p>经过计算机的绘画</p>
 </blockquote>
-<p><img src="26.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="26.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>结束，谢谢观看。</p>
 <h2 id="点评"><a href="#点评" class="headerlink" title="点评"></a>点评</h2><p>这篇感想所表达的内容的效果特别有趣，而且显然可以看出学弟的表情相当丰富，这个在概要中也能体现。然后有一些不足，主要是说的比做的多，结果可用性较差，然后在控制台输出信息时要注意换行。。。</p>
 <p>多加练习，还有提高空间。</p>
-<p><img src="27.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="27.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>孟郊《登科后》
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>陶渊明《杂诗》
 <a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span>白居易《长恨歌》
@@ -475,16 +467,13 @@ PS: &nbsp;我似乎没有说过黑区间就是0-50...
               </div>
               
                 <p class="note note-warning">
-    Author：<a href='https://eatrice.top'> 吃白饭-EatRice</a><br />
-    Source：<a href="https://eatrice.top/post/%E4%B8%80%E6%AC%A1%E6%8C%87%E5%AF%BC%E5%AD%A6%E5%BC%9FC%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9A%84%E8%AE%B0%E5%BD%95-%E5%AD%A6%E5%BC%9F%E5%86%99%E7%9A%84/">
-        https://eatrice.top/post/一次指导学弟C语言基础的记录-学弟写的/</a><br />
-    
-    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-    
-</p>
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -511,33 +500,27 @@ PS: &nbsp;我似乎没有说过黑区间就是0-50...
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
-  <div id="vcomments"></div>
+  <div id="valine"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('vcomments', function() {
-      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz",
-          app_key: "dzKTc4w4K1maxEg8E5243rrH",
-          placeholder: "休伯利安号在等待接收你的信号哟^0^\n(支持MarkDown语法)",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: true,
-          serverURLs: "",
-        });
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appid":"ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz","appkey":"dzKTc4w4K1maxEg8E5243rrH","placeholder":"休伯利安号在等待接收你的信号哟^0^\\n(支持MarkDown语法)","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[],"appId":"ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz","appKey":"dzKTc4w4K1maxEg8E5243rrH"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
       });
     });
   </script>
-  <noscript>Please enable JavaScript to view the
-    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
-  </noscript>
+  <noscript>Please enable JavaScript to view the comments</noscript>
 
 
               </article>
@@ -598,12 +581,38 @@ PS: &nbsp;我似乎没有说过黑区间就是0-50...
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
-<br> <p><a id="rainbow"></a></p> 
+     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a> <br> <p><a id="rainbow"></a></p> 
   </div>
   
 
   
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        赣ICP备2021001440号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=36012102000272"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>京公网安备12345678号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
 
   
 </footer>
@@ -612,24 +621,20 @@ PS: &nbsp;我似乎没有说过黑区间就是0-50...
 
 <!-- SCRIPTS -->
 
-  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
   </script>
 
 
-<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -637,7 +642,7 @@ PS: &nbsp;我似乎没有说过黑区间就是0-50...
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -646,26 +651,30 @@ PS: &nbsp;我似乎没有说过黑区间就是0-50...
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;
@@ -674,20 +683,6 @@ PS: &nbsp;我似乎没有说过黑区间就是0-50...
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
-    })()
   </script>
 
 
@@ -729,7 +724,7 @@ PS: &nbsp;我似乎没有说过黑区间就是0-50...
       };
     </script>
 
-    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
 
   
 
@@ -738,39 +733,6 @@ PS: &nbsp;我似乎没有说过黑区间就是0-50...
 
 
 
-
-
-  
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?71be728981300868000249d1707c92b7";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
-
-  
-    <!-- Google Analytics -->
-    <script defer>
-      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
-      ga.l = +new Date;
-      ga('create', 'UA-160834801-1', 'auto');
-      ga('send', 'pageview');
-    </script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
-  
-
-  
-
-  
-
-  
-
-  
 
 
 
@@ -785,4 +747,132 @@ PS: &nbsp;我似乎没有说过黑区间就是0-50...
 
 
 
-<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/HidenMath.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

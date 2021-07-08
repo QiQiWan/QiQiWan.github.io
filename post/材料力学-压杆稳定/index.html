@@ -7,13 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favcion.png">
-  <link rel="icon" type="image/png" href="/img/favcion.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#3a311c">
   <meta name="description" content="这里是一个工科男苦逼的小空间.记录一些我喜欢的东西比如平面设计，程序设计等等，还会有我不喜欢的东西，各种力学、结构学等等.我的专业是建筑工程，但是我喜欢鼓捣计算机专业相关方面的东西，如果看了我的博客对你有启发的话，记得留言收藏推荐三连击哦^O^">
@@ -24,22 +22,22 @@
   
   <title>材料力学-压杆稳定 ~ 吃白饭的休伯利安号</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/tomorrow-night.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
@@ -57,16 +55,10 @@
 
 <!-- 自定义样式保持在最底部 -->
 
-  
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1746382_qrhzb41budd.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
-<link rel="stylesheet" href="/css/custom.css">
-
-
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"eatrice.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"eatrice.cn","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -189,13 +181,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -204,7 +196,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('/img/background.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -273,11 +265,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -293,10 +285,10 @@
               <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>大学本科土木工程的材料力学和结构力学课程中提到了两类结构失稳问题。材料力学中探究长细杆在轴向压力和可能的垂直轴向压力的共同作用下，构件沿其长度方向发生侧向挠度的情况，该侧向挠度的发生是由于杆件柔度较大，当发生挠度时杆件中主应力尚未达到破坏极限，杆件产生的内力和外部荷载在杆件任意位置处于静力学平衡状态。结构力学中引入了非完善体系的失稳状态，根据大小挠度理论，体系在外荷载小于一定范围时，其发生的形变与荷载成正相关，且体系的静力学特征处于平衡状态；当荷载超过某一极限时，荷载与形变的关系发生显著变化，此时发生体系失稳。由于两类失稳状态分类在两门不同的学科中，使用过程中，对两种原理的比较和应用存在不便。笔者将两类失稳的原理推导和静力学分析进行整合，导出两种失稳状态下的力学特点，并将归纳整理得到的性质用于解决实际问题，并给出实际问题的解决过程。</p>
 <h3 id="1细长杆件的失稳：分支失稳"><a href="#1细长杆件的失稳：分支失稳" class="headerlink" title="1细长杆件的失稳：分支失稳"></a>1细长杆件的失稳：分支失稳</h3><hr>
 <p>由平时的生活经验：假设我们有一根长的杆件，如图1。若在杆的两端施加轴向压力，若压力足够大可能发生两种情况：</p>
-<p><img src="1.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="1.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p><strong>受压破坏：</strong>杆中截面应力超过材料的最大许用应力$ [\sigma ] $，材料发生破坏。</p>
 <p><strong>失稳破坏：</strong>杆件的长细比过大使得杆件在两端压力作用下发生弯曲失稳，如图2。此时发生侧向挠度，可认为杆件失效。</p>
-<p><img src="2.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="2.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>根据材料力学的正截面材料破坏条件：$ [\sigma ] < {\sigma _{}} = \frac{F}{A} $</p>
 <p>其中：$F$为施加在杆件正截面的轴力；</p>
 $ A $为构件的横截面积（假定该杆件横截面处处相等）
@@ -308,9 +300,9 @@ $ A $为构件的横截面积（假定该杆件横截面处处相等）
 由正截面的微元曲率分析可得挠度与弯矩的关系公式：$  - \frac{{M(x)}}{{EI}} = \frac{{{d^2}w(x)}}{{d{x^2}}} $
 <p>其中$ M(x)$为弯矩函数，$EI$为材料刚度，$w(x) $为挠度函数。</p>
 <p>由图3</p>
-<p><img src="3.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="3.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>得出该杆件的力矩平衡方程：（不考虑水平力）$ \frac{{{d^2}w}}{{d{x^2}}} + \frac{F}{{EI}}w = 0 \text{    ①} $</p>
-<p><img src="4.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="4.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>若杆端存在水平力时，平衡方程变为： $\frac{{{d^2}w}}{{d{x^2}}} + \frac{F}{{EI}}w = \frac{{{F_R}(l - x)}}{{EI}}\text{②} $</p>
 <p>该方程有通解：$ w*(x) = A\sin \omega x + B\cos \omega x $</p>
 <p>对于式②</p>
@@ -321,7 +313,7 @@ $ w'(x) = Ak\cos kx - Bk\sin kx - \frac{{{F_R}}}{F} $
 $ {w^{(2)}}(x) =  - A{k^2}\sin kx - B{k^2}\cos kx $
 <p>此时的通解为自由条件下杆的挠曲平衡方程，而实际情况，往往会有支座进行固定，主要的支座类型有铰支座和固定支座。固定支座和铰支座在计算时得主要区别在于：固定支座处的挠度和转角均等于零；铰支座处挠度为零，转角不一定为零。因此此处将固定支座和铰支座相互搭配形成四种情况分别就其不同的边界条件进行讨论：</p>
 <h4 id="1-1失稳状态公式导出"><a href="#1-1失稳状态公式导出" class="headerlink" title="1.1失稳状态公式导出"></a>1.1失稳状态公式导出</h4><p><strong>两端铰支：</strong>示意见图4，该支座类型没有非轴向力。</p>
-<p><img src="4.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="4.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>支座处不提供弯矩，且支座两端均无竖直方向的支座反力，即杆中不存在竖直方向的力产生弯矩。</p>
 <p>因此只需要将边界条件$ {w^{(2)}}(0) = 0 $带入原方程中得：</p>
 $ {w^{(2)}}(0) =  - A{k^2}\sin k*0 + B{k^2}\cos k*0 = 0 $
@@ -338,10 +330,10 @@ $ {w^{(2)}}(0) =  - A{k^2}\sin k*0 + B{k^2}\cos k*0 = 0 $
 
 <p>得到杆件失稳的极限平衡条件。</p>
 <p>平衡方程中存在整数数列n，n在这里指的是挠度形式，如图5</p>
-<p><img src="5.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="5.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>图5展示了$ n = 2 $当时的极限状态。</p>
 <p><strong>一端固定：</strong>示意见图6，该支座类型没有非轴向力。</p>
-<p><img src="6.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="6.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>因为发生弯曲变形后固定端会存在弯矩$ {w^{(2)}}(0) \ne 0$，但是固定端处的转角为零，即$w'(0) = 0$。即：$w'(0) = Ak\cos k*0 - Bk\sin k*0 = Ak = 0 $</p>
 <p>又$ {w^{(2)}}(l) = 0$ => $kl = \frac{{(2n + 1)\pi }}{2} $</p>
 <p>n为整数数列</p>
@@ -360,7 +352,7 @@ $ {w^{(2)}}(0) =  - A{k^2}\sin k*0 + B{k^2}\cos k*0 = 0 $
 </div>
 
 <p>一端固定一端铰接：见图7</p>
-<p><img src="7.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="7.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>边界条件$ w(0) = 0$，支座提供得水平力不一定为零，代入式②，得：$B + \frac{{{F_R}}}{F}l = 0 $</p>
 <p>又$ w'(0) = 0$ => $Ak = \frac{{{F_R}}}{F}$，且$w(l) = 0$ => $A\sin kl + B\cos kl = 0 $</p>
 <p>有：$ B + Akl = 0$，因为不全为零，即$A \ne 0,B \ne 0 $</p>
@@ -459,16 +451,16 @@ $$
 
 <h3 id="2非完善体系中的失稳"><a href="#2非完善体系中的失稳" class="headerlink" title="2非完善体系中的失稳"></a>2非完善体系中的失稳</h3><hr>
 <p>相比于材料力学的关于材料本身的力矩平衡方程，作为一个体系，其约束不完整或构件在加载一开始就呈现出变形状态，该类体系称为非完善体系。非完善压杆在加载一开始就处于变形平衡状态。按照最小挠度理论，当荷载增加到一定程度时，体系得位移会趋于无穷大；按照大挠度理论，体系受到的荷载达到一定程度后会发生荷载不变甚至减小，位移仍在增加的情况。该极限点则为极限失稳点。该失稳形态称为极值点失稳，极值点对于的荷载最大值称为临界荷载。简单示例如图8</p>
-<p><img src="8.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="8.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>用静力学方法解决这类题型的关键是分析体系的自由度——按照节点特性找到所有对指定节点的作用效果——根据作用效果列出力矩平衡方程。</p>
 <p>应用静力学方法的基本原理是将体系的位移看作线性变形。即认为变形和荷载呈线性关系。在进行相关参数计算时忽略体系中已经存在的位移，仍按照其变形之前的体系参数进行计算。该计算结果由于体系变形后相关参数较其变形前会发生改变，因此计算出的结果为近似精确解。该计算方法在结构力学中称为线性分析。同时该方法适用荷载叠加原理。</p>
 <p>该问题中解决的核心思想为将体系看作通过约束单个结构得到的约束体系，约束体系发生小位移，此时作用在体系上的外荷载和体系中由于位移而产生的约束力在发生位移的条件下处于静力学平衡状态。即体系中所有的静力特征对该体系的所有作用的总和平衡。</p>
 <p>本文通过对单自由度体系，有限自由度体系，和无限自由度体系分别进行分析，并进行计算，以得到相关问题的一般解法。</p>
 <h3 id="2-1单自由度体系分析"><a href="#2-1单自由度体系分析" class="headerlink" title="2.1单自由度体系分析"></a>2.1单自由度体系分析</h3><p>如图9，各杆$ EI = \infty $，在体系的最上端作用一个力$F$，弹簧弹性系数为$k$，求解当体系失稳时的极限荷载$F_{cr} $。</p>
-<p><img src="9.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="9.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>解：</p>
 <p>由题意可得：该体系的自由度为1。该体系中有两个力未知，其一是带求的极限荷载F，第二是下部的铰支座提供的向上的支撑力Q。</p>
-<p><img src="10.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="10.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>绘制虚位移示意图：如图10。假设A点侧移距离为y。由于体系中含有两个未知数F、Q，所以对A，B点分别取矩：</p>
 <div class='full-math-div'>
 
@@ -485,12 +477,12 @@ $$
 
 <p>最后解得：$ {F_{cr}} = \frac{{(3a + 4b)kb}}{{2a + 3b}} $</p>
 <h3 id="2-2多自由度体系分析"><a href="#2-2多自由度体系分析" class="headerlink" title="2.2多自由度体系分析"></a>2.2多自由度体系分析</h3><p>由2.1中的静力特征分析不难得出此类稳定问题的解法主要时探究体系从原始平衡形式受到外部作用后变化为新的平衡形式平衡性推导问题。由此引入多自由度体系的静力平衡问题。</p>
-<p><img src="media/53c42f4e76271a3afb2599bab3349772.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="media/53c42f4e76271a3afb2599bab3349772.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>如图11，在该体系右端作用一个力$ F$，每根杆件的长度为$l$，$EI = \infty $，弹簧的位移刚度为$k $，求该体系极限荷载。</p>
-<p><img src="11.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="11.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>解：</p>
 <p>分析其变形平衡状态，绘制静力平衡图，如图12：</p>
-<p><img src="12.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="12.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>设从左至右第一根弹簧的反力为：$ {F_{r1}} = {k_1}{y_1}$，第二根为：${F_{r2}} = {k_2}{y_2} $，</p>
 <p>A点和D点的支座反力分别为：</p>
 <div class='full-math-div'>
@@ -542,7 +534,7 @@ $ |\delta | \ne 0 $时，除零解外，只能解出和的关系，意味着原�
 展开$ |\delta | = 0 $
 $ ({k_1}l - 2F)({k_2}l - 2F) - {F^2} = 0 $
 <p>可解得$ F$的两个特征值，其中最小的为临界荷载。此时将$F$带入原平衡方程，可求得$y_1$和$y_2 $的比值。进而得出临界荷载的失稳变形形式。</p>
-<p><img src="13.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="13.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>同理，对于多自由度体系，如图13：</p>
 <p>题目大意：A,B,C三处节点的均可发生位移，属于三自由度体系，每根杆件刚度为$ EI$  ，长度为$l$。作用在最右端有荷载$F$，近似求解临界极限荷载$F_{cr} $。</p>
 <p><strong>解析：</strong>该题可应用矩阵位移法计算节点处发生单位位移引起的弯矩。A,B,C处的节点形式均为刚节点，发生失稳时节点处即发生侧挠，也发生转角。将整个杆件分为四个杆件单元OA为①，AB为②，BC为③，CD为④。写出每个杆件单元的单元刚度矩阵，组合成总刚。如①单元处的单刚为：</p>
@@ -557,7 +549,7 @@ $$
 $$
 
 <p>假设A,B,C节点处的位移分别为${y_1},{y_2},{y_3},{\theta _1},{\theta _2},{\theta _3}$，可得到各节点处的剪力和弯矩，最后对节点进行弯矩剪力静力学平衡，求解当刚度矩阵行列式等于零时F的最小特征值，即为临界力的近似解。</p>
-<h3 id="2-3无限自由度体系分析"><a href="#2-3无限自由度体系分析" class="headerlink" title="2.3无限自由度体系分析"></a>2.3无限自由度体系分析</h3><p><img src="14.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="2-3无限自由度体系分析"><a href="#2-3无限自由度体系分析" class="headerlink" title="2.3无限自由度体系分析"></a>2.3无限自由度体系分析</h3><p><img src="14.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>如图14，一等截面压杆,下端固定,上端有水平支杆。杆长l，刚度为EI，用静力法求其反力。</p>
 <p><strong>解析：</strong>分析题面可得，在轴向压力超过临界值时，该杆的所有位置都可能发生侧挠。即对于该杆的每个dx长度都是一个发生挠度的微元体，当dx足够小时该杆件即是无限自由度的结构体系。</p>
 <p>仔细分析不难发现该杆与1.1导出的一端固定一端铰支的杆件失稳形式如出一辙。故可用1.1中导出的失稳公式进行计算。</p>
@@ -622,16 +614,13 @@ $$
               </div>
               
                 <p class="note note-warning">
-    Author：<a href='https://eatrice.top'> 吃白饭-EatRice</a><br />
-    Source：<a href="https://eatrice.top/post/%E6%9D%90%E6%96%99%E5%8A%9B%E5%AD%A6-%E5%8E%8B%E6%9D%86%E7%A8%B3%E5%AE%9A/">
-        https://eatrice.top/post/材料力学-压杆稳定/</a><br />
-    
-    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-    
-</p>
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -658,33 +647,27 @@ $$
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
-  <div id="vcomments"></div>
+  <div id="valine"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('vcomments', function() {
-      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz",
-          app_key: "dzKTc4w4K1maxEg8E5243rrH",
-          placeholder: "休伯利安号在等待接收你的信号哟^0^\n(支持MarkDown语法)",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: true,
-          serverURLs: "",
-        });
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appid":"ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz","appkey":"dzKTc4w4K1maxEg8E5243rrH","placeholder":"休伯利安号在等待接收你的信号哟^0^\\n(支持MarkDown语法)","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[],"appId":"ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz","appKey":"dzKTc4w4K1maxEg8E5243rrH"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
       });
     });
   </script>
-  <noscript>Please enable JavaScript to view the
-    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
-  </noscript>
+  <noscript>Please enable JavaScript to view the comments</noscript>
 
 
               </article>
@@ -745,12 +728,38 @@ $$
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
-<br> <p><a id="rainbow"></a></p> 
+     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a> <br> <p><a id="rainbow"></a></p> 
   </div>
   
 
   
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        赣ICP备2021001440号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=36012102000272"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>京公网安备12345678号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
 
   
 </footer>
@@ -759,24 +768,20 @@ $$
 
 <!-- SCRIPTS -->
 
-  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
   </script>
 
 
-<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -784,7 +789,7 @@ $$
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -793,26 +798,30 @@ $$
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;
@@ -821,20 +830,6 @@ $$
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
-    })()
   </script>
 
 
@@ -876,7 +871,7 @@ $$
       };
     </script>
 
-    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
 
   
 
@@ -885,39 +880,6 @@ $$
 
 
 
-
-
-  
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?71be728981300868000249d1707c92b7";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
-
-  
-    <!-- Google Analytics -->
-    <script defer>
-      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
-      ga.l = +new Date;
-      ga('create', 'UA-160834801-1', 'auto');
-      ga('send', 'pageview');
-    </script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
-  
-
-  
-
-  
-
-  
-
-  
 
 
 
@@ -932,4 +894,132 @@ $$
 
 
 
-<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/HidenMath.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

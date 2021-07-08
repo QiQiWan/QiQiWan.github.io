@@ -7,16 +7,17 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favcion.png">
-  <link rel="icon" type="image/png" href="/img/favcion.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  
   <meta name="theme-color" content="#3a311c">
-  <meta name="description" content="这里是一个工科男苦逼的小空间.记录一些我喜欢的东西比如平面设计，程序设计等等，还会有我不喜欢的东西，各种力学、结构学等等.我的专业是建筑工程，但是我喜欢鼓捣计算机专业相关方面的东西，如果看了我的博客对你有启发的话，记得留言收藏推荐三连击哦^O^">
+  <meta name="description" content="程序更新: V1.1
+新增加了功能:计算方格点内所有的开挖和填充的土方量
+计算精度降低,在所有计算过程中对计算结果保留 3 位小数
+">
   <meta name="author" content="吃白饭-EatRice">
   <meta name="keywords" content="随笔,分享,经历,吃白饭,休伯利安号,小万,开学啦,科比读后感,星际争霸,守望先锋,雷诺,休伯利安">
   <meta name="theme-color" content="#3a311c">
@@ -24,22 +25,22 @@
   
   <title>土方工程-边坡土方量计算程序设计 ~ 吃白饭的休伯利安号</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/tomorrow-night.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
@@ -57,16 +58,10 @@
 
 <!-- 自定义样式保持在最底部 -->
 
-  
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1746382_qrhzb41budd.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
-<link rel="stylesheet" href="/css/custom.css">
-
-
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"eatrice.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"eatrice.cn","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -189,13 +184,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -204,7 +199,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('/img/background.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -273,11 +268,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -296,7 +291,7 @@
 </ol>
 <a id="more"></a>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>在土木工程施工的土方问题当中,边坡土方计算是一个重点和难点.何为边坡土方计算?如图所示</p>
-<p><img src="1.jpg" srcset="/img/loading.gif" alt="土方边坡"></p>
+<p><img src="1.jpg" srcset="/img/loading.gif" lazyload alt="土方边坡"></p>
 <p>土方计算主要是土地平整的计算,其包括平整时的土方挖填和平整后的边坡修建.</p>
 <p>在土地平整之后需要根据平面周围地形进行放坡处理.放坡处理时会涉及到边坡的挖填问题,因此需要根据施工高度和周围地形计算边坡土方的施工量.</p>
 <h2 id="假设"><a href="#假设" class="headerlink" title="假设"></a>假设</h2><p>由于边坡放坡的坡脚线与平面高度以及周围地形的高程有关,现有的条件只能通过格点的高程来确定相应的施工高度,无法对平面周围的其他位置高程进行有效测量,同时,由于原地形地貌不可能保持沿单方向线性变化,因此根据有限条件简化模型:</p>
@@ -308,12 +303,12 @@
 <p>基于这三个假设可以忽略不规则的地形地貌的影响,同时一定程度上对放坡地形进行了预测.</p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>土方工程先要进行土地平整,在网格内土地平整的施工量有相应的计算公式.土地平整完后为保证边坡稳定需要对边坡进行放坡,因此边坡也存在挖填问题.</p>
 <p>边坡挖填土方平面示意图如图所示:</p>
-<p><img src="2.jpg" srcset="/img/loading.gif" alt="土方边坡"><sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="橙子杀手的博客-边坡土方量计算
+<p><img src="2.jpg" srcset="/img/loading.gif" lazyload alt="土方边坡"><sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="橙子杀手的博客-边坡土方量计算
 ">[2]</span></a></sup></p>
 <p>示例格点的计算模型如下图所示:</p>
-<p><img src="3.jpg" srcset="/img/loading.gif" alt="土方边坡"><sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="橙子杀手的博客-边坡土方量计算
+<p><img src="3.jpg" srcset="/img/loading.gif" lazyload alt="土方边坡"><sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="橙子杀手的博客-边坡土方量计算
 ">[2]</span></a></sup></p>
-<p>由图可得,挖填边坡宽度由施工高度决定,关于施工高度的计算可我的其他文章:<a href='https://eatrice.top/post/2020-02-18-%E5%9C%9F%E6%9C%A8%E5%B7%A5%E7%A8%8B%E6%96%BD%E5%B7%A5-%E5%AF%BC%E8%AE%BA/#场地的设计标高'>土木工程施工-导论</a><sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="2020-02-18-土木工程施工-导论
+<p>由图可得,挖填边坡宽度由施工高度决定,关于施工高度的计算可我的其他文章:<a target="_blank" rel="noopener" href='https://eatrice.top/post/2020-02-18-%E5%9C%9F%E6%9C%A8%E5%B7%A5%E7%A8%8B%E6%96%BD%E5%B7%A5-%E5%AF%BC%E8%AE%BA/#场地的设计标高'>土木工程施工-导论</a><sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="2020-02-18-土木工程施工-导论
 ">[1]</span></a></sup></p>
 <p>得到施工高度后,已知坡的宽高比$m$,相邻格点的间距$a$可以将计算边坡的施工高度问题转化成求解大量几何体形状体积的问题。</p>
 <h3 id="土地平整施工量计算"><a href="#土地平整施工量计算" class="headerlink" title="土地平整施工量计算"></a>土地平整施工量计算</h3><h4 id="所有角点的符号都相同"><a href="#所有角点的符号都相同" class="headerlink" title="所有角点的符号都相同"></a>所有角点的符号都相同</h4>
@@ -354,7 +349,7 @@ $$
 $V = mh_1^2*\frac{1}{2}*{a_1}*\frac{1}{3}$
 
 <p>计算简要示意图如图所示：</p>
-<p><img src="4.jpg" srcset="/img/loading.gif" alt="土方边坡"><sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="橙子杀手的博客-边坡土方量计算
+<p><img src="4.jpg" srcset="/img/loading.gif" lazyload alt="土方边坡"><sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="橙子杀手的博客-边坡土方量计算
 ">[2]</span></a></sup></p>
 <h2 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h2><ol>
 <li>先对相关参数进行读取:坡的宽高比 m，相邻格点间距 a，方格点的行数 raw，方格点的列数 col。</li>
@@ -369,8 +364,8 @@ $V = mh_1^2*\frac{1}{2}*{a_1}*\frac{1}{3}$
 </ol>
 <h2 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a>源程序</h2><figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><br><span class="css">    <span class="hljs-selector-class">.deter</span> &#123;</span><br>      width: 50px;<br>      height: 50px;<br>    &#125;<br>  <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>计算挖方量<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;head&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">pre</span>&gt;</span>每行有多少角点?<span class="hljs-tag">&lt;/<span class="hljs-name">pre</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;colCount&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">pre</span>&gt;</span>有多少行?<span class="hljs-tag">&lt;/<span class="hljs-name">pre</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;rowCount&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">pre</span>&gt;</span> 坡的宽高比:<span class="hljs-tag">&lt;/<span class="hljs-name">pre</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;M&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">pre</span>&gt;</span> 方格边长a:<span class="hljs-tag">&lt;/<span class="hljs-name">pre</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;A&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;start&quot;</span>&gt;</span>生成<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="javascript">    <span class="hljs-keyword">var</span> start = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;start&quot;</span>);</span><br><span class="javascript">    <span class="hljs-keyword">var</span> m = <span class="hljs-string">&quot;&quot;</span>;</span><br><span class="javascript">    <span class="hljs-keyword">var</span> a = <span class="hljs-string">&quot;&quot;</span>;</span><br><span class="javascript">    <span class="hljs-keyword">var</span> d = <span class="hljs-literal">null</span>;</span><br><span class="javascript">    start.addEventListener(<span class="hljs-string">&quot;click&quot;</span>, <span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;</span><br><span class="javascript">      <span class="hljs-comment">//document.removeChild(document.getElementById(&#x27;forms&#x27;));</span></span><br><br><span class="javascript">      <span class="hljs-keyword">var</span> row = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;rowCount&quot;</span>).value;</span><br><span class="javascript">      <span class="hljs-keyword">var</span> col = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;colCount&quot;</span>).value;</span><br><span class="javascript">      m = <span class="hljs-built_in">parseFloat</span>(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;M&quot;</span>).value);</span><br><span class="javascript">      a = <span class="hljs-built_in">parseFloat</span>(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;A&quot;</span>).value);</span><br><span class="javascript">      <span class="hljs-keyword">if</span> (row == <span class="hljs-string">&quot;&quot;</span> || col == <span class="hljs-string">&quot;&quot;</span> || m == <span class="hljs-string">&quot;&quot;</span> || a == <span class="hljs-string">&quot;&quot;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br><span class="javascript">      <span class="hljs-keyword">else</span> createtables(row, col);</span><br>    &#125;);<br><span class="javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createtables</span>(<span class="hljs-params">row, col</span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-comment">//搭建界面</span></span><br><span class="javascript">      <span class="hljs-keyword">var</span> determinants = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(row);</span><br><span class="javascript">      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; row; i++) determinants[i] = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(col);</span><br><span class="javascript">      <span class="hljs-keyword">var</span> form = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;table&quot;</span>);</span><br><span class="javascript">      form.setAttribute(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;forms&quot;</span>);</span><br><span class="javascript">      <span class="hljs-built_in">document</span>.body.appendChild(form);</span><br><span class="javascript">      <span class="hljs-keyword">var</span> tr = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(row);</span><br><span class="javascript">      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; row; i++) &#123;</span><br><span class="javascript">        tr[i] = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;tr&quot;</span>);</span><br>        form.appendChild(tr[i]);<br><span class="javascript">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j = <span class="hljs-number">0</span>; j &lt; col; j++) &#123;</span><br><span class="javascript">          <span class="hljs-keyword">var</span> td = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;td&quot;</span>);</span><br>          tr[i].appendChild(td);<br><span class="javascript">          determinants[i][j] = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;input&quot;</span>);</span><br><span class="javascript">          determinants[i][j].setAttribute(<span class="hljs-string">&quot;class&quot;</span>, <span class="hljs-string">&quot;deter&quot;</span>);</span><br><span class="javascript">          determinants[i][j].setAttribute(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;number&quot;</span>);</span><br>          td.appendChild(determinants[i][j]);<br>        &#125;<br>      &#125;<br>      d = determinants;<br><br><span class="javascript">      <span class="hljs-keyword">var</span> count = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;button&quot;</span>);</span><br><span class="javascript">      count.setAttribute(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;count&quot;</span>);</span><br>      form.appendChild(count);<br><br><span class="javascript">      count.appendChild(<span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;计算&quot;</span>));</span><br><span class="javascript">      <span class="hljs-keyword">var</span> result = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;div&quot;</span>);</span><br><span class="javascript">      result.setAttribute(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;result&quot;</span>);</span><br><span class="javascript">      <span class="hljs-built_in">document</span>.body.appendChild(result);</span><br><span class="javascript">      count.onclick = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br>        calculation(row, col, result);<br>      &#125;;<br>    &#125;<br><span class="javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">calculation</span>(<span class="hljs-params">row, col, result</span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-comment">//总算法</span></span><br><span class="javascript">      <span class="hljs-comment">//安全检查</span></span><br><span class="javascript">      d.forEach(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> &#123;</span><br><span class="javascript">        <span class="hljs-keyword">if</span> (item.value == <span class="hljs-string">&quot;&quot;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br>      &#125;);<br><span class="javascript">      <span class="hljs-keyword">var</span> total = <span class="hljs-keyword">new</span> work();</span><br>      total.init(0, 0);<br><br><span class="javascript">      <span class="hljs-comment">//记录四个角点位置</span></span><br><span class="javascript">      <span class="hljs-keyword">var</span> corners = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(</span><br>        d[0][0].value,<br>        d[0][col - 1].value,<br>        d[row - 1][0].value,<br>        d[row - 1][col - 1].value<br>      );<br><br><span class="javascript">      <span class="hljs-comment">//提取四条边</span></span><br><span class="javascript">      <span class="hljs-keyword">var</span> up = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(),</span><br><span class="javascript">        left = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(),</span><br><span class="javascript">        buttom = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(),</span><br><span class="javascript">        right = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>();</span><br><br><span class="javascript">      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; row; i++) &#123;</span><br><span class="javascript">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j = <span class="hljs-number">0</span>; j &lt; col; j++) &#123;</span><br><span class="javascript">          <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span>) up.push(<span class="hljs-built_in">parseFloat</span>(d[i][j].value));</span><br><span class="javascript">          <span class="hljs-keyword">if</span> (j == <span class="hljs-number">0</span>) left.push(<span class="hljs-built_in">parseFloat</span>(d[i][j].value));</span><br><span class="javascript">          <span class="hljs-keyword">if</span> (i == row - <span class="hljs-number">1</span>) buttom.push(<span class="hljs-built_in">parseFloat</span>(d[i][j].value));</span><br><span class="javascript">          <span class="hljs-keyword">if</span> (j == col - <span class="hljs-number">1</span>) right.push(<span class="hljs-built_in">parseFloat</span>(d[i][j].value));</span><br>        &#125;<br>      &#125;<br><br><span class="javascript">      <span class="hljs-keyword">var</span> sides = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(up, buttom, left, right);</span><br><br><span class="javascript">      <span class="hljs-comment">//提取格点</span></span><br><span class="javascript">      <span class="hljs-keyword">var</span> latticeResult = <span class="hljs-keyword">new</span> work().init(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);</span><br><br><span class="javascript">      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; row - <span class="hljs-number">1</span>; i++) &#123;</span><br><span class="javascript">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j = <span class="hljs-number">0</span>; j &lt; col - <span class="hljs-number">1</span>; j++) &#123;</span><br><span class="javascript">          <span class="hljs-keyword">var</span> temp = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(</span><br>            d[i][j].value,<br>            d[i + 1][j].value,<br>            d[i][j + 1].value,<br>            d[i + 1][j + 1].value<br>          );<br>          latticeResult.add(CalInGrid(temp));<br><span class="javascript">          <span class="hljs-built_in">console</span>.log(latticeResult.toString(<span class="hljs-string">&quot;格点&quot;</span>));</span><br>        &#125;<br>      &#125;<br><br><span class="javascript">      <span class="hljs-comment">//计算四个角点</span></span><br><span class="javascript">      corners.forEach(<span class="hljs-function"><span class="hljs-params">h</span> =&gt;</span> &#123;</span><br><span class="javascript">        <span class="hljs-built_in">console</span>.log(total.toString(<span class="hljs-string">&quot;角点&quot;</span>));</span><br><span class="javascript">        total.add(CalCorner(<span class="hljs-built_in">parseFloat</span>(h)));</span><br>      &#125;);<br><span class="javascript">      <span class="hljs-comment">//计算四条边</span></span><br><span class="javascript">      sides.forEach(<span class="hljs-function"><span class="hljs-params">side</span> =&gt;</span> &#123;</span><br><span class="javascript">        <span class="hljs-built_in">console</span>.log(total.toString(<span class="hljs-string">&quot;边坡&quot;</span>));</span><br>        total.add(CalSide(side));<br>      &#125;);<br><br><span class="javascript">      <span class="hljs-built_in">console</span>.log(total.toString(<span class="hljs-string">&quot;整个边坡&quot;</span>));</span><br><span class="javascript">      <span class="hljs-comment">//输出结果</span></span><br>      result.innerHTML =<br><span class="javascript">        latticeResult.toString(<span class="hljs-string">&quot;格子&quot;</span>) +</span><br><span class="javascript">        <span class="hljs-string">&quot;&lt;br /&gt; &quot;</span> +</span><br><span class="javascript">        total.toString(<span class="hljs-string">&quot;整个边坡&quot;</span>);</span><br>    &#125;<br><span class="javascript">    <span class="hljs-comment">//计算一条边上的土方量</span></span><br><span class="javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CalSide</span>(<span class="hljs-params">side</span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-keyword">var</span> total = <span class="hljs-keyword">new</span> work();</span><br>      total.init(0, 0);<br><span class="javascript">      <span class="hljs-keyword">var</span> len = side.length;</span><br><span class="javascript">      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; len - <span class="hljs-number">1</span>; i++) &#123;</span><br>        temp = CalLattice(side[i], side[i + 1]);<br>        total.add(temp);<br>      &#125;<br><span class="javascript">      <span class="hljs-keyword">return</span> total;</span><br>    &#125;<br><span class="javascript">    <span class="hljs-comment">//计算相邻格点的挖填土方量</span></span><br><span class="javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CalLattice</span>(<span class="hljs-params">p1, p2</span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-keyword">if</span> (p1 == <span class="hljs-number">0</span> &amp;&amp; p2 == <span class="hljs-number">0</span>) &#123;</span><br><span class="javascript">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> work();</span><br>      &#125;<br><span class="javascript">      <span class="hljs-keyword">if</span> (checkSign(p1, p2)) &#123;</span><br><span class="javascript">        <span class="hljs-comment">//如果角点同号</span></span><br><span class="javascript">        <span class="hljs-keyword">var</span> V;</span><br><span class="javascript">        <span class="hljs-keyword">if</span> (p1 * p2 == <span class="hljs-number">0</span>) &#123;</span><br><span class="javascript">          <span class="hljs-comment">//有一个是0格点,按照三角锥计算</span></span><br><span class="javascript">          <span class="hljs-keyword">var</span> h = checkZero(p1, p2);</span><br><span class="javascript">          <span class="hljs-keyword">var</span> sign = <span class="hljs-built_in">Math</span>.abs(h) / h; <span class="hljs-comment">//保存符号</span></span><br>          V = (a / 6) * h * h * m * sign;<br><span class="javascript">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="javascript">          <span class="hljs-comment">//按照三棱台计算</span></span><br><span class="javascript">          <span class="hljs-keyword">var</span> sign = <span class="hljs-built_in">Math</span>.abs(p1) / p1; <span class="hljs-comment">//保存符号</span></span><br><span class="javascript">          <span class="hljs-keyword">var</span> F1 = (<span class="hljs-number">1</span> / <span class="hljs-number">2</span>) * m * p1 * p1;</span><br><span class="javascript">          <span class="hljs-keyword">var</span> F2 = (<span class="hljs-number">1</span> / <span class="hljs-number">2</span>) * m * p2 * p2;</span><br><span class="javascript">          <span class="hljs-keyword">var</span> F0 = (F1 + F2) / <span class="hljs-number">2</span>;</span><br>          V = (a / 6) * (F1 + F2 + 4 * F0) * sign;<br>        &#125;<br><span class="javascript">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> work().set(V);</span><br><span class="javascript">      &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="javascript">        <span class="hljs-comment">//如果角点异号需要线性插值零点</span></span><br><span class="javascript">        <span class="hljs-keyword">var</span> ap1 = (p1 * a) / (<span class="hljs-built_in">Math</span>.abs(p1) + <span class="hljs-built_in">Math</span>.abs(p2)); <span class="hljs-comment">//格点1分到的边长</span></span><br><span class="javascript">        <span class="hljs-keyword">var</span> ap2 = (p2 * a) / (<span class="hljs-built_in">Math</span>.abs(p1) + <span class="hljs-built_in">Math</span>.abs(p2)); <span class="hljs-comment">//格点2分到的边长</span></span><br><span class="javascript">        <span class="hljs-comment">// var sign1 = p1 / Math.abs(p1);</span></span><br><span class="javascript">        <span class="hljs-comment">// var sign2 = p2 / Math.abs(p2);</span></span><br><span class="javascript">        <span class="hljs-comment">//ap中带了正负号,这一段不要</span></span><br><br><span class="javascript">        <span class="hljs-keyword">var</span> V1 = (ap1 / <span class="hljs-number">6</span>) * m * p1 * p1;</span><br><span class="javascript">        <span class="hljs-keyword">var</span> V2 = (ap2 / <span class="hljs-number">6</span>) * m * p2 * p2;</span><br><span class="javascript">        <span class="hljs-keyword">var</span> result = <span class="hljs-keyword">new</span> work();</span><br><span class="javascript">        <span class="hljs-keyword">if</span> (V1 &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> result.init(V2, V1);</span><br><span class="javascript">        <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> result.init(V1, V2);</span><br>      &#125;<br>    &#125;<br><span class="javascript">    <span class="hljs-comment">//按照四边形底面计算</span></span><br><span class="javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CalCorner</span>(<span class="hljs-params">h</span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-keyword">if</span> (h == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> work();</span><br><span class="javascript">      <span class="hljs-keyword">var</span> V = ((<span class="hljs-built_in">Math</span>.pow(m * h, <span class="hljs-number">2</span>) * <span class="hljs-number">1</span>) / <span class="hljs-number">3</span>) * h;</span><br><span class="javascript">      result = <span class="hljs-keyword">new</span> work();</span><br>      result.set(V);<br><span class="javascript">      <span class="hljs-keyword">return</span> result;</span><br>    &#125;<br><span class="javascript">    <span class="hljs-comment">// 计算方形格点内部的挖填量</span></span><br><span class="javascript">    <span class="hljs-comment">// 传入一个2X2的方格</span></span><br><span class="javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CalInGrid</span>(<span class="hljs-params">d</span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-keyword">var</span> result = <span class="hljs-keyword">new</span> work();</span><br><span class="javascript">      <span class="hljs-keyword">var</span> sum = sumAbs(d);</span><br><span class="javascript">      <span class="hljs-keyword">if</span> (checkFourCorner(d)) &#123;</span><br><span class="javascript">        <span class="hljs-comment">//如果数组同号的话</span></span><br><span class="javascript">        <span class="hljs-keyword">var</span> sign = d[<span class="hljs-number">0</span>] / <span class="hljs-built_in">Math</span>.abs(d[<span class="hljs-number">0</span>]);</span><br><span class="javascript">        <span class="hljs-keyword">var</span> V = (<span class="hljs-built_in">Math</span>.pow(a, <span class="hljs-number">2</span>) / <span class="hljs-number">4</span>) * sum * sign;</span><br>        result.set(V);<br><span class="javascript">      &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="javascript">        <span class="hljs-comment">//如果数组异号的话需要分成两组求</span></span><br><span class="javascript">        <span class="hljs-keyword">var</span> PArr = GetPositives(d);</span><br><span class="javascript">        <span class="hljs-keyword">var</span> NArr = GetNegatives(d);</span><br><span class="javascript">        <span class="hljs-keyword">var</span> V1 = <span class="hljs-built_in">Math</span>.pow(a, <span class="hljs-number">2</span>) / <span class="hljs-number">4</span> * <span class="hljs-built_in">Math</span>.pow(sumAbs(PArr), <span class="hljs-number">2</span>) / sum;</span><br><span class="javascript">        <span class="hljs-keyword">var</span> V2 = <span class="hljs-built_in">Math</span>.pow(a, <span class="hljs-number">2</span>) / <span class="hljs-number">4</span> * <span class="hljs-built_in">Math</span>.pow(sumAbs(NArr), <span class="hljs-number">2</span>) / sum * -<span class="hljs-number">1</span>;</span><br>        result.init(V1, V2);<br>      &#125;<br><span class="javascript">      <span class="hljs-keyword">return</span> result;</span><br>    &#125;<br><span class="javascript">    <span class="hljs-comment">//检查四个格点是否都同号</span></span><br><span class="javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkFourCorner</span>(<span class="hljs-params">d</span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; d.length - <span class="hljs-number">1</span>; i++) &#123;</span><br><span class="javascript">        <span class="hljs-keyword">if</span> (!checkSign(d[i], d[i + <span class="hljs-number">1</span>]))</span><br><span class="javascript">          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br>      &#125;<br><span class="javascript">      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</span><br>    &#125;<br><span class="javascript">    <span class="hljs-comment">//绝对值求和</span></span><br><span class="javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sumAbs</span>(<span class="hljs-params">d</span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-keyword">return</span> d.length &lt;= <span class="hljs-number">1</span> ? <span class="hljs-built_in">Math</span>.abs(d) : d.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x, y</span>) </span>&#123;</span><br><span class="javascript">        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.abs(x) + <span class="hljs-built_in">Math</span>.abs(y);</span><br>      &#125;);<br>    &#125;<br><span class="javascript">    <span class="hljs-comment">//获取正数数列</span></span><br><span class="javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">GetPositives</span>(<span class="hljs-params">d</span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-keyword">var</span> arr = [];</span><br><span class="javascript">      d.forEach(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> &#123;</span><br><span class="javascript">        <span class="hljs-keyword">if</span> (item &gt; <span class="hljs-number">0</span>) arr.push(item);</span><br>      &#125;);<br><span class="javascript">      <span class="hljs-keyword">return</span> arr;</span><br>    &#125;<br><span class="javascript">    <span class="hljs-comment">//获取负数数列</span></span><br><span class="javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">GetNegatives</span>(<span class="hljs-params">d</span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-keyword">var</span> arr = [];</span><br><span class="javascript">      d.forEach(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> &#123;</span><br><span class="javascript">        <span class="hljs-keyword">if</span> (item &lt; <span class="hljs-number">0</span>) arr.push(item);</span><br>      &#125;);<br><span class="javascript">      <span class="hljs-keyword">return</span> arr;</span><br>    &#125;<br><span class="javascript">    <span class="hljs-comment">//检查两个数是否同号</span></span><br><span class="javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkSign</span>(<span class="hljs-params">a, b</span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-keyword">if</span> (a * b &gt;= <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</span><br><span class="javascript">      <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br>    &#125;<br><span class="javascript">    <span class="hljs-comment">//检查哪个点为0,返回不为0的点</span></span><br><span class="javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkZero</span>(<span class="hljs-params">a, b</span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-keyword">return</span> a != <span class="hljs-number">0</span> ? a : b;</span><br>    &#125;<br><br><span class="javascript">    <span class="hljs-comment">//挖填对象</span></span><br><span class="javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">work</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-built_in">this</span>.dig = <span class="hljs-number">0</span>;</span><br><span class="javascript">      <span class="hljs-built_in">this</span>.fill = <span class="hljs-number">0</span>;</span><br><span class="javascript">      <span class="hljs-built_in">this</span>.init = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">a, b</span>) </span>&#123;</span><br>        a = a.toFixed(3);<br>        b = b.toFixed(3);<br><span class="javascript">        <span class="hljs-comment">//dig是正数,fill时负数</span></span><br><span class="javascript">        <span class="hljs-keyword">if</span> (a &gt;= <span class="hljs-number">0</span>) <span class="hljs-built_in">this</span>.dig = a;</span><br><span class="javascript">        <span class="hljs-keyword">else</span> <span class="hljs-built_in">this</span>.fill = a;</span><br><span class="javascript">        <span class="hljs-keyword">if</span> (b &gt;= <span class="hljs-number">0</span>) <span class="hljs-built_in">this</span>.dig = b;</span><br><span class="javascript">        <span class="hljs-keyword">else</span> <span class="hljs-built_in">this</span>.fill = b;</span><br><span class="javascript">        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;</span><br>      &#125;;<br><span class="javascript">      <span class="hljs-built_in">this</span>.set = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">value</span>) </span>&#123;</span><br>        value = value.toFixed(3);<br><span class="javascript">        <span class="hljs-keyword">if</span> (value &gt; <span class="hljs-number">0</span>) <span class="hljs-built_in">this</span>.dig = value;</span><br><span class="javascript">        <span class="hljs-keyword">else</span> <span class="hljs-built_in">this</span>.fill = value;</span><br><span class="javascript">        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;</span><br>      &#125;;<br><span class="javascript">      <span class="hljs-built_in">this</span>.add = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">work</span>) </span>&#123;</span><br><span class="javascript">        <span class="hljs-built_in">this</span>.dig += work.dig;</span><br><span class="javascript">        <span class="hljs-built_in">this</span>.fill += work.fill;</span><br>      &#125;;<br><span class="javascript">      <span class="hljs-built_in">this</span>.toString = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="javascript">        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;开挖土方:&quot;</span> + <span class="hljs-built_in">this</span>.dig + <span class="hljs-string">&quot;&lt;br /&gt;填充土方:&quot;</span> + <span class="hljs-built_in">this</span>.fill;</span><br>      &#125;;<br><span class="javascript">      <span class="hljs-built_in">this</span>.toString = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">str</span>) </span>&#123;</span><br><span class="javascript">        <span class="hljs-keyword">return</span> str + <span class="hljs-string">&quot;处开挖土方:&quot;</span> + <span class="hljs-built_in">this</span>.dig + <span class="hljs-string">&quot;&lt;br /&gt;填充土方:&quot;</span> + <span class="hljs-built_in">this</span>.fill;</span><br>      &#125;;<br>    &#125;<br>  <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
 <h2 id="软件计算结果校验"><a href="#软件计算结果校验" class="headerlink" title="软件计算结果校验"></a>软件计算结果校验</h2><p>程序中有对其每一部分的计算结果进行跟踪<br>跟踪结果与计算结果如图所示</p>
-<p><img src="5.jpg" srcset="/img/loading.gif" alt="计算结果"></p>
-<p><img src="6.jpg" srcset="/img/loading.gif" alt="计算结果"></p>
+<p><img src="5.jpg" srcset="/img/loading.gif" lazyload alt="计算结果"></p>
+<p><img src="6.jpg" srcset="/img/loading.gif" lazyload alt="计算结果"></p>
 <p>其中主页面下侧为总计算结果，右边控制台输出结果与前一步的插值，为单步计算的结果，控制台对每一步结棍都进行了求和</p>
 <p>方格的计算顺序是从左至右,从上至下</p>
 <p>四个角点计算顺序是 左上 右上 左下 右下</p>
@@ -378,7 +373,7 @@ $V = mh_1^2*\frac{1}{2}*{a_1}*\frac{1}{3}$
 <p>我通过手算进行了计算核对，每一步的手算和机算的误差都在 0.0001 内，其他的误差可能是<code>javascript</code>程序语言中对小数储存的方式而引起的系统误差，验证计算结果正确，程序可以使用。</p>
 <p>由于只只有我用一道题目做了手算和机算的相互验证，因此结果可能具有偶然性，欢迎大家辅助验证程序，并欢迎留言指正</p>
 <h2 id="计算程序地址"><a href="#计算程序地址" class="headerlink" title="计算程序地址"></a>计算程序地址</h2><p><a target="_blank" rel="noopener" href='https://qiqi-1252510405.cos.ap-beijing.myqcloud.com/scripts/%E8%AE%A1%E7%AE%97%E6%8C%96%E5%A1%AB%E6%96%B9%E9%87%8F.html'>计算挖填方量</a></p>
-<h2 id="引用Reference"><a href="#引用Reference" class="headerlink" title="引用Reference"></a>引用<code>Reference</code></h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://eatrice.top/post/2020-02-18-%E5%9C%9F%E6%9C%A8%E5%B7%A5%E7%A8%8B%E6%96%BD%E5%B7%A5-%E5%AF%BC%E8%AE%BA/#%E5%9C%BA%E5%9C%B0%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A0%87%E9%AB%98">2020-02-18-土木工程施工-导论</a>
+<h2 id="引用Reference"><a href="#引用Reference" class="headerlink" title="引用Reference"></a>引用<code>Reference</code></h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://eatrice.top/post/2020-02-18-%E5%9C%9F%E6%9C%A8%E5%B7%A5%E7%A8%8B%E6%96%BD%E5%B7%A5-%E5%AF%BC%E8%AE%BA/#%E5%9C%BA%E5%9C%B0%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A0%87%E9%AB%98">2020-02-18-土木工程施工-导论</a>
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://ruru.eatrice.top/post/%E8%BE%B9%E5%9D%A1%E5%9C%9F%E6%96%B9%E9%87%8F%E8%AE%A1%E7%AE%97/">橙子杀手的博客-边坡土方量计算</a>
 <a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
             </div>
@@ -406,16 +401,13 @@ $V = mh_1^2*\frac{1}{2}*{a_1}*\frac{1}{3}$
               </div>
               
                 <p class="note note-warning">
-    Author：<a href='https://eatrice.top'> 吃白饭-EatRice</a><br />
-    Source：<a href="https://eatrice.top/post/%E5%9C%9F%E6%96%B9%E5%B7%A5%E7%A8%8B-%E8%BE%B9%E5%9D%A1%E5%9C%9F%E6%96%B9%E9%87%8F%E8%AE%A1%E7%AE%97/">
-        https://eatrice.top/post/土方工程-边坡土方量计算/</a><br />
-    
-    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-    
-</p>
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -442,33 +434,27 @@ $V = mh_1^2*\frac{1}{2}*{a_1}*\frac{1}{3}$
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
-  <div id="vcomments"></div>
+  <div id="valine"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('vcomments', function() {
-      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz",
-          app_key: "dzKTc4w4K1maxEg8E5243rrH",
-          placeholder: "休伯利安号在等待接收你的信号哟^0^\n(支持MarkDown语法)",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: true,
-          serverURLs: "",
-        });
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appid":"ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz","appkey":"dzKTc4w4K1maxEg8E5243rrH","placeholder":"休伯利安号在等待接收你的信号哟^0^\\n(支持MarkDown语法)","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[],"appId":"ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz","appKey":"dzKTc4w4K1maxEg8E5243rrH"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
       });
     });
   </script>
-  <noscript>Please enable JavaScript to view the
-    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
-  </noscript>
+  <noscript>Please enable JavaScript to view the comments</noscript>
 
 
               </article>
@@ -529,12 +515,38 @@ $V = mh_1^2*\frac{1}{2}*{a_1}*\frac{1}{3}$
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
-<br> <p><a id="rainbow"></a></p> 
+     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a> <br> <p><a id="rainbow"></a></p> 
   </div>
   
 
   
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        赣ICP备2021001440号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=36012102000272"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>京公网安备12345678号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
 
   
 </footer>
@@ -543,24 +555,20 @@ $V = mh_1^2*\frac{1}{2}*{a_1}*\frac{1}{3}$
 
 <!-- SCRIPTS -->
 
-  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
   </script>
 
 
-<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -568,7 +576,7 @@ $V = mh_1^2*\frac{1}{2}*{a_1}*\frac{1}{3}$
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -577,26 +585,30 @@ $V = mh_1^2*\frac{1}{2}*{a_1}*\frac{1}{3}$
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;
@@ -605,20 +617,6 @@ $V = mh_1^2*\frac{1}{2}*{a_1}*\frac{1}{3}$
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
-    })()
   </script>
 
 
@@ -660,7 +658,7 @@ $V = mh_1^2*\frac{1}{2}*{a_1}*\frac{1}{3}$
       };
     </script>
 
-    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
 
   
 
@@ -669,39 +667,6 @@ $V = mh_1^2*\frac{1}{2}*{a_1}*\frac{1}{3}$
 
 
 
-
-
-  
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?71be728981300868000249d1707c92b7";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
-
-  
-    <!-- Google Analytics -->
-    <script defer>
-      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
-      ga.l = +new Date;
-      ga('create', 'UA-160834801-1', 'auto');
-      ga('send', 'pageview');
-    </script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
-  
-
-  
-
-  
-
-  
-
-  
 
 
 
@@ -716,4 +681,132 @@ $V = mh_1^2*\frac{1}{2}*{a_1}*\frac{1}{3}$
 
 
 
-<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/HidenMath.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

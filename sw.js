@@ -10,7 +10,7 @@
 
 'use strict';
 
-var precacheConfig = [["/img/favcion.png","e02488f887ee978e139945973541f1ac"],["/index.html","551c8488bd030c9ff80187ee1f1ae7af"],["/manifest.json","64ae4f2762928f6947b69a4ba6db6291"]];
+var precacheConfig = [["/img/favcion.png","e02488f887ee978e139945973541f1ac"],["/index.html","3a3aeb58569c43bfeb48858bc25c3772"],["/manifest.json","64ae4f2762928f6947b69a4ba6db6291"]];
 var cacheName = 'sw-precache-v3--' + (self.registration ? self.registration.scope : '');
 var firstRegister = 1; // 默认1是首次安装SW， 0是SW更新
 
@@ -286,7 +286,7 @@ self.addEventListener('activate', function (event) {
 
 // Runtime cache 配置转换后的 toolbox 代码.
 
-toolbox.router.get("/**/*", toolbox.cacheFirst, {"origin":"eatrice.me"});
+toolbox.router.get("/**/*", toolbox.cacheFirst, {"origin":"eatrice.cn"});
 
 
 

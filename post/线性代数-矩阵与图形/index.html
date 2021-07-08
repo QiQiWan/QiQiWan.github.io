@@ -7,13 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favcion.png">
-  <link rel="icon" type="image/png" href="/img/favcion.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#3a311c">
   <meta name="description" content="这里是一个工科男苦逼的小空间.记录一些我喜欢的东西比如平面设计，程序设计等等，还会有我不喜欢的东西，各种力学、结构学等等.我的专业是建筑工程，但是我喜欢鼓捣计算机专业相关方面的东西，如果看了我的博客对你有启发的话，记得留言收藏推荐三连击哦^O^">
@@ -24,22 +22,22 @@
   
   <title>线性代数-矩阵与图形 ~ 吃白饭的休伯利安号</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/tomorrow-night.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
@@ -57,16 +55,10 @@
 
 <!-- 自定义样式保持在最底部 -->
 
-  
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1746382_qrhzb41budd.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
-<link rel="stylesheet" href="/css/custom.css">
-
-
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"eatrice.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"eatrice.cn","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -189,13 +181,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -204,7 +196,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('/img/background.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -273,11 +265,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -285,7 +277,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：9 个月前
+                  本文最后更新于：2 个月前
                 
               </p>
             
@@ -316,7 +308,7 @@ a&b\\
 c&d
 \end{array}} \right| $，其构成矩阵可以看作由向量 ${\alpha _1} = {(a,c)^T},{\alpha _2} = {(b,d)^T} $ ， $ [{\alpha _1},{\alpha _2}]$。</p>
 <p>将其绘制到二维直角坐标上：如下图所示：</p>
-<p><img src="1.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="1.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>其中向量 $ {\alpha _1},{\alpha _2} $ 所确定的平行四边形的面积，就等于该行列式的绝对值，即： $ S = \left| {\det ({\alpha _1},{\alpha _2})} \right| = \left| {ad - bc} \right| $ 。（可以通过代数方法进行证明）</p>
 <p>由上图可以看出：</p>
 <ol>
@@ -524,10 +516,10 @@ Av = \lambda v
 $$
 <br>此时：$ \lambda $为矩阵A一个特征向量，$ v $为改特征向量对应的特征值。</p>
 <h4 id="2-8-1正交基和正交阵"><a href="#2-8-1正交基和正交阵" class="headerlink" title="2.8.1正交基和正交阵"></a>2.8.1正交基和正交阵</h4><ul>
-<li>定义：一组能在内积空间中组成一个子空间的向量叫做这个子空间的基（$ {\vec e} $）。</li>
-<li>定义：相互正交的基向量叫做正交基($ {{\vec e}_i},{{\vec e}_j} $)。
-- 定义：正交基的数量等于向量的维数时，此时该空间内所有的向量都可以用正交基的线性组合来描述，这些向量的集合称作线性空间的一组标准正交基,也叫单位正交阵$ {{\vec e}_i},{{\vec e}_j},...,{{\vec e}_n} $
-- 定义：当A每一列向量相互正交，每列的模都为1，且满足$ {A^T}A = E $，则称该矩阵为单位正交阵。
+<li>定义：一组能在内积空间中组成一个子空间的向量叫做这个子空间的基（ ${\vec e}$ ）。</li>
+<li>定义：相互正交的基向量叫做正交基 $({{\vec e}_i},{{\vec e}_j})$ 。
+- 定义：正交基的数量等于向量的维数时，此时该空间内所有的向量都可以用正交基的线性组合来描述，这些向量的集合称作线性空间的一组标准正交基,也叫单位正交阵 ${{\vec e}_i},{{\vec e}_j},...,{{\vec e}_n}$ 
+- 定义：当A每一列向量相互正交，每列的模都为1，且满足 $ {A^T}A = E $ ，则称该矩阵为单位正交阵。
 
 #### 2.8.2图形中的特征值与特征向量
 
@@ -548,7 +540,7 @@ $$
 
 比如令$ A = \left[ {\begin{array}{*{20}{c}} 6&{ - 1.5}\\ 4&1 \end{array}} \right] $求得特征值为：4， 3，其中4对应的特征向量为：$ {(0.6,0.8)^T} $，随便找个向量：$ u = {(3,2)^T} $。<br>令$ {\alpha _n} = {A^n}u $<br>结果如下表：</li>
 </ul>
-<p><img src="2.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="2.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>可见，随着随着n的增大，$ \frac{{{\alpha _{11}}}}{{{\alpha _{21}}}} $向$ \frac{{0.6}}{{0.8}} $收敛，即向量逼近于最大特征值对应的特征向量所在直线收敛。</p>
 <p>若矩阵A的最大特征值的小于1大于0时，$ \mathop {\lim }\limits_{n -  > \infty } {A^n}u = \lambda _{\max }^nkv -  > {(0,0)^T} $。</p>
 <p>因此可以通过特征值判断矩阵的幂是否收敛。</p>
@@ -591,7 +583,7 @@ $$
 <p>如上式所示，矩阵右乘一个对角阵可以将某一列向量乘以对应的元素值。可见，矩阵乘以某一对角矩阵则是对该矩阵的对应列进行拉伸。</p>
 <p>回回到2.8.2节中：任意向量都可以用该空间的标准正交基线性表示，而用标准正交基乘以对角矩阵可以将正交基某列进行相应拉伸，通过坐标轴旋转可以将向量的方向与标准正交基中某个基向量方向重合，因此要得到该向量只需将对应的正交基拉伸，后旋转回到原位。</p>
 <p>对于满秩方阵A来说，A可以看作是相互线性无关的列向量的集合。相互线性无关的向量数量可以作为空间图形的映射，如秩为2的二阶矩阵映射一个平行四边形，秩为3的三阶矩阵映射一个六面体；若三阶矩阵的秩为2，则其只在空间中某一平面映射一个平行四边形，性质同秩为2的二阶矩阵。因此对于满秩矩阵来说，其一定可以通过旋转将其所有的特征向量转至与该空间的一组标准正交基的方向重合。</p>
-<p><img src="3.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="3.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>对于公式：$ A{\rm{ = }}{P^{ - 1}}BP{\rm{ = }}E{P^{ - 1}}BP $，当B为对角阵，P为标准正交基时，从其图形的角度来看，可以看作先将单位矩阵代表的正交基旋转至指定方向，后根据矩阵B指定的拉伸方向对标准正交基进行拉伸，最后将坐标系旋转回去，就获得了矩阵A。2.7.2中证明了此时P为A的特征向量矩阵之一，即A的特征向量来自于该组正交基，A的特征值为该组正交基获得A向量的拉伸大小。</p>
 <p>因此回顾相似矩阵的概念：$ A{\rm{ = }}{P^{ - 1}}BP $，其本质上是一个正交基经过旋转，拉伸，再旋转回去，然后就形成了一个矩阵。相似矩阵在<strong>绝对坐标</strong>下表示的是同一个矩阵，其<strong>区别</strong>在于在不同的标准正交基下导致矩阵中各向量的坐标也不同。</p>
 <p>当方阵有的特征值各不相同时，其对应的特征向量，满足正交；方阵有重复特征值时，计算得到的两组特征向量可能不正交，因此需要将各个矩阵进行正交化：<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span class="hint--top hint--rounded" aria-label="格拉姆-施密特正交化-维基百科
@@ -609,14 +601,14 @@ $$
 
 <p><strong>施密特(Schmidt)方法</strong></p>
 <h2 id="3二次型"><a href="#3二次型" class="headerlink" title="3二次型"></a>3二次型</h2><p>在多次的线性关系中，次数更高往往决定这个函数的更多性质，比如对于最简单的一元二次函数：$  y = x ^ 2 $，其图像如下图所示：</p>
-<p><img src="4.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="4.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>给该函数增加一次项或常数：$ y = x^2 + 2x + 4 $，图像如下图所示：</p>
-<p><img src="5.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="5.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>同理，对于更高次的多项式，函数图像的形状往往只由最高次决定。高等代数中使用二次型，来研究二次函数。<sup id="fnref:8" class="footnote-ref"><a href="#fn:8" rel="footnote"><span class="hint--top hint--rounded" aria-label="二次型-维基百科
 ">[8]</span></a></sup></p>
 <h3 id="3-1二次型的平移与旋转"><a href="#3-1二次型的平移与旋转" class="headerlink" title="3.1二次型的平移与旋转"></a>3.1二次型的平移与旋转</h3><p>下面从简单的圆锥曲线来入手二次型：</p>
 <p>对于椭圆：$  x ^ 2 + xy + y ^2 = 1 $ 其图像如下图所示：</p>
-<p><img src="6.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="6.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>可以明显看出该椭圆是标准椭圆曲线绕原点旋转而成。根据矩阵的运算过程，该二次方程可以写成：</p>
 
 $$
@@ -670,7 +662,7 @@ y
 \end{array}} \right)\\
  = 0.5{x^2} + 1.5{y^2} = 1
 \end{array}$</p>
-<p><img src="7.gif" srcset="/img/loading.gif" alt=""></p>
+<p><img src="7.gif" srcset="/img/loading.gif" lazyload alt=""></p>
 <h3 id="3-3多元二次型的规范化"><a href="#3-3多元二次型的规范化" class="headerlink" title="3.3多元二次型的规范化"></a>3.3多元二次型的规范化</h3><p>对于多元的二次函数，同样经过以下步骤将其规范化：</p>
 <ol>
 <li>列写函数的二次型对称矩阵</li>
@@ -700,7 +692,7 @@ f(X) = {X^T}AX</script><ul>
 <li>当二次型矩阵特征值均小于等于0，且至少存在1个0，则$ f(x) $为半负定二次型函数，二次型矩阵为半负定矩阵</li>
 <li>当二次型矩阵特征值有正有负，则$ f(x) $为不定二次型，二次型矩阵为不定矩阵。</li>
 </ul>
-<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://eatrice.top/post/%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%8E%A8%E5%AF%BC%E5%92%8C%E8%AF%AF%E5%B7%AE%E5%A4%84%E7%90%86/">多元线性回归推导和误差处理-吃白饭的休伯利安号</a>
+<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://eatrice.top/post/%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%8E%A8%E5%AF%BC%E5%92%8C%E8%AF%AF%E5%B7%AE%E5%A4%84%E7%90%86/">多元线性回归推导和误差处理-吃白饭的休伯利安号</a>
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%B7%9A%E6%80%A7%E9%97%9C%E4%BF%82">线性关系-维基百科</a>
 <a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%A1%8C%E5%88%97%E5%BC%8F">行列式-维基百科</a>
 <a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:4" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%BA%A4%E6%8D%A2%E7%8E%AF">交换环-维基百科</a>
@@ -728,16 +720,13 @@ f(X) = {X^T}AX</script><ul>
               </div>
               
                 <p class="note note-warning">
-    Author：<a href='https://eatrice.top'> 吃白饭-EatRice</a><br />
-    Source：<a href="https://eatrice.top/post/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-%E7%9F%A9%E9%98%B5%E4%B8%8E%E5%9B%BE%E5%BD%A2/">
-        https://eatrice.top/post/线性代数-矩阵与图形/</a><br />
-    
-    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-    
-</p>
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -764,33 +753,27 @@ f(X) = {X^T}AX</script><ul>
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
-  <div id="vcomments"></div>
+  <div id="valine"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('vcomments', function() {
-      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz",
-          app_key: "dzKTc4w4K1maxEg8E5243rrH",
-          placeholder: "休伯利安号在等待接收你的信号哟^0^\n(支持MarkDown语法)",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: true,
-          serverURLs: "",
-        });
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appid":"ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz","appkey":"dzKTc4w4K1maxEg8E5243rrH","placeholder":"休伯利安号在等待接收你的信号哟^0^\\n(支持MarkDown语法)","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[],"appId":"ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz","appKey":"dzKTc4w4K1maxEg8E5243rrH"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
       });
     });
   </script>
-  <noscript>Please enable JavaScript to view the
-    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
-  </noscript>
+  <noscript>Please enable JavaScript to view the comments</noscript>
 
 
               </article>
@@ -851,12 +834,38 @@ f(X) = {X^T}AX</script><ul>
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
-<br> <p><a id="rainbow"></a></p> 
+     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a> <br> <p><a id="rainbow"></a></p> 
   </div>
   
 
   
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        赣ICP备2021001440号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=36012102000272"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>京公网安备12345678号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
 
   
 </footer>
@@ -865,24 +874,20 @@ f(X) = {X^T}AX</script><ul>
 
 <!-- SCRIPTS -->
 
-  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
   </script>
 
 
-<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -890,7 +895,7 @@ f(X) = {X^T}AX</script><ul>
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -899,26 +904,30 @@ f(X) = {X^T}AX</script><ul>
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;
@@ -927,20 +936,6 @@ f(X) = {X^T}AX</script><ul>
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
-    })()
   </script>
 
 
@@ -982,7 +977,7 @@ f(X) = {X^T}AX</script><ul>
       };
     </script>
 
-    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
 
   
 
@@ -991,39 +986,6 @@ f(X) = {X^T}AX</script><ul>
 
 
 
-
-
-  
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?71be728981300868000249d1707c92b7";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
-
-  
-    <!-- Google Analytics -->
-    <script defer>
-      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
-      ga.l = +new Date;
-      ga('create', 'UA-160834801-1', 'auto');
-      ga('send', 'pageview');
-    </script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
-  
-
-  
-
-  
-
-  
-
-  
 
 
 
@@ -1038,4 +1000,132 @@ f(X) = {X^T}AX</script><ul>
 
 
 
-<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/HidenMath.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -7,13 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favcion.png">
-  <link rel="icon" type="image/png" href="/img/favcion.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#3a311c">
   <meta name="description" content="这里是一个工科男苦逼的小空间.记录一些我喜欢的东西比如平面设计，程序设计等等，还会有我不喜欢的东西，各种力学、结构学等等.我的专业是建筑工程，但是我喜欢鼓捣计算机专业相关方面的东西，如果看了我的博客对你有启发的话，记得留言收藏推荐三连击哦^O^">
@@ -24,22 +22,22 @@
   
   <title>从0开始搭建一个hexo博客 ~ 吃白饭的休伯利安号</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/tomorrow-night.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
@@ -57,16 +55,10 @@
 
 <!-- 自定义样式保持在最底部 -->
 
-  
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1746382_qrhzb41budd.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
-<link rel="stylesheet" href="/css/custom.css">
-
-
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"eatrice.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"eatrice.cn","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"❤","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"♦"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"71be728981300868000249d1707c92b7","google":"UA-160834801-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -189,13 +181,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -204,7 +196,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('/img/background.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -273,11 +265,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -292,12 +284,12 @@
             <div class="markdown-body">
               <h1 id="摘要和准备工作"><a href="#摘要和准备工作" class="headerlink" title="摘要和准备工作"></a>摘要和准备工作</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我从很早以前开始就有搭建一个博客的想法，最早能够追溯到高中二年级。后来也陆陆续续尝试了搭建一群由静态页面组成的页面体系，后来发现这种页面体系有点坑，主要是但个网页的制作在页眉和页头处会有大量的相同的代码内容需要更改，而且该页面体系对于各种资源文件的路径特别敏感，很容易出错。再后来，学习的不断深入，还新学了C#的ASP.NET。这种框架的主要设计模式为动态网页开发，且这类网站挂载在IIS上，但是由于该网站服务依赖于独立的云计算资源，没钱续费，最后还是放弃了。。。经过无数次的尝试和体验，我终于发现了一个简单好用的网站框架，那就是hexo。下面就是我从0开始搭建我的hexo博客的来龙去脉。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里使用的是 <code>ubuntu 18.1</code> 的操作系统对 <code><a target="_blank" rel="noopener" href='https://hexo.io/'>hexo</a></code> 框架的安装和在云端的 <code><a target="_blank" rel="noopener" href='https://github.com'>github</a></code> 的部署。关于如何安装 <code><a target="_blank" rel="noopener" href='https://hexo.io/'>hexo</a></code> 框架，百度上已经有许多的相关教程和方法，如何在 <code><a target="_blank" rel="noopener" href='https://github.com'>github</a></code> 部署，也有很多的相关教程，还有着很多官方文档。所以这里的<code><a target="_blank" rel="noopener" href='https://hexo.io/'>hexo</a></code>网站搭建教程，主要是用来介绍我在搭建网站的时候遇到的一些问题和最后的解决方案，以通过这些给自己或其他人提供相关的意见和建议。</p>
-<p><img src="1.png" srcset="/img/loading.gif" alt="休伯利安号的空间" title="博客首页"></p>
+<p><img src="1.png" srcset="/img/loading.gif" lazyload alt="休伯利安号的空间" title="博客首页"></p>
 <h1 id="主要流程"><a href="#主要流程" class="headerlink" title="主要流程"></a>主要流程</h1><h2 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我选用的主题为Fluid，该主题功能不是很多，但主要有优点使用简单，整体效果好等优点。如下是安装命令:</p>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">cd</span> blog    <span class="hljs-comment">#进入博客所在的目录</span></span><br><span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">cd</span> themes    <span class="hljs-comment">#进入主题宝所在的目录</span></span><br><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">clone</span> https://github.com/fluid-dev/hexo-theme-fluid.git    <span class="hljs-comment">#克隆主题文件</span></span><br><span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">cd</span> ../    <span class="hljs-comment">#返回博客主目录</span></span><br><span class="hljs-meta">$</span><span class="bash"> vi _config.yml    <span class="hljs-comment">#修改博客的主配置文件</span></span><br></code></pre></div></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装好主题后可以在文件夹 <code>themes</code> 文件夹中即可查看。对于本次使用的主题 <code>Fluid</code> 需要对文件夹进行重命名，或在主文件目录下 <code>config.yml</code> 找到’theme’选项，改成<code>theme: &#123;你的主题名字&#125;</code>。同时我们会对主题文件会进行一些自定义的设置，为了避免配置在主题更新后失效，可以制定全局主题的配置文件: <code>source/_data/fluid_config.yml</code> 其中的内容可以直接从主题文件下的配置文件中复制粘贴。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在配置主题的配置文件中，随意增加或删除一些配置选项，或者文件内容的格式不符合文件的标准格式。<code>hexo</code>对此也能够继续进行生成和发布，但是其生成和发布的过程中会发生报错，所以，在一开始使用过程中发生了错误或问题，不妨检查一下配置文件的配置选项和格式标准。<br><img src="2.png" srcset="/img/loading.gif" alt="Fluid主题" title="主题logo"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装好主题后可以在文件夹 <code>themes</code> 文件夹中即可查看。对于本次使用的主题 <code>Fluid</code> 需要对文件夹进行重命名，或在主文件目录下 <code>config.yml</code> 找到’theme’选项，改成<code>theme: &#123;你的主题名字&#125;</code>。同时我们会对主题文件会进行一些自定义的设置，为了避免配置在主题更新后失效，可以制定全局主题的配置文件: <code>source/_data/fluid_config.yml</code> 其中的内容可以直接从主题文件下的配置文件中复制粘贴。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在配置主题的配置文件中，随意增加或删除一些配置选项，或者文件内容的格式不符合文件的标准格式。<code>hexo</code>对此也能够继续进行生成和发布，但是其生成和发布的过程中会发生报错，所以，在一开始使用过程中发生了错误或问题，不妨检查一下配置文件的配置选项和格式标准。<br><img src="2.png" srcset="/img/loading.gif" lazyload alt="Fluid主题" title="主题logo"></p>
 <h2 id="评论功能"><a href="#评论功能" class="headerlink" title="评论功能"></a>评论功能</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于网站是静态的，所以可以使用第三方的评论系统。目前比较常用的有 <code>disqus | valine | gitalk | utterances | changyan | livere</code> 这里使用的是 <code>livere</code> 去官网注册一个账号，放在 <code>Fluid</code> 主题里面完全可以傻瓜式操作。来比力的评论插件有着很多的缺点，比如加载太过于慢了，还有其本身的样式也很丑。搭建博客的初衷是为了写作，所以就不为这个问题劳心劳力了，管他长啥样，重点不那儿！效果如图所示：</p>
-<p><img src="3.png" srcset="/img/loading.gif" alt="LiveRe评论系统" title="来比力"></p>
+<p><img src="3.png" srcset="/img/loading.gif" lazyload alt="LiveRe评论系统" title="来比力"></p>
 <h2 id="MarkDown撰写博客"><a href="#MarkDown撰写博客" class="headerlink" title="MarkDown撰写博客"></a><code>MarkDown</code>撰写博客</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>hexo</code>的文章标记语言<code>MarkDown</code>这语言之前都没有接触过的东西，作为一名业余选手，只能把自己以前写过的<code>html</code>连粘带贴地，直接应用到这里面来啦。就像博客的开篇起手式“<a href='翻墙的少年'>翻墙的少年一样</a>”，卑微地敲着<code>html</code>。我学院有位已经毕业了的学长说使用Latex给我们做了一个论文模板，我觉得他做的工作和我现在做的工作差不多。另外关于写作问题，我还是研习一下的命令就行，其他的复杂格式用<code>html</code>代替便是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs 说明">&lt;!--more--&gt;    #首先这是一个摘要分割符<br>#这是一级标题<br>##这是二级标题<br>###这是三级标题<br>####这是四级标题<br>...<br>![图片详情](url &quot;&#123;图片占位符&#125;&quot;)    #这是放置一个图片<br>- [ ] 任务一 未做任务 &#96;- + 空格 + [ ]&#96;<br>- [x] 任务二 已做任务 &#96;- + 空格 + [x]&#96;    #这是服务列表<br>&amp;nbsp;    #设置缩进之一个空格<br><br>*斜体*或_斜体_<br>**粗体**<br>***加粗斜体***<br>~~删除线~~<br>++下划线++<br>&#x3D;&#x3D;背景高亮&#x3D;&#x3D;<br><br>超链接还是&lt;a href&#x3D;&quot;&quot;&gt;&lt;&#x2F;a&gt;比较好用<br><br>我经常去的几个网站[Google][1]、[Leanote][2]。    #参考链接<br><br>[1]:http:&#x2F;&#x2F;www.google.com <br>[2]:http:&#x2F;&#x2F;www.leanote.com<br><br>使用 Markdown<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="Markdown是一种纯文本标记语言
 ">[1]</span></a></sup>可以效率的书写文档, 直接转换成 HTML<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="HyperText Markup Language 超文本标记语言## 0. 目录&#123;#index&#125;    #描至页面的其他部分 无序列表项 一    #无序列表+ 无序列表项 二- 无序列表项 三1. 有序列表项 一    #有序列表2. 有序列表项 二3. 有序列表项 三&gt;&gt;&gt; 请问 Markdwon 怎么用？ - 小白    #多级引用&gt;&gt; 自己看教程！ - 愤青&gt; 教程在哪？ - 小白#代码、、、include &lt;stdio.h&gt;int main(void)&#123;    printf(&quot;Hello world\n&quot;);&#125;、、、​、、、graph LR    #流程图A—&gt;B、、、、、、sequenceDiagram    #消息列表A-&gt;&gt;B: How are you?B-&gt;&gt;A: Great!、、、|学号|姓名|序号|    #表格|-|-|-||小明明|男|5||小红|女|79||小陆|男|192|&#96;$ &#123;equation&#125; $&#96;    #行内公式公式   #整行公式、、、 math    #块级公式x &#x3D; \dfrac&#123;-b \pm \sqrt&#123;b^2 - 4ac&#125;&#125;&#123;2a&#125; 、、、、、、 math[\frac&#123;1&#125;&#123;\Bigl(\sqrt&#123;\phi \sqrt&#123;5&#125;&#125;-\phi\Bigr) e^&#123;\frac25 \pi&#125;&#125; &#x3D;1+\frac&#123;e^&#123;-2\pi&#125;&#125; &#123;1+\frac&#123;e^&#123;-4\pi&#125;&#125; &#123;1+\frac&#123;e^&#123;-6\pi&#125;&#125;&#123;1+\frac&#123;e^&#123;-8\pi&#125;&#125; &#123;1+\ldots&#125; &#125; &#125; &#125;]、、、#分割线  **- - -—————-#特殊字符的使用特殊字符     描述     字符的代码  空格符     &amp;nbsp;&lt;     小于号     &lt;&gt;     大于号     &gt;&amp;     和号     &amp;￥     人民币     &amp;yen;©     版权     &amp;copy;®     注册商标     &amp;reg;°C     摄氏度     &amp;deg;C±     正负号     &amp;plusmn;×     乘号     &amp;times;÷     除号     &amp;divide;²     平方（上标²）     &amp;sup2;³     立方（上标³）     &amp;sup3;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/hexoPostRenderCodeBlock&gt;
@@ -311,16 +303,16 @@
 
 <hexoPostRenderCodeBlock><figure class="highlight powershell"><table><tr><td class="gutter hljs"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell"><span class="hljs-variable">$</span>  <span class="hljs-built_in">ls</span> <span class="hljs-literal">-al</span> ~/.ssh    <span class="hljs-comment">#检查本地公钥的存在</span><br>&gt;&gt;  No such file or directory<br><span class="hljs-variable">$</span>  ssh<span class="hljs-literal">-keygen</span> <span class="hljs-literal">-t</span> rsa <span class="hljs-literal">-C</span> &#123;your_email@example.com&#125;    <span class="hljs-comment">#使用邮箱生成公钥，并一路按下确定建</span><br><span class="hljs-variable">$</span>  <span class="hljs-built_in">cat</span>  ~/.ssh/k8s_rsa.pub    <span class="hljs-comment">#即可输出公钥的内容</span><br></code></pre></div></td></tr></table></figure>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后将生成的公钥复制粘贴进公钥添加的页面中即可完成公钥的添加。如图所示：</p>
-<p><img src="3.png" srcset="/img/loading.gif" alt="公钥页面" title="公钥添加"></p>
-<p><img src="4.png" srcset="/img/loading.gif" alt="添加完成" title="公钥添加完成"></p>
+<p><img src="3.png" srcset="/img/loading.gif" lazyload alt="公钥页面" title="公钥添加"></p>
+<p><img src="4.png" srcset="/img/loading.gif" lazyload alt="添加完成" title="公钥添加完成"></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;之后我们只需要在本地的终端中输入</p>
 <figure class="highlight verilog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs verilog">$  hexo clean<br>$  hexo <span class="hljs-keyword">generate</span><br>$  hexo deploy<br></code></pre></div></td></tr></table></figure>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;即可成功发布。</p>
-<p><img src="5.png" srcset="/img/loading.gif" alt="发布界面" title="网站发布完成!"></p>
+<p><img src="5.png" srcset="/img/loading.gif" lazyload alt="发布界面" title="网站发布完成!"></p>
 <h2 id="自定义域名访问"><a href="#自定义域名访问" class="headerlink" title="自定义域名访问"></a>自定义域名访问</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我在<code>github</code>上注册的名字为<code>QiQiWan</code>所以我的博客的链接地址为<a href='qiqiwan.github.io'><code>qiqiwan.github.io</code></a>。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个名字可能比较难记，所以可以自己去申请一个域名，在域名解析里面添加记录值为<a href='qiqiwan.github.io'><code>qiqiwan.github.io</code></a>的<code>CNAME</code>类型解析即可。</p>
-<p><img src="6.png" srcset="/img/loading.gif" alt="解析界面" title="解析界面"></p>
-<p>现在我们可以通过<a href='http://eatrice.top'><code>EatRice.top</code></a>来访问我们的网站啦！</p>
+<p><img src="6.png" srcset="/img/loading.gif" lazyload alt="解析界面" title="解析界面"></p>
+<p>现在我们可以通过<a target="_blank" rel="noopener" href='http://eatrice.top'><code>EatRice.top</code></a>来访问我们的网站啦！</p>
 <section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>Markdown是一种纯文本标记语言<br><br>
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>HyperText Markup Language 超文本标记语言<br><br>## 0. 目录&#123;#index&#125;    #描至页面的其他部分<br><br><em> 无序列表项 一    #无序列表<br>+ 无序列表项 二<br>- 无序列表项 三<br><br>1. 有序列表项 一    #有序列表<br>2. 有序列表项 二<br>3. 有序列表项 三<br><br>&gt;&gt;&gt; 请问 Markdwon 怎么用？ - 小白    #多级引用<br>&gt;&gt; 自己看教程！ - 愤青<br>&gt; 教程在哪？ - 小白<br><br>#代码<br>、、、<br>include &lt;stdio.h&gt;<br>int main(void)<br>&#123;<br>    printf(&quot;Hello world\n&quot;);<br>&#125;<br>、、、<br><br>​、、、<br>graph LR    #流程图<br>A—&gt;B<br>、、、<br><br>、、、<br>sequenceDiagram    #消息列表<br>A-&gt;&gt;B: How are you?<br>B-&gt;&gt;A: Great!<br>、、、<br><br>|学号|姓名|序号|    #表格<br>|-|-|-|<br>|小明明|男|5|<br>|小红|女|79|<br>|小陆|男|192|<br><br><br>&#96;$ &#123;equation&#125; $&#96;    #行内公式<br><br><script type="math/tex">公式</script>   #整行公式<br><br>、、、 math    #块级公式<br>x &#x3D; \dfrac&#123;-b \pm \sqrt&#123;b^2 - 4ac&#125;&#125;&#123;2a&#125; <br>、、、<br>、、、 math<br>[\frac&#123;1&#125;&#123;\Bigl(\sqrt&#123;\phi \sqrt&#123;5&#125;&#125;-\phi\Bigr) e^&#123;\frac25 \pi&#125;&#125; &#x3D;<br>1+\frac&#123;e^&#123;-2\pi&#125;&#125; &#123;1+\frac&#123;e^&#123;-4\pi&#125;&#125; &#123;1+\frac&#123;e^&#123;-6\pi&#125;&#125;<br>&#123;1+\frac&#123;e^&#123;-8\pi&#125;&#125; &#123;1+\ldots&#125; &#125; &#125; &#125;]<br>、、、<br><br>#分割线<br></em> <em> </em><br><strong><em><br>**</em></strong><br>- - -<br>—————-<br><br>#特殊字符的使用<br>特殊字符     描述     字符的代码<br>  空格符     &amp;nbsp;<br>&lt;     小于号     &lt;<br>&gt;     大于号     &gt;<br>&amp;     和号     &amp;<br>￥     人民币     &amp;yen;<br>©     版权     &amp;copy;<br>®     注册商标     &amp;reg;<br>°C     摄氏度     &amp;deg;C<br>±     正负号     &amp;plusmn;<br>×     乘号     &amp;times;<br>÷     除号     &amp;divide;<br>²     平方（上标²）     &amp;sup2;<br>³     立方（上标³）     &amp;sup3;<br>&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/hexoPostRenderCodeBlock&gt;
 <a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
@@ -342,25 +334,22 @@
                     
                       <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E8%87%AA%E8%BF%B0/">自述</a>
-                    
                       <a class="hover-with-bg" href="/tags/%E5%86%85%E5%AE%B9%E5%88%86%E4%BA%AB/">内容分享</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%87%AA%E8%BF%B0/">自述</a>
                     
                   </div>
                 
               </div>
               
                 <p class="note note-warning">
-    Author：<a href='https://eatrice.top'> 吃白饭-EatRice</a><br />
-    Source：<a href="https://eatrice.top/post/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AAhexo%E5%8D%9A%E5%AE%A2/">
-        https://eatrice.top/post/从0开始搭建一个hexo博客/</a><br />
-    
-    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-    
-</p>
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -387,33 +376,27 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
-  <div id="vcomments"></div>
+  <div id="valine"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('vcomments', function() {
-      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz",
-          app_key: "dzKTc4w4K1maxEg8E5243rrH",
-          placeholder: "休伯利安号在等待接收你的信号哟^0^\n(支持MarkDown语法)",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: true,
-          serverURLs: "",
-        });
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appid":"ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz","appkey":"dzKTc4w4K1maxEg8E5243rrH","placeholder":"休伯利安号在等待接收你的信号哟^0^\\n(支持MarkDown语法)","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"requiredFields":[],"appId":"ut4YhjXKhs59W7h1ljDfgOAG-gzGzoHsz","appKey":"dzKTc4w4K1maxEg8E5243rrH"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
       });
     });
   </script>
-  <noscript>Please enable JavaScript to view the
-    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
-  </noscript>
+  <noscript>Please enable JavaScript to view the comments</noscript>
 
 
               </article>
@@ -474,12 +457,38 @@
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
-<br> <p><a id="rainbow"></a></p> 
+     <a href="/" target="_blank" rel="nofollow noopener"> <b>吃白饭的休伯利安号O.O</b></a><br> <span>已经在星海中遨游了：</span><span id="timeDate"></span>天<span id="times"></span> <br> 由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动 <i class="iconfont icon-love"></i> 主题: <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a> <br> <p><a id="rainbow"></a></p> 
   </div>
   
 
   
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        赣ICP备2021001440号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=36012102000272"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>京公网安备12345678号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
 
   
 </footer>
@@ -488,24 +497,20 @@
 
 <!-- SCRIPTS -->
 
-  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
   </script>
 
 
-<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -513,7 +518,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -522,26 +527,30 @@
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;
@@ -550,20 +559,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
-    })()
   </script>
 
 
@@ -605,7 +600,7 @@
       };
     </script>
 
-    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
 
   
 
@@ -614,39 +609,6 @@
 
 
 
-
-
-  
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?71be728981300868000249d1707c92b7";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
-
-  
-    <!-- Google Analytics -->
-    <script defer>
-      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
-      ga.l = +new Date;
-      ga('create', 'UA-160834801-1', 'auto');
-      ga('send', 'pageview');
-    </script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
-  
-
-  
-
-  
-
-  
-
-  
 
 
 
@@ -661,4 +623,132 @@
 
 
 
-<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/HidenMath.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
