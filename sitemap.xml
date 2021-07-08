@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://eatrice.cn/post/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-%E7%9F%A9%E9%98%B5%E4%B8%8E%E5%9B%BE%E5%BD%A2/</loc>
+    <loc>https://eatrice.cn/manifest.json</loc>
     
-    <lastmod>2021-05-17</lastmod>
+    <lastmod>2021-07-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://eatrice.cn/RSS/index.html</loc>
+    
+    <lastmod>2021-07-08</lastmod>
     
   </url>
   
   <url>
     <loc>https://eatrice.cn/post/%E5%8D%97%E6%98%8C%E5%B7%A5%E7%A8%8B%E5%AD%A6%E9%99%A2%E6%AF%95%E4%B8%9A%E8%AE%BA%E6%96%87latex%E6%A8%A1%E6%9D%BF/</loc>
     
-    <lastmod>2021-05-13</lastmod>
+    <lastmod>2021-07-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://eatrice.cn/post/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-%E7%9F%A9%E9%98%B5%E4%B8%8E%E5%9B%BE%E5%BD%A2/</loc>
+    
+    <lastmod>2021-05-17</lastmod>
     
   </url>
   
@@ -45,13 +59,6 @@
   
   <url>
     <loc>https://eatrice.cn/about/index.html</loc>
-    
-    <lastmod>2020-11-23</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://eatrice.cn/RSS/index.html</loc>
     
     <lastmod>2020-11-23</lastmod>
     
@@ -205,13 +212,6 @@
   </url>
   
   <url>
-    <loc>https://eatrice.cn/manifest.json</loc>
-    
-    <lastmod>2020-04-14</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://eatrice.cn/post/%E5%BC%A0%E9%9B%AF%E9%9B%AF%EF%BC%9A%E7%A0%94%E9%80%94%E6%9C%89%E9%81%93%EF%BC%8C%E8%81%8A%E8%81%8A%E8%80%83%E7%A0%94%E9%82%A3%E4%BA%9B%E4%BA%8B/</loc>
     
     <lastmod>2020-04-10</lastmod>
@@ -312,13 +312,6 @@
   </url>
   
   <url>
-    <loc>https://eatrice.cn/tags/%E6%95%B0%E5%AD%A6/</loc>
-    <lastmod>2021-07-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://eatrice.cn/tags/%E4%B8%8A%E5%AD%A6/</loc>
     <lastmod>2021-07-08</lastmod>
     <changefreq>daily</changefreq>
@@ -327,6 +320,13 @@
   
   <url>
     <loc>https://eatrice.cn/tags/%E5%BC%80%E5%AD%A6%E5%AD%A3/</loc>
+    <lastmod>2021-07-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://eatrice.cn/tags/%E6%95%B0%E5%AD%A6/</loc>
     <lastmod>2021-07-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -475,14 +475,14 @@
   </url>
   
   <url>
-    <loc>https://eatrice.cn/categories/%E6%95%B0%E5%AD%A6/</loc>
+    <loc>https://eatrice.cn/categories/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2021-07-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://eatrice.cn/categories/%E9%9A%8F%E7%AC%94/</loc>
+    <loc>https://eatrice.cn/categories/%E6%95%B0%E5%AD%A6/</loc>
     <lastmod>2021-07-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
