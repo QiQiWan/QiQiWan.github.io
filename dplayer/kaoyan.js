@@ -7,7 +7,7 @@ const dp1 = new DPlayer({
     screenshot: true,
     hotkey: true,
     preload: 'auto',
-    logo: 'https://eatrice.top/img/favcion.png',
+    logo: 'https://eatrice.cn/img/favcion.png',
     volume: 0.7,
     mutex: true,
     video: {
