@@ -139,3 +139,7 @@ footer a {
 .about-info{
   color: var(--text-color);
 } */
+
+video{
+  width: 100%;
+}
