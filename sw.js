@@ -10,7 +10,7 @@
 
 'use strict';
 
-var precacheConfig = [["/img/favcion.png","e02488f887ee978e139945973541f1ac"],["/index.html","b1e9f23d8291da6bb94c90821d00f3d2"],["/manifest.json","4ea3c9cebfe8a7325ee37a1c98d517a6"]];
+var precacheConfig = [["/img/favcion.png","e02488f887ee978e139945973541f1ac"],["/index.html","46f46e55d31832508d6cc7aab10a6679"],["/manifest.json","4ea3c9cebfe8a7325ee37a1c98d517a6"]];
 var cacheName = 'sw-precache-v3--' + (self.registration ? self.registration.scope : '');
 var firstRegister = 1; // 默认1是首次安装SW， 0是SW更新
 
